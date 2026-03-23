@@ -25,19 +25,31 @@ export async function GET(request: Request) {
         )
       }
       
-      return NextResponse.json({ data: product, success: true })
+      return NextResponse.json({ data: product, success: true }, {
+        headers: {
+          'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
+        },
+      })
     }
     
     if (getCategoriesFlag) {
       const products = await getAllProducts()
       const categories = getCategories(products)
       
-      return NextResponse.json({ data: categories, success: true })
+      return NextResponse.json({ data: categories, success: true }, {
+        headers: {
+          'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+        },
+      })
     }
     
     const cachedData = getCachedProducts(cacheKey)
     if (cachedData) {
-      return NextResponse.json({ data: cachedData, success: true, cached: true })
+      return NextResponse.json({ data: cachedData, success: true, cached: true }, {
+        headers: {
+          'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
+        },
+      })
     }
     
     const products = await getAllProducts()
@@ -54,7 +66,11 @@ export async function GET(request: Request) {
     
     setCachedProducts(cacheKey, filteredProducts, 5 * 60 * 1000)
     
-    return NextResponse.json({ data: filteredProducts, success: true })
+    return NextResponse.json({ data: filteredProducts, success: true }, {
+      headers: {
+        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
+      },
+    })
   } catch (error) {
     console.error('API Error:', error)
     

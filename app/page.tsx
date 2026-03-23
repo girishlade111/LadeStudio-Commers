@@ -94,6 +94,7 @@ export default function HomePage() {
                 product={product}
                 onWishlistToggle={toggleWishlist}
                 isInWishlist={wishlist.includes(product.id)}
+                priority={index < 2}
               />
             </div>
           ))}
@@ -131,6 +132,8 @@ export default function HomePage() {
                 alt={category.name}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                priority={index < 2}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
@@ -170,6 +173,7 @@ export default function HomePage() {
                 product={product}
                 onWishlistToggle={toggleWishlist}
                 isInWishlist={wishlist.includes(product.id)}
+                priority={index < 2}
               />
             </div>
           ))}
@@ -184,6 +188,8 @@ export default function HomePage() {
             alt="CTA background"
             fill
             className="object-cover"
+            priority
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-primary/80" />
         </div>

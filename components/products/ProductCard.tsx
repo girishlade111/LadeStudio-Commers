@@ -11,9 +11,10 @@ interface ProductCardProps {
   product: Product
   onWishlistToggle?: (product: Product) => void
   isInWishlist?: boolean
+  priority?: boolean
 }
 
-export function ProductCard({ product, onWishlistToggle, isInWishlist }: ProductCardProps) {
+export function ProductCard({ product, onWishlistToggle, isInWishlist, priority = false }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false)
   const [imageError, setImageError] = useState(false)
 
@@ -33,6 +34,8 @@ export function ProductCard({ product, onWishlistToggle, isInWishlist }: Product
               className={`object-cover transition-transform duration-500 ${isHovered ? 'scale-110' : 'scale-100'}`}
               onError={() => setImageError(true)}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              priority={priority}
+              quality={priority ? 80 : 75}
             />
           ) : (
             <div className="flex items-center justify-center h-full text-neutral-400">
