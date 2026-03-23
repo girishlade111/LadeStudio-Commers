@@ -1,0 +1,55 @@
+# https://www.robotstxt.org/robotstxt.html
+# Allow all crawlers to access all content
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ladestudio.com/sitemap.xml
+
+# Crawl-delay for polite crawling (optional)
+Crawl-delay: 1
+
+# Allow important resources
+User-agent: Googlebot
+Allow: /
+Allow: /shop
+Allow: /about
+Allow: /contact
+Allow: /faq
+Allow: /shipping
+Allow: /privacy
+Allow: /terms
+Allow: /refunds
+Allow: /cart
+Allow: /checkout
+Allow: /wishlist
+Allow: /products/
+
+# Allow image search
+User-agent: Googlebot-Image
+Allow: /
+
+# Allow video search
+User-agent: Googlebot-video
+Allow: /
+
+# Allow news
+User-agent: Googlebot-News
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+
+# Baidu
+User-agent: Baiduspider
+Allow: /
+
+# Yandex
+User-agent: YandexBot
+Allow: /
