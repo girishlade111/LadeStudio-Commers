@@ -13,10 +13,10 @@ export function Footer() {
 
   const footerLinks = {
     shop: [
-      { href: '/products', label: 'All Products' },
-      { href: '/products?category=new', label: 'New Arrivals' },
-      { href: '/products?category=bestsellers', label: 'Best Sellers' },
-      { href: '/products?sale=true', label: 'Sale' },
+      { href: '/shop', label: 'All Products' },
+      { href: '/shop?category=new', label: 'New Arrivals' },
+      { href: '/shop?category=bestsellers', label: 'Best Sellers' },
+      { href: '/shop?sale=true', label: 'Sale' },
     ],
     company: [
       { href: '/about', label: 'About Us' },
