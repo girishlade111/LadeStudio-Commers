@@ -33,7 +33,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary
               transition-all duration-200
               disabled:bg-neutral-100 disabled:text-neutral-400 disabled:cursor-not-allowed
-              ${error ? 'border-error' : 'border-neutral-200'}
+              shadow-soft backdrop-blur-sm
+              ${error ? 'border-error' : 'border-neutral-200/80'}
               ${leftIcon ? 'pl-12' : ''}
               ${rightIcon ? 'pr-12' : ''}
               ${className}
@@ -78,8 +79,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary
             transition-all duration-200
             disabled:bg-neutral-100 disabled:text-neutral-400 disabled:cursor-not-allowed
+            shadow-soft backdrop-blur-sm
             resize-none
-            ${error ? 'border-error' : 'border-neutral-200'}
+            ${error ? 'border-error' : 'border-neutral-200/80'}
             ${className}
           `}
           {...props}

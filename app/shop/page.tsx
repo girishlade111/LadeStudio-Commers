@@ -17,7 +17,7 @@ const sortOptions = [
 function ShopContent() {
   const searchParams = useSearchParams()
   const initialCategory = searchParams.get('category') || 'All'
-  
+
   const [selectedCategory, setSelectedCategory] = useState(initialCategory)
   const [sortBy, setSortBy] = useState('featured')
   const [searchQuery, setSearchQuery] = useState('')
@@ -38,9 +38,7 @@ function ShopContent() {
           fetchCategories(),
         ])
 
-        if (ignore) {
-          return
-        }
+        if (ignore) return
 
         setProducts(catalogProducts)
         const resolvedCategories = ['All', ...catalogCategories]
@@ -74,15 +72,15 @@ function ShopContent() {
     let result = [...products]
 
     if (selectedCategory !== 'All') {
-      result = result.filter(p => p.category.toLowerCase() === selectedCategory.toLowerCase())
+      result = result.filter((product) => product.category.toLowerCase() === selectedCategory.toLowerCase())
     }
 
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase()
-      result = result.filter(p => 
-        p.name.toLowerCase().includes(query) ||
-        p.description.toLowerCase().includes(query) ||
-        p.category.toLowerCase().includes(query)
+      result = result.filter((product) =>
+        product.name.toLowerCase().includes(query) ||
+        product.description.toLowerCase().includes(query) ||
+        product.category.toLowerCase().includes(query)
       )
     }
 
@@ -91,19 +89,19 @@ function ShopContent() {
         result.reverse()
         break
       case 'price-low':
-        result.sort((a, b) => a.price - b.price)
+        result.sort((first, second) => first.price - second.price)
         break
       case 'price-high':
-        result.sort((a, b) => b.price - a.price)
+        result.sort((first, second) => second.price - first.price)
         break
     }
 
     return result
-  }, [selectedCategory, sortBy, searchQuery])
+  }, [products, searchQuery, selectedCategory, sortBy])
 
   const getCategoryCount = (category: string) => {
     if (category === 'All') return products.length
-    return products.filter(p => p.category.toLowerCase() === category.toLowerCase()).length
+    return products.filter((product) => product.category.toLowerCase() === category.toLowerCase()).length
   }
 
   if (isLoading) {
@@ -112,11 +110,11 @@ function ShopContent() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center px-5">
-        <div className="max-w-lg text-center bg-white border border-neutral-200 rounded-3xl p-8 shadow-soft">
-          <h2 className="text-2xl font-display font-bold text-neutral-900 mb-3">Unable to load products</h2>
-          <p className="text-neutral-500 mb-6">{error}</p>
-          <Button variant="primary" onClick={() => window.location.reload()}>
+      <div className="min-h-screen flex items-center justify-center px-5">
+        <div className="jewel-card max-w-lg rounded-[2rem] p-10 text-center">
+          <h2 className="font-display text-3xl font-bold text-neutral-900">Unable to load products</h2>
+          <p className="mt-3 text-neutral-500">{error}</p>
+          <Button variant="primary" className="mt-6" onClick={() => window.location.reload()}>
             Try Again
           </Button>
         </div>
@@ -125,84 +123,78 @@ function ShopContent() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <section className="relative bg-primary-900 py-20 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 to-transparent" />
-        </div>
-        <div className="container mx-auto px-5 md:px-8 relative z-10">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-4">
-            Shop Collection
-          </h1>
-          <p className="text-lg text-white/60 max-w-2xl">
-            Explore our curated collection of premium essentials, crafted with quality and designed for the modern lifestyle.
-          </p>
-        </div>
-      </section>
-
-      {/* Search & Filter Bar */}
-      <section className="sticky top-16 md:top-20 z-40 bg-white border-b border-neutral-200 shadow-sm">
-        <div className="container mx-auto px-5 md:px-8 py-4">
-          <div className="flex flex-col md:flex-row md:items-center gap-4">
-            {/* Search */}
-            <div className="relative flex-1 max-w-md">
-              <input
-                type="text"
-                placeholder="Search products..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-11 pr-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
-              />
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-              </svg>
-            </div>
-
-            {/* Filter Toggle (Mobile) */}
-            <button
-              onClick={() => setShowFilters(!showFilters)}
-              className="md:hidden flex items-center justify-center gap-2 px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
-              </svg>
-              <span className="text-sm font-medium">Filters</span>
-            </button>
-
-            {/* Sort Dropdown */}
-            <div className="flex items-center gap-3">
-              <span className="text-sm text-neutral-500 hidden md:block">Sort by:</span>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-neutral-900 focus:outline-none focus:border-secondary cursor-pointer"
-              >
-                {sortOptions.map(option => (
-                  <option key={option.value} value={option.value}>{option.label}</option>
-                ))}
-              </select>
-            </div>
+    <div className="min-h-screen">
+      <section className="relative overflow-hidden px-5 pb-14 pt-28 md:px-8 md:pb-20 md:pt-36">
+        <div className="absolute inset-0 jewel-dark" />
+        <div className="absolute inset-0 rich-grid opacity-45" />
+        <div className="absolute -left-20 top-10 h-64 w-64 rounded-full bg-secondary/14 blur-3xl" />
+        <div className="absolute right-0 top-16 h-72 w-72 rounded-full bg-accent/18 blur-3xl" />
+        <div className="container relative mx-auto">
+          <div className="max-w-3xl">
+            <span className="inline-flex rounded-full border border-white/10 bg-white/8 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-secondary">
+              The Collection
+            </span>
+            <h1 className="mt-6 font-display text-[clamp(3rem,6vw,5.6rem)] font-bold leading-[0.94] text-white">
+              Shop with a richer
+              <span className="block text-gradient">editorial rhythm</span>
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/68">
+              Discover the Google Sheets powered catalog through deeper color, stronger hierarchy, and a more premium browse experience.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Main Content */}
-      <div className="container mx-auto px-5 md:px-8 py-8 md:py-12">
+      <section className="sticky top-24 z-30 mx-5 -mt-8 rounded-[1.8rem] border border-white/40 bg-white/68 px-5 py-5 shadow-elevated backdrop-blur-2xl md:mx-8">
+        <div className="container mx-auto flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div className="relative flex-1 lg:max-w-xl">
+            <input
+              type="text"
+              placeholder="Search products, categories, or details"
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              className="w-full rounded-full border border-neutral-200/80 bg-white/80 py-3 pl-12 pr-4 text-sm text-neutral-900 placeholder:text-neutral-400 shadow-soft"
+            />
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            </svg>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-neutral-200 bg-white/75 px-4 py-3 text-sm font-semibold text-neutral-700 md:hidden"
+            >
+              Filters
+            </button>
+
+            <select
+              value={sortBy}
+              onChange={(event) => setSortBy(event.target.value)}
+              className="rounded-full border border-neutral-200 bg-white/75 px-4 py-3 text-sm font-semibold text-neutral-700 shadow-soft"
+            >
+              {sortOptions.map((option) => (
+                <option key={option.value} value={option.value}>{option.label}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <div className="container mx-auto px-5 py-10 md:px-8 md:py-14">
         <div className="flex gap-8">
-          {/* Sidebar Filters - Desktop */}
-          <aside className="hidden md:block w-64 flex-shrink-0">
-            <div className="sticky top-40">
-              <h3 className="text-sm font-semibold text-neutral-900 mb-4 uppercase tracking-wider">Categories</h3>
-              <div className="space-y-1">
-                    {categories.map(category => (
-                      <button
+          <aside className="hidden md:block w-72 flex-shrink-0">
+            <div className="jewel-card sticky top-44 rounded-[2rem] p-6">
+              <h3 className="text-[11px] font-semibold uppercase tracking-[0.22em] text-secondary">Categories</h3>
+              <div className="mt-5 space-y-2">
+                {categories.map((category) => (
+                  <button
                     key={category}
                     onClick={() => setSelectedCategory(category)}
-                    className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-all ${
+                    className={`flex w-full items-center justify-between rounded-[1.2rem] px-4 py-3 text-left text-sm font-semibold transition-all ${
                       selectedCategory === category
-                        ? 'bg-secondary text-white font-medium'
-                        : 'text-neutral-600 hover:bg-neutral-100'
+                        ? 'bg-gradient-to-r from-primary-800 via-plum-700 to-primary-800 text-white shadow-card'
+                        : 'bg-white/50 text-neutral-600 hover:bg-white hover:text-primary-800'
                     }`}
                   >
                     <span>{category}</span>
@@ -212,106 +204,71 @@ function ShopContent() {
                   </button>
                 ))}
               </div>
-
-              {/* Price Range */}
-              <div className="mt-8">
-                <h3 className="text-sm font-semibold text-neutral-900 mb-4 uppercase tracking-wider">Price Range</h3>
-                <div className="space-y-3">
-                  {[
-                    { label: 'Under $100', min: 0, max: 100 },
-                    { label: '$100 - $200', min: 100, max: 200 },
-                    { label: '$200 - $300', min: 200, max: 300 },
-                    { label: 'Over $300', min: 300, max: Infinity },
-                  ].map(range => (
-                    <label key={range.label} className="flex items-center gap-3 cursor-pointer group">
-                      <input type="checkbox" className="w-4 h-4 rounded border-neutral-300 text-secondary focus:ring-secondary" />
-                      <span className="text-sm text-neutral-600 group-hover:text-neutral-900">{range.label}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* Availability */}
-              <div className="mt-8">
-                <h3 className="text-sm font-semibold text-neutral-900 mb-4 uppercase tracking-wider">Availability</h3>
-                <label className="flex items-center gap-3 cursor-pointer group">
-                  <input type="checkbox" defaultChecked className="w-4 h-4 rounded border-neutral-300 text-secondary focus:ring-secondary" />
-                  <span className="text-sm text-neutral-600 group-hover:text-neutral-900">In Stock Only</span>
-                </label>
-              </div>
             </div>
           </aside>
 
-          {/* Mobile Filters */}
           {showFilters && (
-            <div className="md:hidden fixed inset-0 z-50 bg-black/50" onClick={() => setShowFilters(false)}>
-              <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl p-6 max-h-[70vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-semibold">Filters</h3>
-                  <button onClick={() => setShowFilters(false)} className="p-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+            <div className="fixed inset-0 z-50 bg-primary-900/50 md:hidden" onClick={() => setShowFilters(false)}>
+              <div
+                className="absolute bottom-0 left-0 right-0 rounded-t-[2rem] bg-white p-6 shadow-elevated"
+                onClick={(event) => event.stopPropagation()}
+              >
+                <div className="mb-5 flex items-center justify-between">
+                  <h3 className="font-display text-2xl font-bold text-neutral-900">Filters</h3>
+                  <button onClick={() => setShowFilters(false)} className="rounded-full bg-neutral-100 p-3 text-neutral-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-5 w-5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                   </button>
                 </div>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="text-sm font-medium text-neutral-900 mb-3">Categories</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {categories.map(category => (
-                        <button
-                          key={category}
-                          onClick={() => {
-                            setSelectedCategory(category)
-                            setShowFilters(false)
-                          }}
-                          className={`px-4 py-2 rounded-full text-sm transition-all ${
-                            selectedCategory === category
-                              ? 'bg-secondary text-white'
-                              : 'bg-neutral-100 text-neutral-600'
-                          }`}
-                        >
-                          {category}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+                <div className="flex flex-wrap gap-2">
+                  {categories.map((category) => (
+                    <button
+                      key={category}
+                      onClick={() => {
+                        setSelectedCategory(category)
+                        setShowFilters(false)
+                      }}
+                      className={`rounded-full px-4 py-2.5 text-sm font-semibold transition-all ${
+                        selectedCategory === category
+                          ? 'bg-primary-800 text-white'
+                          : 'bg-neutral-100 text-neutral-600'
+                      }`}
+                    >
+                      {category}
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
           )}
 
-          {/* Products Grid */}
           <main className="flex-1">
-            {/* Results Header */}
-            <div className="flex items-center justify-between mb-6">
+            <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
               <p className="text-sm text-neutral-500">
-                Showing <span className="font-medium text-neutral-900">{filteredProducts.length}</span> products
-                {selectedCategory !== 'All' && <span> in <span className="font-medium text-secondary">{selectedCategory}</span></span>}
+                Showing <span className="font-semibold text-neutral-900">{filteredProducts.length}</span> products
+                {selectedCategory !== 'All' && (
+                  <span> in <span className="font-semibold text-plum-700">{selectedCategory}</span></span>
+                )}
               </p>
             </div>
 
-            {/* Products */}
             {filteredProducts.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6">
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {filteredProducts.map((product, index) => (
-                  <ProductCard
-                    key={product.id}
-                    product={product}
-                    priority={index < 4}
-                  />
+                  <ProductCard key={product.id} product={product} priority={index < 4} />
                 ))}
               </div>
             ) : (
-              <div className="text-center py-20">
-                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-neutral-100 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-neutral-400">
+              <div className="jewel-card rounded-[2.2rem] px-6 py-16 text-center">
+                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-neutral-100">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-8 w-8 text-neutral-400">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold text-neutral-900 mb-2">No products found</h3>
-                <p className="text-neutral-500 mb-6">Try adjusting your search or filter criteria</p>
-                <Button variant="outline" onClick={() => { setSearchQuery(''); setSelectedCategory('All'); }}>
+                <h3 className="mt-6 font-display text-3xl font-bold text-neutral-900">No products found</h3>
+                <p className="mt-3 text-neutral-500">Try a different search phrase or clear your filters.</p>
+                <Button variant="outline" className="mt-6" onClick={() => { setSearchQuery(''); setSelectedCategory('All') }}>
                   Clear Filters
                 </Button>
               </div>
@@ -325,15 +282,22 @@ function ShopContent() {
 
 function ShopLoading() {
   return (
-    <div className="min-h-screen bg-white">
-      <div className="bg-primary-900 py-20 animate-pulse" />
-      <div className="container mx-auto px-5 md:px-8 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {[...Array(8)].map((_, i) => (
-            <div key={i}>
-              <div className="aspect-[3/4] bg-neutral-100 rounded-2xl animate-pulse" />
-              <div className="mt-4 h-4 bg-neutral-100 rounded animate-pulse w-1/2" />
-              <div className="mt-2 h-4 bg-neutral-100 rounded animate-pulse w-3/4" />
+    <div className="min-h-screen">
+      <div className="jewel-dark px-5 pb-16 pt-32 md:px-8">
+        <div className="container mx-auto">
+          <div className="h-5 w-32 rounded-full bg-white/10" />
+          <div className="mt-8 h-20 max-w-2xl rounded-[2rem] bg-white/10" />
+          <div className="mt-6 h-8 max-w-xl rounded-full bg-white/10" />
+        </div>
+      </div>
+      <div className="container mx-auto px-5 py-12 md:px-8">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {[...Array(8)].map((_, index) => (
+            <div key={index} className="jewel-card animate-pulse rounded-[2rem] p-3">
+              <div className="aspect-[3/4] rounded-[1.5rem] bg-neutral-200" />
+              <div className="mt-5 h-4 w-24 rounded-full bg-neutral-200" />
+              <div className="mt-3 h-7 w-2/3 rounded-full bg-neutral-200" />
+              <div className="mt-3 h-6 w-1/3 rounded-full bg-neutral-200" />
             </div>
           ))}
         </div>

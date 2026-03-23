@@ -17,84 +17,106 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen">
-      {/* ===== HERO SECTION ===== */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Background Image with Parallax feel */}
-        <div className="absolute inset-0">
-          <Image
-            src={heroBanner.image}
-            alt="Hero background"
-            fill
-            className="object-cover scale-105"
-            priority
-          />
-          {/* Refined gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
+      <section className="relative isolate overflow-hidden px-5 pb-16 pt-28 md:px-8 md:pb-24 md:pt-36">
+        <div className="absolute inset-0 -z-20 jewel-dark" />
+        <div className="absolute inset-0 -z-10 opacity-30">
+          <Image src={heroBanner.image} alt="Hero background" fill className="object-cover mix-blend-soft-light" priority />
         </div>
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary-900 via-primary-900/85 to-plum-900/70" />
+        <div className="absolute -left-24 top-12 h-72 w-72 rounded-full bg-secondary/15 blur-3xl" />
+        <div className="absolute right-0 top-20 h-80 w-80 rounded-full bg-accent/20 blur-3xl" />
+        <div className="absolute inset-0 rich-grid opacity-40" />
 
-        {/* Decorative grain */}
-        <div className="absolute inset-0 opacity-[0.03] bg-noise mix-blend-overlay pointer-events-none" />
-
-        <div className="container mx-auto px-5 md:px-8 relative z-10">
-          <div className="max-w-3xl">
-            {/* Eyebrow */}
-            <div className="inline-flex items-center gap-3 mb-8 animate-fade-up">
-              <span className="w-10 h-[1px] bg-secondary" />
-              <span className="text-[11px] font-semibold tracking-[0.25em] uppercase text-secondary">
+        <div className="container mx-auto">
+          <div className="grid items-center gap-14 lg:grid-cols-[1.05fr,0.95fr]">
+            <div className="max-w-3xl">
+              <div className="mb-7 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/8 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-secondary backdrop-blur-xl animate-fade-up">
+                <span className="h-2 w-2 rounded-full bg-secondary" />
                 New Collection 2026
-              </span>
+              </div>
+
+              <h1
+                className="font-display text-[clamp(3.2rem,7vw,6.8rem)] font-bold leading-[0.94] text-white animate-fade-up"
+                style={{ animationDelay: '100ms' }}
+              >
+                Jewel-toned pieces
+                <span className="mt-2 block text-gradient">{heroBanner.subtitle}</span>
+              </h1>
+
+              <p
+                className="mt-8 max-w-2xl text-lg leading-8 text-white/68 animate-fade-up md:text-xl"
+                style={{ animationDelay: '220ms' }}
+              >
+                Curated essentials with richer textures, statement silhouettes, and a premium finish built for everyday rituals.
+              </p>
+
+              <div className="mt-10 flex flex-col gap-4 sm:flex-row animate-fade-up" style={{ animationDelay: '320ms' }}>
+                <Link href="/shop">
+                  <Button size="xl" variant="secondary" className="min-w-[220px]">
+                    Shop The Collection
+                  </Button>
+                </Link>
+                <Link href="/about">
+                  <Button size="xl" variant="ghost" className="border border-white/15 bg-white/6 text-white hover:bg-white/12">
+                    Our Story
+                  </Button>
+                </Link>
+              </div>
+
+              <div className="mt-12 grid gap-4 sm:grid-cols-3 animate-fade-up" style={{ animationDelay: '420ms' }}>
+                {[
+                  { value: `${allProducts.length || 0}+`, label: 'Studio Picks' },
+                  { value: '24/7', label: 'Store Access' },
+                  { value: 'INR', label: 'UPI Ready' },
+                ].map((stat) => (
+                  <div key={stat.label} className="rounded-[1.6rem] border border-white/10 bg-white/8 px-5 py-5 backdrop-blur-xl">
+                    <p className="font-display text-3xl font-bold text-white">{stat.value}</p>
+                    <p className="mt-1 text-[11px] uppercase tracking-[0.22em] text-white/50">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* Main headline */}
-            <h1
-              className="font-display font-bold text-white mb-8 animate-fade-up leading-[1.05]"
-              style={{ animationDelay: '100ms', fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
-            >
-              {heroBanner.title}
-              <span className="text-gradient block mt-2">{heroBanner.subtitle}</span>
-            </h1>
-
-            <p
-              className="text-lg md:text-xl text-white/70 mb-10 max-w-xl leading-relaxed animate-fade-up"
-              style={{ animationDelay: '250ms' }}
-            >
-              {heroBanner.description}
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-start gap-4 animate-fade-up" style={{ animationDelay: '400ms' }}>
-              <Link href="/shop">
-                <Button size="lg" variant="secondary" className="shadow-glow group">
-                  {heroBanner.ctaText}
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                  </svg>
-                </Button>
-              </Link>
-              <Link href="/about">
-                <Button size="lg" variant="ghost" className="text-white/80 hover:text-white hover:bg-white/10">
-                  Our Story
-                </Button>
-              </Link>
+            <div className="animate-fade-up" style={{ animationDelay: '180ms' }}>
+              <div className="relative mx-auto max-w-[34rem]">
+                <div className="absolute -left-6 top-10 hidden w-36 rounded-[1.8rem] border border-white/10 bg-white/10 p-5 backdrop-blur-xl lg:block">
+                  <p className="text-[11px] uppercase tracking-[0.22em] text-secondary">Curated</p>
+                  <p className="mt-2 text-sm leading-6 text-white/72">
+                    Elevated product storytelling with crafted visuals and rich material cues.
+                  </p>
+                </div>
+                <div className="absolute -bottom-6 right-0 z-20 hidden w-44 rounded-[1.8rem] border border-white/10 bg-white/10 p-5 backdrop-blur-xl lg:block">
+                  <p className="text-[11px] uppercase tracking-[0.22em] text-secondary">Fast Checkout</p>
+                  <p className="mt-2 text-sm leading-6 text-white/72">
+                    Browse, pay with UPI, and upload proof without changing the flow.
+                  </p>
+                </div>
+                <div className="relative overflow-hidden rounded-[2.4rem] border border-white/10 bg-white/8 p-4 shadow-elevated backdrop-blur-sm">
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem]">
+                    <Image
+                      src={heroBanner.image}
+                      alt="Featured collection"
+                      fill
+                      className="object-cover"
+                      priority
+                      sizes="(max-width: 1024px) 100vw, 42vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary-900/55 via-transparent to-transparent" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 animate-fade-up" style={{ animationDelay: '600ms' }}>
-          <span className="text-[10px] font-medium tracking-[0.3em] uppercase text-white/40">Scroll</span>
-          <div className="w-[1px] h-8 bg-gradient-to-b from-white/40 to-transparent animate-pulse" />
-        </div>
       </section>
 
-      {/* ===== MARQUEE BAND ===== */}
-      <div className="bg-primary-800 py-4 overflow-hidden marquee-container">
+      <div className="bg-primary-900 py-4 overflow-hidden marquee-container">
         <div className="animate-marquee flex whitespace-nowrap">
-          {[...Array(2)].map((_, i) => (
-            <div key={i} className="flex items-center gap-12 px-6">
-              {['Free Shipping Over $100', 'Handcrafted Quality', '30-Day Returns', 'Sustainable Materials', 'Premium Essentials', 'Curated Collections'].map((text) => (
-                <span key={text} className="flex items-center gap-3 text-[11px] font-medium tracking-[0.15em] uppercase text-white/60">
-                  <span className="w-1.5 h-1.5 rounded-full bg-secondary/60" />
+          {[...Array(2)].map((_, index) => (
+            <div key={index} className="flex items-center gap-12 px-6">
+              {['Free Shipping Above Rs. 999', 'Clerk Secure Sign-In', 'Google Sheets Powered Catalog', 'UPI Checkout Flow', 'Rich Editorial Experience'].map((text) => (
+                <span key={text} className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/62">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary/70" />
                   {text}
                 </span>
               ))}
@@ -103,284 +125,134 @@ export default async function HomePage() {
         </div>
       </div>
 
-      {/* ===== FEATURED PRODUCTS ===== */}
-      <Section background="default" padding="xl">
+      <Section background="default" padding="xl" className="relative">
         <SectionHeader
-          label="Curated for you"
-          title="Featured Products"
-          subtitle="Handpicked selections from our latest collection, designed for the modern lifestyle"
+          label="Curated Selection"
+          title="Featured in the Studio"
+          subtitle="A richer shopping experience starts with pieces that already know how to hold attention."
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
-          {featuredProducts.map((product, index) => (
-            <div
-              key={product.id}
-              className="animate-fade-up"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <ProductCard
-                product={product}
-                priority={index < 2}
-              />
-            </div>
-          ))}
-        </div>
-
-        <div className="text-center mt-14">
-          <Link href="/products">
-            <Button variant="outline" size="lg" className="group">
-              View All Products
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-              </svg>
-            </Button>
-          </Link>
-        </div>
+        {featuredProducts.length > 0 ? (
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {featuredProducts.map((product, index) => (
+              <div key={product.id} className="animate-fade-up" style={{ animationDelay: `${index * 90}ms` }}>
+                <ProductCard product={product} priority={index < 2} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="jewel-card mx-auto max-w-3xl rounded-[2rem] p-10 text-center">
+            <h3 className="font-display text-3xl font-bold text-neutral-900">Products will appear here soon</h3>
+            <p className="mt-3 text-neutral-500">Once your Google Sheets catalog is available, featured picks will populate automatically.</p>
+          </div>
+        )}
       </Section>
 
-      {/* ===== CATEGORIES - CREATIVE ASYMMETRIC GRID ===== */}
-      <Section background="cream" padding="xl">
+      <Section background="cream" padding="xl" className="relative overflow-hidden">
+        <div className="absolute inset-0 opacity-70">
+          <div className="absolute left-0 top-0 h-52 w-52 rounded-full bg-secondary/10 blur-3xl" />
+          <div className="absolute bottom-0 right-0 h-64 w-64 rounded-full bg-accent/10 blur-3xl" />
+        </div>
+
         <SectionHeader
-          label="Explore"
-          title="Shop by Category"
-          subtitle="Discover our curated collections across every facet of modern living"
+          label="Categories"
+          title="A Category Wall With More Presence"
+          subtitle="Explore collections designed to feel immersive before the first click."
         />
 
-        {/* Asymmetric grid - first row: 1 large + 1 small stacked, second row: 3 equal */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5">
-          {/* Large featured card */}
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-12">
           <Link
-            href={`/products?category=${categories[0]?.id}`}
-            className="md:col-span-7 group relative aspect-[4/3] md:aspect-auto md:row-span-2 overflow-hidden rounded-2xl animate-fade-up"
+            href={`/shop?category=${categories[0]?.name || ''}`}
+            className="group relative overflow-hidden rounded-[2rem] md:col-span-7 md:row-span-2"
           >
-            <Image
-              src={categories[0]?.image || ''}
-              alt={categories[0]?.name || ''}
-              fill
-              className="object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, 58vw"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
-              <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-secondary mb-3 block">
-                {categories[0]?.productCount} Products
-              </span>
-              <h3 className="text-2xl md:text-4xl font-display font-bold text-white mb-2">
-                {categories[0]?.name}
-              </h3>
-              <p className="text-white/70 text-sm md:text-base max-w-sm">{categories[0]?.description}</p>
+            <div className="absolute inset-0">
+              <Image src={categories[0]?.image || ''} alt={categories[0]?.name || ''} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 58vw" />
             </div>
-            <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0 translate-x-2">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 text-white">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-              </svg>
+            <div className="absolute inset-0 bg-gradient-to-t from-primary-900 via-primary-900/30 to-transparent" />
+            <div className="relative flex h-full min-h-[440px] flex-col justify-end p-8 md:p-10">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.24em] text-secondary">{categories[0]?.productCount} Products</span>
+              <h3 className="mt-4 font-display text-4xl font-bold text-white md:text-5xl">{categories[0]?.name}</h3>
+              <p className="mt-3 max-w-md text-white/68">{categories[0]?.description}</p>
             </div>
           </Link>
 
-          {/* Two stacked cards on the right */}
-          {categories.slice(1, 3).map((category, index) => (
+          {categories.slice(1, 5).map((category, index) => (
             <Link
               key={category.id}
-              href={`/products?category=${category.id}`}
-              className="md:col-span-5 group relative aspect-[16/9] overflow-hidden rounded-2xl animate-fade-up"
-              style={{ animationDelay: `${(index + 1) * 100}ms` }}
+              href={`/shop?category=${category.name}`}
+              className={`group relative overflow-hidden rounded-[2rem] ${index < 2 ? 'md:col-span-5' : 'md:col-span-6'}`}
             >
-              <Image
-                src={category.image}
-                alt={category.name}
-                fill
-                className="object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 42vw"
-                priority={index === 0}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-5 md:p-7">
-                <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-secondary mb-2 block">
-                  {category.productCount} Products
-                </span>
-                <h3 className="text-xl md:text-2xl font-display font-bold text-white">
-                  {category.name}
-                </h3>
+              <div className="absolute inset-0">
+                <Image src={category.image} alt={category.name} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 42vw" />
               </div>
-              <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0 translate-x-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3.5 h-3.5 text-white">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-                </svg>
-              </div>
-            </Link>
-          ))}
-
-          {/* Bottom row: remaining categories */}
-          {categories.slice(3).map((category, index) => (
-            <Link
-              key={category.id}
-              href={`/products?category=${category.id}`}
-              className="md:col-span-6 group relative aspect-[16/9] overflow-hidden rounded-2xl animate-fade-up"
-              style={{ animationDelay: `${(index + 3) * 100}ms` }}
-            >
-              <Image
-                src={category.image}
-                alt={category.name}
-                fill
-                className="object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-5 md:p-7">
-                <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-secondary mb-2 block">
-                  {category.productCount} Products
-                </span>
-                <h3 className="text-xl md:text-2xl font-display font-bold text-white">
-                  {category.name}
-                </h3>
-              </div>
-              <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0 translate-x-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3.5 h-3.5 text-white">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-                </svg>
+              <div className="absolute inset-0 bg-gradient-to-t from-primary-900/90 via-primary-900/20 to-transparent" />
+              <div className="relative flex min-h-[240px] flex-col justify-end p-7">
+                <span className="text-[11px] font-semibold uppercase tracking-[0.24em] text-secondary">{category.productCount} Products</span>
+                <h3 className="mt-3 font-display text-3xl font-bold text-white">{category.name}</h3>
               </div>
             </Link>
           ))}
         </div>
       </Section>
 
-      {/* ===== TRENDING PRODUCTS ===== */}
       <Section background="default" padding="xl">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 md:mb-16">
+        <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-secondary mb-4">
-              What&apos;s hot
-            </p>
-            <h2 className="text-display-sm md:text-display-md font-display font-bold text-neutral-900 text-balance">
-              Trending Now
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-secondary">Most Wanted</p>
+            <h2 className="mt-4 font-display text-display-sm font-bold text-neutral-900 md:text-display-md">
+              Trending With A Richer Look
             </h2>
-            <p className="mt-4 text-body-lg text-neutral-500 max-w-lg">
-              The most coveted items this season, chosen by our community
+            <p className="mt-4 max-w-xl text-body-lg text-neutral-500">
+              Best-performing pieces, presented with stronger hierarchy and more editorial confidence.
             </p>
           </div>
-          <Link href="/products" className="mt-6 md:mt-0">
-            <Button variant="outline" size="md" className="group">
-              See All
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-              </svg>
-            </Button>
+          <Link href="/shop">
+            <Button variant="outline" size="lg">See All Products</Button>
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
-          {trendingProducts.map((product, index) => (
-            <div
-              key={product.id}
-              className="animate-fade-up"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <ProductCard
-                product={product}
-              />
-            </div>
-          ))}
-        </div>
+        {trendingProducts.length > 0 && (
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {trendingProducts.map((product, index) => (
+              <div key={product.id} className="animate-fade-up" style={{ animationDelay: `${index * 90}ms` }}>
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </div>
+        )}
       </Section>
 
-      {/* ===== EDITORIAL CTA SECTION ===== */}
-      <section className="relative overflow-hidden">
-        <div className="grid md:grid-cols-2 min-h-[500px] md:min-h-[600px]">
-          {/* Left: Image */}
-          <div className="relative aspect-square md:aspect-auto overflow-hidden">
-            <Image
-              src={ctaBanner.image}
-              alt="CTA background"
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-            <div className="absolute inset-0 bg-black/10" />
-          </div>
-
-          {/* Right: Content */}
-          <div className="relative bg-primary-800 flex items-center">
-            {/* Decorative */}
-            <div className="absolute top-0 right-0 w-48 h-48 bg-secondary/5 rounded-full -translate-y-1/2 translate-x-1/2" />
-            <div className="absolute bottom-0 left-0 w-32 h-32 bg-secondary/5 rounded-full translate-y-1/2 -translate-x-1/2" />
-
-            <div className="relative z-10 px-8 md:px-14 lg:px-20 py-16 md:py-0 w-full">
-              <span className="text-[11px] font-semibold tracking-[0.25em] uppercase text-secondary mb-6 block">
-                Stay Connected
-              </span>
-              <h2 className="text-display-sm md:text-display-md font-display font-bold text-white mb-6 text-balance">
-                {ctaBanner.title}
-              </h2>
-              <p className="text-body-lg text-neutral-400 mb-10 max-w-md">
-                {ctaBanner.description}
-              </p>
-
-              <form className="flex flex-col sm:flex-row gap-3 max-w-lg">
-                <input
-                  type="email"
-                  placeholder="Your email address"
-                  className="flex-1 px-5 py-3.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-neutral-500 focus:outline-none focus:border-secondary/50 transition-all duration-300 text-sm"
-                />
-                <Button variant="secondary" size="lg" className="whitespace-nowrap">
-                  {ctaBanner.ctaText}
-                </Button>
-              </form>
-
-              <p className="text-[11px] text-neutral-500 mt-4">
-                No spam. Unsubscribe anytime.
-              </p>
+      <section className="relative overflow-hidden px-5 py-20 md:px-8 md:py-28">
+        <div className="container mx-auto">
+          <div className="grid overflow-hidden rounded-[2.6rem] border border-white/10 jewel-dark md:grid-cols-2">
+            <div className="relative min-h-[380px]">
+              <Image src={ctaBanner.image} alt="Newsletter banner" fill className="object-cover mix-blend-luminosity opacity-75" sizes="(max-width: 768px) 100vw, 50vw" />
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-900/60 to-transparent" />
+            </div>
+            <div className="relative flex items-center px-8 py-12 md:px-14 lg:px-16">
+              <div>
+                <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-secondary">Stay Connected</span>
+                <h2 className="mt-5 font-display text-display-sm font-bold text-white md:text-display-md">
+                  {ctaBanner.title}
+                </h2>
+                <p className="mt-5 max-w-lg text-body-lg text-white/68">
+                  {ctaBanner.description}
+                </p>
+                <form className="mt-8 flex max-w-lg flex-col gap-3 sm:flex-row">
+                  <input
+                    type="email"
+                    placeholder="Your email address"
+                    className="flex-1 rounded-full border border-white/10 bg-white/10 px-5 py-4 text-sm text-white placeholder:text-white/38 focus:border-secondary/40"
+                  />
+                  <Button variant="secondary" size="lg" className="whitespace-nowrap">
+                    {ctaBanner.ctaText}
+                  </Button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* ===== TRUST / FEATURES SECTION ===== */}
-      <Section background="default" padding="lg">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 md:divide-x divide-neutral-200">
-          {[
-            {
-              icon: (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="w-7 h-7">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
-                </svg>
-              ),
-              title: 'Complimentary Shipping',
-              description: 'Free delivery on all orders above $100',
-            },
-            {
-              icon: (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="w-7 h-7">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-                </svg>
-              ),
-              title: 'Secure Transactions',
-              description: 'Every payment is encrypted and protected',
-            },
-            {
-              icon: (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="w-7 h-7">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-                </svg>
-              ),
-              title: 'Hassle-Free Returns',
-              description: '30-day return policy, no questions asked',
-            },
-          ].map((feature, index) => (
-            <div
-              key={feature.title}
-              className="text-center px-8 md:px-12 animate-fade-up"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-cream text-secondary mb-5">
-                {feature.icon}
-              </div>
-              <h3 className="text-base font-semibold text-neutral-900 mb-2">{feature.title}</h3>
-              <p className="text-sm text-neutral-500 leading-relaxed">{feature.description}</p>
-            </div>
-          ))}
-        </div>
-      </Section>
     </div>
   )
 }

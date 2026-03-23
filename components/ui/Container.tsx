@@ -14,7 +14,7 @@ export function Container({ children, className = '', size = 'lg' }: ContainerPr
   }
 
   return (
-    <div className={`mx-auto px-4 md:px-8 ${sizes[size]} ${className}`}>
+    <div className={`mx-auto px-5 md:px-8 ${sizes[size]} ${className}`}>
       {children}
     </div>
   )

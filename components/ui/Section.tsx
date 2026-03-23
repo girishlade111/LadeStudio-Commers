@@ -17,12 +17,12 @@ export function Section({
   padding = 'md',
 }: SectionProps) {
   const backgrounds = {
-    default: 'bg-white',
-    light: 'bg-surface-light',
-    dark: 'bg-neutral-50',
-    primary: 'bg-primary-800 text-white',
-    secondary: 'bg-secondary text-primary',
-    cream: 'bg-cream',
+    default: 'bg-transparent',
+    light: 'bg-surface-light/80',
+    dark: 'bg-neutral-900/95 text-white',
+    primary: 'jewel-dark text-white',
+    secondary: 'bg-secondary/10',
+    cream: 'bg-cream/80',
   }
 
   const paddings = {

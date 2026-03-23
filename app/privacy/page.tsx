@@ -3,151 +3,125 @@ export const metadata = {
   description: 'Lade Studio Privacy Policy - Learn how we collect, use, and protect your personal information.',
 }
 
+const sections = [
+  {
+    title: '1. Information We Collect',
+    body: [
+      'We collect information you provide directly to us, such as your name, email address, phone number, shipping address, billing address, products purchased, order history, and messages sent through our support channels.',
+      'Payment information like transaction references may be processed for order verification, but payment handling remains tied to the payment methods and proof you provide during checkout.',
+    ],
+  },
+  {
+    title: '2. How We Use Your Information',
+    body: [
+      'We use your information to process and fulfill orders, send order confirmations and shipping updates, respond to support requests, improve our products and website, prevent fraud, and comply with legal obligations.',
+      'Promotional communication is only sent when permitted or requested by you.',
+    ],
+  },
+  {
+    title: '3. Information Sharing',
+    body: [
+      'We do not sell, trade, or rent your personal information to third parties. We may share limited information with service providers who help us operate the business, with legal authorities when required, or as part of a legitimate business transfer.',
+    ],
+  },
+  {
+    title: '4. Data Security',
+    body: [
+      'We use reasonable technical and organizational safeguards to protect your information from unauthorized access, disclosure, alteration, or destruction. No online system is completely risk-free, so absolute security cannot be guaranteed.',
+    ],
+  },
+  {
+    title: '5. Cookies and Tracking',
+    body: [
+      'Cookies and similar technologies may be used to remember your preferences, maintain your cart, and understand how visitors use the site. You can control cookies through your browser settings, though some features may work less smoothly if disabled.',
+    ],
+  },
+  {
+    title: '6. Your Rights',
+    body: [
+      'You may request access to your information, ask for corrections, request deletion where permitted, opt out of marketing communication, or withdraw consent where processing is based on consent.',
+    ],
+  },
+  {
+    title: '7. Data Retention',
+    body: [
+      'We retain personal information for as long as necessary to support the purposes described in this policy, including order fulfillment, compliance, support, and record-keeping requirements.',
+    ],
+  },
+  {
+    title: '8. Third-Party Links',
+    body: [
+      'Our site may contain links to third-party services. We are not responsible for their privacy practices, and we encourage you to review their policies separately before sharing personal information.',
+    ],
+  },
+  {
+    title: '9. Children\'s Privacy',
+    body: [
+      'Our services are not intended for individuals under 18 years of age. If you believe information from a child has been submitted, please contact us so we can take appropriate action.',
+    ],
+  },
+  {
+    title: '10. Changes to This Policy',
+    body: [
+      'We may update this policy from time to time to reflect legal, operational, or product changes. Material updates will be reflected on this page along with a revised date.',
+    ],
+  },
+]
+
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero */}
-      <section className="relative bg-primary-900 py-20 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 to-transparent" />
-        </div>
-        <div className="container mx-auto px-5 md:px-8 relative z-10 text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-4">
-            Privacy Policy
-          </h1>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">
-            Last updated: March 2026
-          </p>
+    <div className="min-h-screen">
+      <section className="relative overflow-hidden px-5 pb-20 pt-28 md:px-8 md:pb-24 md:pt-36">
+        <div className="absolute inset-0 jewel-dark" />
+        <div className="absolute inset-0 rich-grid opacity-35" />
+        <div className="absolute -left-20 top-16 h-72 w-72 rounded-full bg-secondary/14 blur-3xl" />
+        <div className="absolute right-0 top-20 h-72 w-72 rounded-full bg-plum-500/16 blur-3xl" />
+
+        <div className="container relative mx-auto">
+          <div className="mx-auto max-w-4xl text-center">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-secondary">Policies</p>
+            <h1 className="mt-5 font-display text-[clamp(3rem,6vw,5.8rem)] font-bold leading-[0.92] text-white">
+              Privacy with
+              <span className="block text-gradient">clarity and care</span>
+            </h1>
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/68">
+              Last updated: March 2026. This page explains how we collect, use, and protect customer information across the storefront.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Content */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-5 md:px-8">
-          <div className="max-w-3xl mx-auto prose prose-lg">
-            <p className="text-neutral-600 leading-relaxed text-lg">
-              At Lade Studio, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or make a purchase.
-            </p>
+      <section className="container mx-auto px-5 pb-20 md:px-8 md:pb-24">
+        <div className="mx-auto max-w-4xl jewel-card rounded-[2.6rem] p-6 shadow-soft md:p-10">
+          <p className="text-lg leading-8 text-neutral-600">
+            At Lade Studio, we are committed to protecting your privacy and handling your information responsibly. This Privacy Policy explains what information we collect, why we collect it, and how we use it when you browse the website, place an order, or contact us.
+          </p>
 
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-neutral-900 mt-12 mb-6">
-              1. Information We Collect
-            </h2>
-            <p className="text-neutral-600 leading-relaxed mb-4">
-              We collect information you provide directly to us, such as:
-            </p>
-            <ul className="list-disc list-inside text-neutral-600 space-y-2 mb-8">
-              <li><strong>Personal Information:</strong> Name, email address, phone number, shipping address, billing address</li>
-              <li><strong>Payment Information:</strong> UPI ID, transaction details (processed securely through payment providers)</li>
-              <li><strong>Order Information:</strong> Products purchased, order history, preferences</li>
-              <li><strong>Communication Data:</strong> Messages sent through our contact forms, WhatsApp, or email</li>
-            </ul>
+          <div className="mt-10 space-y-8">
+            {sections.map((section) => (
+              <div key={section.title} className="rounded-[1.8rem] border border-neutral-200/80 bg-white/70 p-6 shadow-soft">
+                <h2 className="font-display text-3xl font-bold text-neutral-900">{section.title}</h2>
+                <div className="mt-4 space-y-4">
+                  {section.body.map((paragraph) => (
+                    <p key={paragraph} className="leading-8 text-neutral-600">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
 
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-neutral-900 mt-12 mb-6">
-              2. How We Use Your Information
-            </h2>
-            <p className="text-neutral-600 leading-relaxed mb-4">
-              We use the information we collect to:
+          <div className="mt-10 jewel-dark rounded-[2rem] p-6 md:p-8">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-secondary">Contact</p>
+            <h2 className="mt-3 font-display text-3xl font-bold text-white">Privacy questions?</h2>
+            <p className="mt-3 max-w-2xl leading-8 text-white/70">
+              Reach out if you have questions, requests, or concerns about how your data is handled.
             </p>
-            <ul className="list-disc list-inside text-neutral-600 space-y-2 mb-8">
-              <li>Process and fulfill your orders</li>
-              <li>Send order confirmations, shipping updates, and delivery notifications via WhatsApp and email</li>
-              <li>Respond to your questions, comments, and customer service requests</li>
-              <li>Send promotional communications (only with your consent)</li>
-              <li>Improve our website, products, and services</li>
-              <li>Detect, prevent, and address fraud or unauthorized activities</li>
-              <li>Comply with legal obligations</li>
-            </ul>
-
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-neutral-900 mt-12 mb-6">
-              3. Information Sharing
-            </h2>
-            <p className="text-neutral-600 leading-relaxed mb-4">
-              We do not sell, trade, or rent your personal information to third parties. We may share your information with:
-            </p>
-            <ul className="list-disc list-inside text-neutral-600 space-y-2 mb-8">
-              <li><strong>Service Providers:</strong> Companies that help us operate our business (payment processors, shipping partners, delivery services)</li>
-              <li><strong>Legal Compliance:</strong> When required by law, court order, or governmental authority</li>
-              <li><strong>Business Transfers:</strong> In case of merger, acquisition, or sale of assets</li>
-            </ul>
-
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-neutral-900 mt-12 mb-6">
-              4. Data Security
-            </h2>
-            <p className="text-neutral-600 leading-relaxed mb-8">
-              We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. This includes SSL encryption for data transmission, secure servers, and regular security assessments. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee absolute security.
-            </p>
-
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-neutral-900 mt-12 mb-6">
-              5. Cookies and Tracking
-            </h2>
-            <p className="text-neutral-600 leading-relaxed mb-4">
-              We use cookies and similar tracking technologies to:
-            </p>
-            <ul className="list-disc list-inside text-neutral-600 space-y-2 mb-8">
-              <li>Remember your preferences and cart items</li>
-              <li>Understand how you use our website</li>
-              <li>Deliver personalized content and recommendations</li>
-            </ul>
-            <p className="text-neutral-600 leading-relaxed mb-8">
-              You can control cookies through your browser settings. Disabling cookies may affect your browsing experience on our website.
-            </p>
-
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-neutral-900 mt-12 mb-6">
-              6. Your Rights
-            </h2>
-            <p className="text-neutral-600 leading-relaxed mb-4">
-              You have the right to:
-            </p>
-            <ul className="list-disc list-inside text-neutral-600 space-y-2 mb-8">
-              <li>Access your personal information</li>
-              <li>Correct inaccurate or incomplete data</li>
-              <li>Request deletion of your data (subject to legal requirements)</li>
-              <li>Opt out of marketing communications at any time</li>
-              <li>Withdraw consent where processing is based on consent</li>
-            </ul>
-            <p className="text-neutral-600 leading-relaxed mb-8">
-              To exercise these rights, please contact us at privacy@ladestudio.com.
-            </p>
-
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-neutral-900 mt-12 mb-6">
-              7. Data Retention
-            </h2>
-            <p className="text-neutral-600 leading-relaxed mb-8">
-              We retain your personal information for as long as necessary to fulfill the purposes outlined in this policy, unless a longer retention period is required by law. Order-related data is retained for at least 7 years for tax and legal compliance purposes.
-            </p>
-
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-neutral-900 mt-12 mb-6">
-              8. Third-Party Links
-            </h2>
-            <p className="text-neutral-600 leading-relaxed mb-8">
-              Our website may contain links to third-party websites, services, or applications. We are not responsible for the privacy practices of these third parties. We encourage you to review their privacy policies before providing any personal information.
-            </p>
-
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-neutral-900 mt-12 mb-6">
-              9. Children's Privacy
-            </h2>
-            <p className="text-neutral-600 leading-relaxed mb-8">
-              Our website and services are not intended for individuals under 18 years of age. We do not knowingly collect personal information from children. If you believe we have collected information from a child under 18, please contact us immediately.
-            </p>
-
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-neutral-900 mt-12 mb-6">
-              10. Changes to This Policy
-            </h2>
-            <p className="text-neutral-600 leading-relaxed mb-8">
-              We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. We will notify you of any material changes by posting the updated policy on this page with a revised "Last updated" date. We encourage you to review this policy periodically.
-            </p>
-
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-neutral-900 mt-12 mb-6">
-              11. Contact Us
-            </h2>
-            <p className="text-neutral-600 leading-relaxed mb-4">
-              If you have any questions, concerns, or requests regarding this Privacy Policy, please contact us:
-            </p>
-            <div className="bg-neutral-50 rounded-2xl p-6 mb-8">
-              <p className="text-neutral-900 font-medium mb-2">Lade Studio</p>
-              <p className="text-neutral-600 mb-1">Email: privacy@ladestudio.com</p>
-              <p className="text-neutral-600 mb-1">WhatsApp: +91 99999 99999</p>
-              <p className="text-neutral-600">Business Hours: Mon - Sat, 9 AM - 7 PM</p>
+            <div className="mt-5 space-y-1 text-white/86">
+              <p>privacy@ladestudio.com</p>
+              <p>WhatsApp: +91 99999 99999</p>
+              <p>Business Hours: Mon - Sat, 9 AM - 7 PM</p>
             </div>
           </div>
         </div>

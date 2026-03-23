@@ -28,9 +28,7 @@ export function PaymentProofContent({ initialPendingCheckout }: PaymentProofCont
   const [submittedOrder, setSubmittedOrder] = useState<OrderRecord | null>(null)
 
   useEffect(() => {
-    if (initialPendingCheckout) {
-      return
-    }
+    if (initialPendingCheckout) return
 
     try {
       const storedPendingCheckout = JSON.parse(getPendingCheckout()) as PendingCheckout | null
@@ -46,9 +44,7 @@ export function PaymentProofContent({ initialPendingCheckout }: PaymentProofCont
 
   useEffect(() => {
     return () => {
-      if (previewUrl) {
-        URL.revokeObjectURL(previewUrl)
-      }
+      if (previewUrl) URL.revokeObjectURL(previewUrl)
     }
   }, [previewUrl])
 
@@ -73,17 +69,9 @@ export function PaymentProofContent({ initialPendingCheckout }: PaymentProofCont
   const validate = () => {
     const nextErrors: typeof errors = {}
 
-    if (!validateName(payerName)) {
-      nextErrors.payerName = 'Enter the name used while paying.'
-    }
-
-    if (!validatePhone(payerPhone)) {
-      nextErrors.payerPhone = 'Enter the 10-digit number linked to the payment.'
-    }
-
-    if (!screenshot) {
-      nextErrors.screenshot = 'Upload your payment screenshot.'
-    }
+    if (!validateName(payerName)) nextErrors.payerName = 'Enter the name used while paying.'
+    if (!validatePhone(payerPhone)) nextErrors.payerPhone = 'Enter the 10-digit number linked to the payment.'
+    if (!screenshot) nextErrors.screenshot = 'Upload your payment screenshot.'
 
     setErrors(nextErrors)
     return Object.keys(nextErrors).length === 0
@@ -92,9 +80,7 @@ export function PaymentProofContent({ initialPendingCheckout }: PaymentProofCont
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    if (!pendingCheckout || !validate()) {
-      return
-    }
+    if (!pendingCheckout || !validate()) return
 
     setIsSubmitting(true)
     setErrors({})
@@ -116,9 +102,7 @@ export function PaymentProofContent({ initialPendingCheckout }: PaymentProofCont
         )
       )
 
-      if (screenshot) {
-        formData.append('screenshot', screenshot)
-      }
+      if (screenshot) formData.append('screenshot', screenshot)
 
       const response = await fetch('/api/orders', {
         method: 'POST',
@@ -144,34 +128,32 @@ export function PaymentProofContent({ initialPendingCheckout }: PaymentProofCont
 
   if (submittedOrder) {
     return (
-      <div className="max-w-3xl mx-auto bg-white rounded-3xl border border-neutral-200 p-8 md:p-10 shadow-soft">
-        <div className="w-16 h-16 rounded-full bg-green-100 text-green-600 flex items-center justify-center mb-6">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
+      <div className="mx-auto max-w-3xl jewel-dark rounded-[2.4rem] p-8 shadow-elevated md:p-10">
+        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-accent/20 text-white mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-8 w-8">
             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
           </svg>
         </div>
-        <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-secondary mb-3">Payment Submitted</p>
-        <h2 className="text-3xl font-display font-bold text-neutral-900 mb-3">Order received successfully</h2>
-        <p className="text-neutral-600 mb-8">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-secondary">Payment Submitted</p>
+        <h2 className="mt-3 font-display text-5xl font-bold text-white">Order received successfully</h2>
+        <p className="mt-4 text-white/68">
           Your payment screenshot has been submitted. We will review it and update your order status soon.
         </p>
-        <div className="grid md:grid-cols-2 gap-4 mb-8">
-          <div className="rounded-2xl bg-cream p-5">
-            <p className="text-xs text-neutral-500 uppercase tracking-wider mb-2">Order ID</p>
-            <p className="font-semibold text-neutral-900">{submittedOrder.orderId}</p>
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          <div className="rounded-[1.5rem] border border-white/10 bg-white/8 p-5">
+            <p className="text-xs uppercase tracking-[0.14em] text-white/45">Order ID</p>
+            <p className="mt-2 font-semibold text-white">{submittedOrder.orderId}</p>
           </div>
-          <div className="rounded-2xl bg-cream p-5">
-            <p className="text-xs text-neutral-500 uppercase tracking-wider mb-2">Submitted On</p>
-            <p className="font-semibold text-neutral-900">{formatDate(submittedOrder.createdAt)}</p>
+          <div className="rounded-[1.5rem] border border-white/10 bg-white/8 p-5">
+            <p className="text-xs uppercase tracking-[0.14em] text-white/45">Submitted On</p>
+            <p className="mt-2 font-semibold text-white">{formatDate(submittedOrder.createdAt)}</p>
           </div>
         </div>
-        <div className="flex flex-col sm:flex-row gap-3">
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link href="/orders" className="flex-1">
-            <Button variant="primary" size="lg" fullWidth>
-              View My Orders
-            </Button>
+            <Button variant="secondary" size="lg" fullWidth>View My Orders</Button>
           </Link>
-          <Button variant="outline" size="lg" onClick={() => router.push('/shop')}>
+          <Button variant="ghost" size="lg" className="border border-white/15 bg-white/6 text-white hover:bg-white/10" onClick={() => router.push('/shop')}>
             Continue Shopping
           </Button>
         </div>
@@ -181,10 +163,10 @@ export function PaymentProofContent({ initialPendingCheckout }: PaymentProofCont
 
   if (!pendingCheckout) {
     return (
-      <div className="max-w-2xl mx-auto bg-white rounded-3xl border border-neutral-200 p-8 text-center shadow-soft">
-        <h2 className="text-2xl font-display font-bold text-neutral-900 mb-3">No payment to submit</h2>
-        <p className="text-neutral-500 mb-6">Complete checkout first, then come back here to upload your payment screenshot.</p>
-        <Link href="/checkout">
+      <div className="mx-auto max-w-2xl jewel-card rounded-[2.2rem] p-8 text-center shadow-soft">
+        <h2 className="font-display text-4xl font-bold text-neutral-900">No payment to submit</h2>
+        <p className="mt-3 text-neutral-500">Complete checkout first, then come back here to upload your payment screenshot.</p>
+        <Link href="/checkout" className="mt-8 inline-block">
           <Button variant="primary" size="lg">Back to Checkout</Button>
         </Link>
       </div>
@@ -192,63 +174,65 @@ export function PaymentProofContent({ initialPendingCheckout }: PaymentProofCont
   }
 
   return (
-    <div className="grid lg:grid-cols-[1.2fr,0.8fr] gap-6">
-      <form onSubmit={handleSubmit} className="bg-white rounded-3xl border border-neutral-200 p-6 md:p-8 shadow-soft">
-        <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-secondary mb-3">Step 3</p>
-        <h2 className="text-2xl font-display font-bold text-neutral-900 mb-2">Upload payment proof</h2>
-        <p className="text-sm text-neutral-500 mb-8">
+    <div className="grid gap-6 lg:grid-cols-[1.15fr,0.85fr]">
+      <form onSubmit={handleSubmit} className="jewel-card rounded-[2.2rem] p-6 shadow-soft md:p-8">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-secondary">Step 3</p>
+        <h2 className="mt-3 font-display text-4xl font-bold text-neutral-900">Upload payment proof</h2>
+        <p className="mt-3 text-sm leading-7 text-neutral-500">
           Add the name, number, and screenshot used for the payment. Your purchased products are already attached.
         </p>
 
-        <div className="grid md:grid-cols-2 gap-5">
+        <div className="mt-8 grid gap-5 md:grid-cols-2">
           <div>
-            <label className="block text-xs font-medium text-neutral-500 uppercase tracking-wider mb-2">Payer Name</label>
+            <label className="mb-2 block text-xs font-medium uppercase tracking-[0.16em] text-neutral-500">Payer Name</label>
             <input
               type="text"
               value={payerName}
               onChange={(event) => setPayerName(sanitizeInput(event.target.value, 100))}
-              className={`w-full px-4 py-3 rounded-xl border ${errors.payerName ? 'border-red-400 bg-red-50/50' : 'border-neutral-200'} focus:border-secondary focus:outline-none transition-all text-sm`}
+              className={`w-full rounded-[1.2rem] border px-4 py-3 text-sm shadow-soft ${errors.payerName ? 'border-red-400 bg-red-50/50' : 'border-neutral-200 bg-white/75'}`}
               placeholder="Name used during payment"
               maxLength={100}
             />
-            {errors.payerName && <p className="text-red-500 text-xs mt-1.5">{errors.payerName}</p>}
+            {errors.payerName && <p className="mt-1.5 text-xs text-red-500">{errors.payerName}</p>}
           </div>
           <div>
-            <label className="block text-xs font-medium text-neutral-500 uppercase tracking-wider mb-2">Payment Number</label>
+            <label className="mb-2 block text-xs font-medium uppercase tracking-[0.16em] text-neutral-500">Payment Number</label>
             <input
               type="tel"
               value={payerPhone}
               onChange={(event) => setPayerPhone(event.target.value.replace(/\D/g, '').slice(0, 10))}
-              className={`w-full px-4 py-3 rounded-xl border ${errors.payerPhone ? 'border-red-400 bg-red-50/50' : 'border-neutral-200'} focus:border-secondary focus:outline-none transition-all text-sm`}
+              className={`w-full rounded-[1.2rem] border px-4 py-3 text-sm shadow-soft ${errors.payerPhone ? 'border-red-400 bg-red-50/50' : 'border-neutral-200 bg-white/75'}`}
               placeholder="10-digit payment number"
               maxLength={10}
             />
-            {errors.payerPhone && <p className="text-red-500 text-xs mt-1.5">{errors.payerPhone}</p>}
+            {errors.payerPhone && <p className="mt-1.5 text-xs text-red-500">{errors.payerPhone}</p>}
           </div>
         </div>
 
         <div className="mt-6">
-          <label className="block text-xs font-medium text-neutral-500 uppercase tracking-wider mb-2">Payment Screenshot</label>
-          <label className={`flex flex-col items-center justify-center rounded-2xl border border-dashed ${errors.screenshot ? 'border-red-400 bg-red-50/40' : 'border-neutral-300 bg-neutral-50'} px-5 py-8 text-center cursor-pointer hover:border-secondary transition-colors`}>
+          <label className="mb-2 block text-xs font-medium uppercase tracking-[0.16em] text-neutral-500">Payment Screenshot</label>
+          <label className={`flex cursor-pointer flex-col items-center justify-center rounded-[1.6rem] border border-dashed px-5 py-10 text-center transition-colors ${
+            errors.screenshot ? 'border-red-400 bg-red-50/40' : 'border-neutral-300 bg-white/55 hover:border-secondary'
+          }`}>
             <input type="file" accept="image/png,image/jpeg,image/webp" className="hidden" onChange={handleScreenshotChange} />
-            <span className="text-sm font-medium text-neutral-700">Choose screenshot</span>
-            <span className="text-xs text-neutral-500 mt-1">PNG, JPG, or WEBP up to 5 MB</span>
+            <span className="text-sm font-semibold text-neutral-700">Choose screenshot</span>
+            <span className="mt-1 text-xs uppercase tracking-[0.12em] text-neutral-500">PNG, JPG, or WEBP up to 5 MB</span>
           </label>
-          {errors.screenshot && <p className="text-red-500 text-xs mt-1.5">{errors.screenshot}</p>}
+          {errors.screenshot && <p className="mt-1.5 text-xs text-red-500">{errors.screenshot}</p>}
           {previewUrl && (
-            <div className="mt-4 relative w-full max-w-sm aspect-[4/5] rounded-2xl overflow-hidden border border-neutral-200">
+            <div className="relative mt-4 aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[1.6rem] border border-neutral-200">
               <Image src={previewUrl} alt="Payment screenshot preview" fill className="object-cover" unoptimized />
             </div>
           )}
         </div>
 
         {errors.submit && (
-          <div className="mt-6 rounded-2xl bg-red-50 text-red-600 text-sm px-4 py-3">
+          <div className="mt-6 rounded-[1.3rem] bg-red-50 px-4 py-3 text-sm text-red-600">
             {errors.submit}
           </div>
         )}
 
-        <div className="flex flex-col sm:flex-row gap-3 mt-8">
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Button type="submit" variant="primary" size="lg" isLoading={isSubmitting}>
             Submit Payment Proof
           </Button>
@@ -260,50 +244,48 @@ export function PaymentProofContent({ initialPendingCheckout }: PaymentProofCont
         </div>
       </form>
 
-      <div className="space-y-4">
-        <div className="bg-white rounded-3xl border border-neutral-200 p-6 shadow-soft">
-          <h3 className="text-sm font-semibold text-neutral-900 mb-4">Submitted products</h3>
-          <div className="space-y-4 max-h-80 overflow-y-auto">
+      <div className="space-y-5">
+        <div className="jewel-dark rounded-[2.2rem] p-6 shadow-elevated">
+          <h3 className="font-display text-3xl font-bold text-white">Submitted products</h3>
+          <div className="mt-5 max-h-80 space-y-4 overflow-y-auto pr-1">
             {pendingCheckout.items.map((item) => (
-              <div key={item.id} className="flex gap-3">
-                <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-cream flex-shrink-0">
+              <div key={item.id} className="flex gap-3 rounded-[1.4rem] border border-white/10 bg-white/6 p-3">
+                <div className="relative h-16 w-16 overflow-hidden rounded-[1rem] bg-white/10">
                   <Image src={item.image} alt={item.name} fill className="object-cover" sizes="64px" />
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-neutral-900 line-clamp-1">{item.name}</p>
-                  <p className="text-xs text-neutral-500">Qty {item.quantity}</p>
+                <div className="min-w-0 flex-1">
+                  <p className="line-clamp-1 text-sm font-semibold text-white">{item.name}</p>
+                  <p className="mt-1 text-xs uppercase tracking-[0.14em] text-white/45">Qty {item.quantity}</p>
                 </div>
-                <p className="text-sm font-semibold text-neutral-900">{formatPrice(item.price * item.quantity)}</p>
+                <p className="text-sm font-semibold text-white">{formatPrice(item.price * item.quantity)}</p>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="bg-white rounded-3xl border border-neutral-200 p-6 shadow-soft">
-          <h3 className="text-sm font-semibold text-neutral-900 mb-4">Order summary</h3>
-          <div className="space-y-2.5">
+        <div className="jewel-card rounded-[2.2rem] p-6 shadow-soft">
+          <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-neutral-500">Order summary</h3>
+          <div className="mt-4 space-y-3">
             <div className="flex justify-between text-sm text-neutral-500">
               <span>Items ({itemCount})</span>
               <span className="text-neutral-900">{formatPrice(pendingCheckout.subtotal)}</span>
             </div>
             <div className="flex justify-between text-sm text-neutral-500">
               <span>Shipping</span>
-              <span className={pendingCheckout.shipping === 0 ? 'text-green-600' : 'text-neutral-900'}>
-                {pendingCheckout.shipping === 0 ? 'Free' : formatPrice(pendingCheckout.shipping)}
-              </span>
+              <span className="text-neutral-900">{pendingCheckout.shipping === 0 ? 'Free' : formatPrice(pendingCheckout.shipping)}</span>
             </div>
-            <div className="flex justify-between text-base font-bold text-neutral-900 pt-3 border-t border-neutral-100">
+            <div className="flex justify-between border-t border-neutral-100 pt-4 text-base font-bold text-neutral-900">
               <span>Total</span>
               <span>{formatPrice(pendingCheckout.total)}</span>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-3xl border border-neutral-200 p-6 shadow-soft">
-          <h3 className="text-sm font-semibold text-neutral-900 mb-4">Shipping details</h3>
-          <p className="text-sm font-medium text-neutral-900">{pendingCheckout.customer.name}</p>
-          <p className="text-sm text-neutral-600 mt-1">{pendingCheckout.customer.phone}</p>
-          <p className="text-sm text-neutral-600 mt-2 whitespace-pre-line">{pendingCheckout.customer.address}</p>
+        <div className="jewel-card rounded-[2.2rem] p-6 shadow-soft">
+          <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-neutral-500">Shipping details</h3>
+          <p className="mt-4 text-lg font-semibold text-neutral-900">{pendingCheckout.customer.name}</p>
+          <p className="mt-1 text-neutral-600">{pendingCheckout.customer.phone}</p>
+          <p className="mt-3 whitespace-pre-line text-neutral-600">{pendingCheckout.customer.address}</p>
         </div>
       </div>
     </div>

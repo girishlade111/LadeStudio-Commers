@@ -8,9 +8,9 @@ import { formatDate, formatPrice } from '@/utils/formatters'
 export const dynamic = 'force-dynamic'
 
 const STATUS_STYLES: Record<string, string> = {
-  payment_submitted: 'bg-amber-100 text-amber-700',
-  verified: 'bg-green-100 text-green-700',
-  rejected: 'bg-red-100 text-red-700',
+  payment_submitted: 'border border-amber-200/70 bg-amber-50 text-amber-800',
+  verified: 'border border-emerald-200/70 bg-emerald-50 text-emerald-800',
+  rejected: 'border border-rose-200/70 bg-rose-50 text-rose-800',
 }
 
 export default async function OrdersPage() {
@@ -32,8 +32,8 @@ export default async function OrdersPage() {
 
       <div className="container mx-auto px-5 md:px-8 -mt-8 pb-16">
         {orders.length === 0 ? (
-          <div className="max-w-3xl mx-auto bg-white rounded-3xl border border-neutral-200 p-8 md:p-10 shadow-soft text-center">
-            <h2 className="text-2xl font-display font-bold text-neutral-900 mb-3">No orders yet</h2>
+          <div className="max-w-3xl mx-auto jewel-card rounded-[2.2rem] p-8 md:p-10 shadow-soft text-center">
+            <h2 className="text-4xl font-display font-bold text-neutral-900 mb-3">No orders yet</h2>
             <p className="text-neutral-500 mb-6">Once you submit a payment proof, your purchased products will appear here.</p>
             <Link href="/shop">
               <Button variant="primary" size="lg">Browse Products</Button>
@@ -42,31 +42,31 @@ export default async function OrdersPage() {
         ) : (
           <div className="max-w-5xl mx-auto space-y-6">
             {orders.map((order) => (
-              <article key={order.orderId} className="bg-white rounded-3xl border border-neutral-200 p-6 md:p-8 shadow-soft">
+              <article key={order.orderId} className="jewel-card rounded-[2.4rem] p-6 shadow-soft md:p-8">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
                   <div>
                     <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-secondary mb-2">Order</p>
-                    <h2 className="text-xl font-semibold text-neutral-900">{order.orderId}</h2>
+                    <h2 className="text-2xl font-display font-bold text-neutral-900">{order.orderId}</h2>
                     <p className="text-sm text-neutral-500 mt-1">{formatDate(order.createdAt)}</p>
                   </div>
                   <div className="flex flex-col items-start md:items-end gap-3">
-                    <span className={`inline-flex px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide ${STATUS_STYLES[order.status] || STATUS_STYLES.payment_submitted}`}>
+                    <span className={`inline-flex rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-wide ${STATUS_STYLES[order.status] || STATUS_STYLES.payment_submitted}`}>
                       {order.status.replace('_', ' ')}
                     </span>
-                    <span className="text-xl font-bold text-neutral-900">{formatPrice(order.total)}</span>
+                    <span className="text-2xl font-extrabold text-primary-800">{formatPrice(order.total)}</span>
                   </div>
                 </div>
 
                 <div className="grid lg:grid-cols-[1.4fr,0.6fr] gap-6">
                   <div className="space-y-4">
                     {order.items.map((item) => (
-                      <div key={`${order.orderId}-${item.productId}`} className="flex gap-4 items-center">
+                      <div key={`${order.orderId}-${item.productId}`} className="flex items-center gap-4 rounded-[1.7rem] border border-neutral-200/80 bg-white/70 p-3 shadow-soft">
                         <div className="relative w-20 h-20 rounded-2xl overflow-hidden bg-cream flex-shrink-0">
                           <Image src={item.image} alt={item.name} fill className="object-cover" sizes="80px" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm text-neutral-500 uppercase tracking-wide">{item.category}</p>
-                          <p className="text-base font-semibold text-neutral-900 line-clamp-1">{item.name}</p>
+                          <p className="text-[11px] text-neutral-500 uppercase tracking-[0.18em]">{item.category}</p>
+                          <p className="text-lg font-semibold text-neutral-900 line-clamp-1">{item.name}</p>
                           <p className="text-sm text-neutral-500">Qty {item.quantity}</p>
                         </div>
                         <p className="text-sm font-semibold text-neutral-900">{formatPrice(item.totalPrice)}</p>
@@ -75,7 +75,7 @@ export default async function OrdersPage() {
                   </div>
 
                   <div className="space-y-4">
-                    <div className="rounded-2xl bg-cream p-5">
+                    <div className="rounded-[1.8rem] border border-neutral-200/80 bg-white/70 p-5 shadow-soft">
                       <p className="text-xs uppercase tracking-wider text-neutral-500 mb-2">Payment Proof</p>
                       {order.screenshotUrl ? (
                         <a href={order.screenshotUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-secondary hover:text-secondary-700">
@@ -85,7 +85,7 @@ export default async function OrdersPage() {
                         <p className="text-sm text-neutral-500">No screenshot link available</p>
                       )}
                     </div>
-                    <div className="rounded-2xl bg-cream p-5">
+                    <div className="rounded-[1.8rem] border border-neutral-200/80 bg-white/70 p-5 shadow-soft">
                       <p className="text-xs uppercase tracking-wider text-neutral-500 mb-2">Delivery Details</p>
                       <p className="text-sm font-medium text-neutral-900">{order.customerName}</p>
                       <p className="text-sm text-neutral-600 mt-1">{order.customerPhone}</p>
