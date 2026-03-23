@@ -1,24 +1,19 @@
-'use client'
-
-import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ProductCard } from '@/components/products/ProductCard'
 import { Button } from '@/components/ui/Button'
 import { Section, SectionHeader } from '@/components/ui/Section'
-import { heroBanner, ctaBanner, featuredProducts, trendingProducts, categories } from '@/data'
-import { Product } from '@/types'
+import { categories as showcaseCategories, ctaBanner, heroBanner } from '@/data'
+import { getAllProducts } from '@/services/catalog'
 
-export default function HomePage() {
-  const [wishlist, setWishlist] = useState<string[]>([])
-
-  const toggleWishlist = (product: Product) => {
-    setWishlist(prev =>
-      prev.includes(product.id)
-        ? prev.filter(id => id !== product.id)
-        : [...prev, product.id]
-    )
-  }
+export default async function HomePage() {
+  const allProducts = await getAllProducts()
+  const featuredProducts = allProducts.slice(0, 4)
+  const trendingProducts = allProducts.slice(4, 8)
+  const categories = showcaseCategories.map((category) => ({
+    ...category,
+    productCount: allProducts.filter((product) => product.category.toLowerCase() === category.name.toLowerCase()).length,
+  }))
 
   return (
     <div className="min-h-screen">
@@ -68,7 +63,7 @@ export default function HomePage() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-start gap-4 animate-fade-up" style={{ animationDelay: '400ms' }}>
-              <Link href={heroBanner.ctaLink}>
+              <Link href="/shop">
                 <Button size="lg" variant="secondary" className="shadow-glow group">
                   {heroBanner.ctaText}
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1">
@@ -125,8 +120,6 @@ export default function HomePage() {
             >
               <ProductCard
                 product={product}
-                onWishlistToggle={toggleWishlist}
-                isInWishlist={wishlist.includes(product.id)}
                 priority={index < 2}
               />
             </div>
@@ -285,8 +278,6 @@ export default function HomePage() {
             >
               <ProductCard
                 product={product}
-                onWishlistToggle={toggleWishlist}
-                isInWishlist={wishlist.includes(product.id)}
               />
             </div>
           ))}

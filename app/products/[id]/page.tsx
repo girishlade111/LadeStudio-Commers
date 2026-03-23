@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import { ProductDetailsContent } from './ProductDetailsContent'
-import { fetchProductById, fetchProducts } from '@/services/api/products'
+import { getAllProducts, getCatalogProductById } from '@/services/catalog'
 
 interface ProductPageProps {
   params: Promise<{ id: string }>
@@ -12,7 +12,10 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   const { id } = await params
 
   try {
-    const product = await fetchProductById(id)
+    const product = await getCatalogProductById(id)
+    if (!product) {
+      throw new Error('Product not found')
+    }
     return {
       title: `${product.name} | Lade Studio`,
       description: product.description,
@@ -34,9 +37,13 @@ async function ProductDetails({ params }: ProductPageProps) {
 
   try {
     const [product, allProducts] = await Promise.all([
-      fetchProductById(id),
-      fetchProducts()
+      getCatalogProductById(id),
+      getAllProducts()
     ])
+
+    if (!product) {
+      notFound()
+    }
 
     const relatedProducts = allProducts
       .filter(p => p.category === product.category && p.id !== product.id)

@@ -7,6 +7,7 @@ import { CartItem } from '@/types'
 import { formatPrice } from '@/utils/formatters'
 import { Button } from '@/components/ui/Button'
 import { useCart } from '@/hooks/useCart'
+import { FREE_SHIPPING_THRESHOLD, calculateOrderTotals } from '@/utils/orders'
 
 interface CartContentProps {
   cartItems: CartItem[]
@@ -16,9 +17,7 @@ export function CartContent({ cartItems }: CartContentProps) {
   const { updateQuantity, removeFromCart } = useCart()
   const [removingId, setRemovingId] = useState<string | null>(null)
 
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
-  const shipping = subtotal > 100 ? 0 : 9.99
-  const total = subtotal + shipping
+  const { subtotal, shipping, total } = calculateOrderTotals(cartItems)
 
   const handleRemove = (id: string) => {
     setRemovingId(id)
@@ -151,7 +150,7 @@ export function CartContent({ cartItems }: CartContentProps) {
         <div className="sticky top-24 bg-white rounded-2xl border border-neutral-200 p-6 shadow-soft">
           <h3 className="text-base font-semibold text-neutral-900 mb-6">Order Summary</h3>
 
-          <div className="space-y-4 border-b border-neutral-100 pb-6">
+            <div className="space-y-4 border-b border-neutral-100 pb-6">
             <div className="flex justify-between text-sm">
               <span className="text-neutral-500">Subtotal</span>
               <span className="font-medium text-neutral-900">{formatPrice(subtotal)}</span>
@@ -166,9 +165,9 @@ export function CartContent({ cartItems }: CartContentProps) {
                 )}
               </span>
             </div>
-            {subtotal < 100 && (
+            {subtotal > 0 && subtotal < FREE_SHIPPING_THRESHOLD && (
               <div className="text-xs text-neutral-400 bg-cream p-3 rounded-lg">
-                Add {formatPrice(100 - subtotal)} more for free shipping
+                Add {formatPrice(FREE_SHIPPING_THRESHOLD - subtotal)} more for free shipping
               </div>
             )}
           </div>
@@ -178,12 +177,14 @@ export function CartContent({ cartItems }: CartContentProps) {
             <span className="text-xl font-bold text-neutral-900">{formatPrice(total)}</span>
           </div>
 
-          <Button variant="primary" size="lg" fullWidth>
-            Proceed to Checkout
-          </Button>
+          <Link href="/checkout" className="block">
+            <Button variant="primary" size="lg" fullWidth>
+              Proceed to Checkout
+            </Button>
+          </Link>
 
           <div className="space-y-3 pt-6 mt-6 border-t border-neutral-100">
-            {['Free shipping over $100', '30-day return policy', 'Secure checkout'].map((text) => (
+            {['Free shipping over Rs. 999', '30-day return policy', 'Secure checkout'].map((text) => (
               <div key={text} className="flex items-center gap-2.5 text-xs text-neutral-500">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3.5 h-3.5 text-green-500 flex-shrink-0">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />

@@ -4,39 +4,45 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { CartItem } from '@/types'
+import { CartItem, CustomerInfo, PendingCheckout } from '@/types'
 import { formatPrice } from '@/utils/formatters'
 import { Button } from '@/components/ui/Button'
-import { useCart } from '@/hooks/useCart'
 import { validateName, validatePhone, validateAddress, sanitizeInput } from '@/utils/security'
+import { calculateOrderTotals } from '@/utils/orders'
+import { setPendingCheckout } from '@/utils/storage'
 
 interface CheckoutContentProps {
   cartItems: CartItem[]
 }
 
-interface CustomerInfo {
-  name: string
-  phone: string
-  address: string
-}
-
 const UPI_ID = process.env.NEXT_PUBLIC_UPI_ID || 'default@upi'
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919999999999'
+const UPI_QR_URL = process.env.NEXT_PUBLIC_UPI_QR_URL
 
 export function CheckoutContent({ cartItems }: CheckoutContentProps) {
   const router = useRouter()
-  const { clearCart } = useCart()
   const [step, setStep] = useState<'form' | 'payment'>('form')
   const [customer, setCustomer] = useState<CustomerInfo>({
     name: '',
+    email: '',
     phone: '',
     address: '',
   })
   const [errors, setErrors] = useState<Partial<CustomerInfo>>({})
 
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
-  const shipping = subtotal > 100 ? 0 : 9.99
-  const total = subtotal + shipping
+  const { subtotal, shipping, total } = calculateOrderTotals(cartItems)
+
+  const persistPendingCheckout = () => {
+    const pendingCheckout: PendingCheckout = {
+      customer,
+      items: cartItems,
+      subtotal,
+      shipping,
+      total,
+      createdAt: new Date().toISOString(),
+    }
+
+    setPendingCheckout(JSON.stringify(pendingCheckout))
+  }
 
   const validateForm = () => {
     const newErrors: Partial<CustomerInfo> = {}
@@ -59,32 +65,14 @@ export function CheckoutContent({ cartItems }: CheckoutContentProps) {
 
   const handleContinue = () => {
     if (validateForm()) {
+      persistPendingCheckout()
       setStep('payment')
     }
   }
 
-  const generateWhatsAppMessage = () => {
-    let message = `*New Order - Lade Studio*\n\n`
-    message += `*Customer Details:*\n`
-    message += `Name: ${customer.name}\n`
-    message += `Phone: ${customer.phone}\n`
-    message += `Address: ${customer.address}\n\n`
-    message += `*Order Items:*\n`
-    cartItems.forEach((item, index) => {
-      message += `${index + 1}. ${item.name} x${item.quantity} - ${formatPrice(item.price * item.quantity)}\n`
-    })
-    message += `\n*Subtotal:* ${formatPrice(subtotal)}\n`
-    message += `*Shipping:* ${shipping === 0 ? 'Free' : formatPrice(shipping)}\n`
-    message += `*Total:* ${formatPrice(total)}\n\n`
-    message += `*Payment Status:* Paid via UPI`
-    return encodeURIComponent(message)
-  }
-
   const handlePaid = () => {
-    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${generateWhatsAppMessage()}`
-    clearCart()
-    window.open(waUrl, '_blank')
-    router.push('/')
+    persistPendingCheckout()
+    router.push('/checkout/payment-proof')
   }
 
   if (cartItems.length === 0) {
@@ -225,12 +213,12 @@ export function CheckoutContent({ cartItems }: CheckoutContentProps) {
           {/* Payment QR */}
           <div className="bg-white rounded-2xl border border-neutral-200 p-6 md:p-8 shadow-soft">
             <h2 className="text-base font-semibold text-neutral-900 mb-1">Scan to Pay</h2>
-            <p className="text-sm text-neutral-500 mb-6">Use any UPI app to scan the QR code</p>
+            <p className="text-sm text-neutral-500 mb-6">Use any UPI app to pay, then continue to upload your payment screenshot.</p>
 
             <div className="flex justify-center mb-6">
               <div className="p-4 bg-white rounded-2xl border border-neutral-200 shadow-card">
                 <Image
-                  src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=${UPI_ID}&pn=Lade%20Studio&am=${total.toFixed(2)}&cu=INR`}
+                  src={UPI_QR_URL || `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=${UPI_ID}&pn=Lade%20Studio&am=${total.toFixed(2)}&cu=INR`}
                   alt="UPI QR Code"
                   width={220}
                   height={220}
@@ -246,9 +234,9 @@ export function CheckoutContent({ cartItems }: CheckoutContentProps) {
             </div>
 
             <div className="bg-cream rounded-xl p-5">
-              <p className="text-xs text-neutral-500 mb-3 text-center">After completing payment:</p>
+              <p className="text-xs text-neutral-500 mb-3 text-center">After completing payment, continue to upload your screenshot proof.</p>
               <Button variant="primary" size="lg" fullWidth onClick={handlePaid}>
-                I Have Paid
+                I Have Paid, Continue
               </Button>
             </div>
 

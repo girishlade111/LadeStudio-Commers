@@ -1,9 +1,14 @@
 const CART_KEY = 'ladi_studio_cart'
 const WISHLIST_KEY = 'ladi_studio_wishlist'
+const PENDING_CHECKOUT_KEY = 'ladi_studio_pending_checkout'
+
+function getStorageItem(key: string, fallback: string): string {
+  if (typeof window === 'undefined') return fallback
+  return localStorage.getItem(key) || fallback
+}
 
 export function getCart(): string {
-  if (typeof window === 'undefined') return '[]'
-  return localStorage.getItem(CART_KEY) || '[]'
+  return getStorageItem(CART_KEY, '[]')
 }
 
 export function setCart(cart: string): void {
@@ -12,8 +17,7 @@ export function setCart(cart: string): void {
 }
 
 export function getWishlist(): string {
-  if (typeof window === 'undefined') return '[]'
-  return localStorage.getItem(WISHLIST_KEY) || '[]'
+  return getStorageItem(WISHLIST_KEY, '[]')
 }
 
 export function setWishlist(wishlist: string): void {
@@ -29,4 +33,18 @@ export function clearCart(): void {
 export function clearWishlist(): void {
   if (typeof window === 'undefined') return
   localStorage.removeItem(WISHLIST_KEY)
+}
+
+export function getPendingCheckout(): string {
+  return getStorageItem(PENDING_CHECKOUT_KEY, 'null')
+}
+
+export function setPendingCheckout(pendingCheckout: string): void {
+  if (typeof window === 'undefined') return
+  localStorage.setItem(PENDING_CHECKOUT_KEY, pendingCheckout)
+}
+
+export function clearPendingCheckout(): void {
+  if (typeof window === 'undefined') return
+  localStorage.removeItem(PENDING_CHECKOUT_KEY)
 }

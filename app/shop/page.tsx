@@ -1,12 +1,12 @@
 'use client'
 
-import { useState, useMemo, Suspense } from 'react'
+import { Suspense, useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { ProductCard } from '@/components/products/ProductCard'
 import { Button } from '@/components/ui/Button'
-import { products } from '@/data'
+import { Product } from '@/types'
+import { fetchCategories, fetchProducts } from '@/services/api/products'
 
-const categories = ['All', 'Apparel', 'Accessories', 'Home', 'Electronics', 'Footwear']
 const sortOptions = [
   { value: 'featured', label: 'Featured' },
   { value: 'newest', label: 'Newest' },
@@ -22,6 +22,53 @@ function ShopContent() {
   const [sortBy, setSortBy] = useState('featured')
   const [searchQuery, setSearchQuery] = useState('')
   const [showFilters, setShowFilters] = useState(false)
+  const [products, setProducts] = useState<Product[]>([])
+  const [categories, setCategories] = useState<string[]>(['All'])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    let ignore = false
+
+    async function loadCatalog() {
+      try {
+        setIsLoading(true)
+        const [catalogProducts, catalogCategories] = await Promise.all([
+          fetchProducts(),
+          fetchCategories(),
+        ])
+
+        if (ignore) {
+          return
+        }
+
+        setProducts(catalogProducts)
+        const resolvedCategories = ['All', ...catalogCategories]
+        setCategories(resolvedCategories)
+        setSelectedCategory((currentCategory) => {
+          const matchedCategory = resolvedCategories.find(
+            (category) => category.toLowerCase() === currentCategory.toLowerCase()
+          )
+          return matchedCategory || 'All'
+        })
+        setError(null)
+      } catch (loadError) {
+        if (!ignore) {
+          setError(loadError instanceof Error ? loadError.message : 'Failed to load products')
+        }
+      } finally {
+        if (!ignore) {
+          setIsLoading(false)
+        }
+      }
+    }
+
+    loadCatalog()
+
+    return () => {
+      ignore = true
+    }
+  }, [])
 
   const filteredProducts = useMemo(() => {
     let result = [...products]
@@ -57,6 +104,24 @@ function ShopContent() {
   const getCategoryCount = (category: string) => {
     if (category === 'All') return products.length
     return products.filter(p => p.category.toLowerCase() === category.toLowerCase()).length
+  }
+
+  if (isLoading) {
+    return <ShopLoading />
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center px-5">
+        <div className="max-w-lg text-center bg-white border border-neutral-200 rounded-3xl p-8 shadow-soft">
+          <h2 className="text-2xl font-display font-bold text-neutral-900 mb-3">Unable to load products</h2>
+          <p className="text-neutral-500 mb-6">{error}</p>
+          <Button variant="primary" onClick={() => window.location.reload()}>
+            Try Again
+          </Button>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -130,8 +195,8 @@ function ShopContent() {
             <div className="sticky top-40">
               <h3 className="text-sm font-semibold text-neutral-900 mb-4 uppercase tracking-wider">Categories</h3>
               <div className="space-y-1">
-                {categories.map(category => (
-                  <button
+                    {categories.map(category => (
+                      <button
                     key={category}
                     onClick={() => setSelectedCategory(category)}
                     className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-all ${

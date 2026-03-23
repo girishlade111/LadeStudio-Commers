@@ -3,16 +3,20 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { UserButton, useAuth } from '@clerk/nextjs'
+import { useCart } from '@/hooks/useCart'
+import { useWishlist } from '@/hooks/useWishlist'
 
-interface NavbarProps {
-  cartCount?: number
-  wishlistCount?: number
-}
-
-export function Navbar({ cartCount = 0, wishlistCount = 0 }: NavbarProps) {
+export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
+  const { isLoaded: isAuthLoaded, userId } = useAuth()
+  const { getItemCount: getCartItemCount, isLoaded: isCartLoaded } = useCart()
+  const { getItemCount: wishlistCount, isLoaded: isWishlistLoaded } = useWishlist()
+  const cartCount = isCartLoaded ? getCartItemCount() : 0
+  const savedCount = isWishlistLoaded ? wishlistCount : 0
+  const isSignedIn = isAuthLoaded && Boolean(userId)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,7 +42,7 @@ export function Navbar({ cartCount = 0, wishlistCount = 0 }: NavbarProps) {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/products', label: 'Shop' },
+    { href: '/shop', label: 'Shop' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
   ]
@@ -87,9 +91,9 @@ export function Navbar({ cartCount = 0, wishlistCount = 0 }: NavbarProps) {
               <div className={`flex items-center gap-1 px-1.5 py-1.5 rounded-full transition-all duration-500 ${
                 isScrolled ? 'bg-neutral-100/80' : 'bg-white/10 backdrop-blur-sm'
               }`}>
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
                     href={link.href}
                     className={`relative px-5 py-2 text-sm font-medium tracking-wide rounded-full transition-all duration-300 ${
                       isActive(link.href)
@@ -100,6 +104,18 @@ export function Navbar({ cartCount = 0, wishlistCount = 0 }: NavbarProps) {
                     {link.label}
                   </Link>
                 ))}
+                {isSignedIn && (
+                  <Link
+                    href="/orders"
+                    className={`relative px-5 py-2 text-sm font-medium tracking-wide rounded-full transition-all duration-300 ${
+                      isActive('/orders')
+                        ? 'bg-primary-800 text-white shadow-sm'
+                        : 'text-neutral-600 hover:text-primary-800 hover:bg-white/60'
+                    }`}
+                  >
+                    My Orders
+                  </Link>
+                )}
               </div>
             </div>
 
@@ -124,9 +140,9 @@ export function Navbar({ cartCount = 0, wishlistCount = 0 }: NavbarProps) {
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-[18px] h-[18px]">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                 </svg>
-                {wishlistCount > 0 && (
+                {savedCount > 0 && (
                   <span className="absolute top-1 right-1 w-4 h-4 bg-secondary text-white text-[10px] font-bold rounded-full flex items-center justify-center animate-scale-in">
-                    {wishlistCount}
+                    {savedCount}
                   </span>
                 )}
               </Link>
@@ -146,6 +162,20 @@ export function Navbar({ cartCount = 0, wishlistCount = 0 }: NavbarProps) {
                   </span>
                 )}
               </Link>
+
+              {!isSignedIn && (
+                <Link
+                  href="/sign-in"
+                  className="hidden md:inline-flex px-4 py-2 text-sm font-medium rounded-full border border-neutral-200 text-neutral-700 hover:border-primary-800 hover:text-primary-800 transition-all duration-200"
+                >
+                  Sign In
+                </Link>
+              )}
+              {isSignedIn && (
+                <div className="hidden md:flex items-center pl-2">
+                  <UserButton />
+                </div>
+              )}
 
               {/* Mobile Menu Toggle */}
               <button
@@ -203,9 +233,38 @@ export function Navbar({ cartCount = 0, wishlistCount = 0 }: NavbarProps) {
                   </svg>
                 </Link>
               ))}
+              {isSignedIn && (
+                <Link
+                  href="/orders"
+                  className={`flex items-center justify-between py-4 text-lg font-medium border-b border-neutral-100 transition-all duration-300 ${
+                    isActive('/orders')
+                      ? 'text-secondary'
+                      : 'text-neutral-800 hover:text-secondary hover:pl-2'
+                  }`}
+                >
+                  My Orders
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 text-neutral-300">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                  </svg>
+                </Link>
+              )}
             </nav>
 
             <div className="mt-auto space-y-4">
+              {!isSignedIn && (
+                <Link
+                  href="/sign-in"
+                  className="inline-flex items-center justify-center w-full px-5 py-3 rounded-xl bg-primary-800 text-white text-sm font-medium"
+                >
+                  Sign In
+                </Link>
+              )}
+              {isSignedIn && (
+                <div className="flex items-center gap-3">
+                  <UserButton />
+                  <span className="text-sm text-neutral-500">Account</span>
+                </div>
+              )}
               <div className="section-divider" />
               <p className="text-xs text-neutral-400 uppercase tracking-widest">Follow us</p>
               <div className="flex gap-4">

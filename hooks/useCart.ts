@@ -9,8 +9,12 @@ export function useCart() {
   const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    const storedCart = JSON.parse(getCart())
-    setCartState(storedCart)
+    try {
+      const storedCart = JSON.parse(getCart())
+      setCartState(Array.isArray(storedCart) ? storedCart : [])
+    } catch {
+      setCartState([])
+    }
     setIsLoaded(true)
   }, [])
 

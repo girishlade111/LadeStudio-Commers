@@ -10,3 +10,5 @@ build/
 .DS_Store
 *.pem
 .vercel
+# clerk configuration (can include secrets)
+/.clerk/

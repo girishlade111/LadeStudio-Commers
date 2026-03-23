@@ -9,8 +9,12 @@ export function useWishlist() {
   const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    const storedWishlist = JSON.parse(getWishlist())
-    setWishlistState(storedWishlist)
+    try {
+      const storedWishlist = JSON.parse(getWishlist())
+      setWishlistState(Array.isArray(storedWishlist) ? storedWishlist : [])
+    } catch {
+      setWishlistState([])
+    }
     setIsLoaded(true)
   }, [])
 
