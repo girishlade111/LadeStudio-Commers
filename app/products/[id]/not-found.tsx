@@ -3,16 +3,16 @@ import { Button } from '@/components/ui/Button'
 
 export default function ProductNotFound() {
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center px-5">
       <div className="text-center max-w-md">
-        <div className="mb-8">
+        <div className="w-20 h-20 mx-auto mb-8 rounded-2xl bg-cream flex items-center justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1}
             stroke="currentColor"
-            className="w-24 h-24 mx-auto text-neutral-300"
+            className="w-10 h-10 text-secondary"
           >
             <path
               strokeLinecap="round"
@@ -21,11 +21,11 @@ export default function ProductNotFound() {
             />
           </svg>
         </div>
-        <h1 className="text-3xl font-bold text-neutral-900 mb-4">Product Not Found</h1>
-        <p className="text-lg text-neutral-600 mb-8">
+        <h1 className="text-display-sm font-display font-bold text-neutral-900 mb-4">Product Not Found</h1>
+        <p className="text-body-md text-neutral-500 mb-8">
           Sorry, we couldn&apos;t find the product you&apos;re looking for. It may have been removed or the link might be incorrect.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link href="/products">
             <Button variant="primary" size="lg">
               Browse Products

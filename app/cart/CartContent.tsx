@@ -38,17 +38,20 @@ export function CartContent({ cartItems }: CartContentProps) {
 
   if (cartItems.length === 0) {
     return (
-      <div className="min-h-[60vh] flex flex-col items-center justify-center text-center py-16">
-        <div className="w-24 h-24 mb-6 rounded-full bg-neutral-100 flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-12 h-12 text-neutral-400">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+      <div className="min-h-[50vh] flex flex-col items-center justify-center text-center py-20">
+        <div className="w-20 h-20 mb-6 rounded-2xl bg-cream flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="w-10 h-10 text-secondary">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
           </svg>
         </div>
-        <h2 className="text-2xl font-bold text-neutral-900 mb-3">Your cart is empty</h2>
-        <p className="text-neutral-500 mb-8 max-w-md">Looks like you haven't added anything to your cart yet. Start shopping to fill it up!</p>
+        <h2 className="text-xl font-display font-bold text-neutral-900 mb-3">Your cart is empty</h2>
+        <p className="text-sm text-neutral-500 mb-8 max-w-sm">Looks like you haven&apos;t added anything yet. Explore our collection to find something you love.</p>
         <Link href="/products">
           <Button variant="primary" size="lg">
             Start Shopping
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
           </Button>
         </Link>
       </div>
@@ -56,83 +59,85 @@ export function CartContent({ cartItems }: CartContentProps) {
   }
 
   return (
-    <div className="grid lg:grid-cols-3 gap-8">
-      <div className="lg:col-span-2 space-y-6">
-        <div className="flex items-center justify-between pb-4 border-b border-neutral-200">
-          <h2 className="text-xl font-bold text-neutral-900">{cartItems.length} {cartItems.length === 1 ? 'Item' : 'Items'}</h2>
-          <Link href="/products" className="text-sm text-secondary hover:text-secondary-700 font-medium transition-colors">
+    <div className="grid lg:grid-cols-3 gap-6">
+      {/* Cart Items */}
+      <div className="lg:col-span-2 space-y-4">
+        <div className="flex items-center justify-between pb-4 mb-2">
+          <p className="text-sm text-neutral-500">
+            {cartItems.length} {cartItems.length === 1 ? 'item' : 'items'}
+          </p>
+          <Link href="/products" className="text-sm text-secondary hover:text-secondary-700 font-medium transition-colors link-underline">
             Continue Shopping
           </Link>
         </div>
 
-        {cartItems.map((item, index) => (
+        {cartItems.map((item) => (
           <div
             key={item.id}
-            className={`flex gap-6 p-6 bg-white rounded-2xl border border-neutral-200 transition-all duration-300 ${
+            className={`flex gap-5 p-5 bg-white rounded-2xl border border-neutral-200 transition-all duration-300 hover:shadow-card ${
               removingId === item.id ? 'opacity-0 translate-x-4' : 'opacity-100'
             }`}
-            style={{ animationDelay: `${index * 50}ms` }}
           >
             <Link href={`/products/${item.id}`} className="flex-shrink-0">
-              <div className="w-28 h-28 md:w-32 md:h-32 rounded-xl overflow-hidden bg-neutral-100 relative">
+              <div className="w-24 h-24 md:w-28 md:h-28 rounded-xl overflow-hidden bg-cream relative">
                 <Image
                   src={item.image}
                   alt={item.name}
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-500"
-                  sizes="128px"
+                  sizes="112px"
                 />
               </div>
             </Link>
 
             <div className="flex-1 min-w-0">
-              <div className="flex items-start justify-between gap-4">
+              <div className="flex items-start justify-between gap-3">
                 <div>
-                  <Link href={`/products/${item.id}`} className="text-lg font-semibold text-neutral-900 hover:text-secondary transition-colors line-clamp-1">
+                  <span className="text-[10px] font-medium tracking-widest uppercase text-neutral-400">{item.category}</span>
+                  <Link href={`/products/${item.id}`} className="block text-base font-semibold text-neutral-900 hover:text-secondary transition-colors line-clamp-1 mt-0.5">
                     {item.name}
                   </Link>
-                  <p className="text-sm text-neutral-500 mt-1">{item.category}</p>
                 </div>
                 <button
                   onClick={() => handleRemove(item.id)}
-                  className="p-2 text-neutral-400 hover:text-red-500 transition-colors"
+                  className="p-1.5 rounded-lg text-neutral-300 hover:text-red-500 hover:bg-red-50 transition-all"
                   aria-label="Remove item"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
               </div>
 
               <div className="flex items-center justify-between mt-4">
-                <div className="flex items-center border-2 border-neutral-200 rounded-xl">
+                <div className="flex items-center bg-neutral-50 rounded-lg">
                   <button
                     onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
-                    className="px-3 py-2 text-neutral-600 hover:text-secondary transition-colors hover:bg-neutral-50"
+                    className="px-3 py-1.5 text-neutral-500 hover:text-primary-800 transition-colors"
                     disabled={item.quantity <= 1}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3.5 h-3.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15" />
                     </svg>
                   </button>
-                  <span className="px-4 py-2 font-semibold min-w-[40px] text-center border-x-2 border-neutral-200">
+                  <span className="px-3 py-1.5 text-sm font-semibold min-w-[32px] text-center">
                     {item.quantity}
                   </span>
                   <button
                     onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-                    className="px-3 py-2 text-neutral-600 hover:text-secondary transition-colors hover:bg-neutral-50"
+                    className="px-3 py-1.5 text-neutral-500 hover:text-primary-800 transition-colors"
                     disabled={item.quantity >= 10}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3.5 h-3.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                   </button>
                 </div>
 
                 <div className="text-right">
-                  <p className="text-xl font-bold text-secondary">{formatPrice(item.price * item.quantity)}</p>
+                  <p className="text-lg font-bold text-neutral-900">{formatPrice(item.price * item.quantity)}</p>
                   {item.quantity > 1 && (
-                    <p className="text-sm text-neutral-500">{formatPrice(item.price)} each</p>
+                    <p className="text-xs text-neutral-400">{formatPrice(item.price)} each</p>
                   )}
                 </div>
               </div>
@@ -141,17 +146,18 @@ export function CartContent({ cartItems }: CartContentProps) {
         ))}
       </div>
 
+      {/* Order Summary */}
       <div className="lg:col-span-1">
-        <div className="sticky top-24 bg-white rounded-2xl border border-neutral-200 p-6 space-y-6">
-          <h3 className="text-xl font-bold text-neutral-900">Order Summary</h3>
+        <div className="sticky top-24 bg-white rounded-2xl border border-neutral-200 p-6 shadow-soft">
+          <h3 className="text-base font-semibold text-neutral-900 mb-6">Order Summary</h3>
 
-          <div className="space-y-4 border-b border-neutral-200 pb-6">
-            <div className="flex justify-between text-neutral-600">
-              <span>Subtotal</span>
-              <span className="font-medium">{formatPrice(subtotal)}</span>
+          <div className="space-y-4 border-b border-neutral-100 pb-6">
+            <div className="flex justify-between text-sm">
+              <span className="text-neutral-500">Subtotal</span>
+              <span className="font-medium text-neutral-900">{formatPrice(subtotal)}</span>
             </div>
-            <div className="flex justify-between text-neutral-600">
-              <span>Shipping</span>
+            <div className="flex justify-between text-sm">
+              <span className="text-neutral-500">Shipping</span>
               <span className="font-medium">
                 {shipping === 0 ? (
                   <span className="text-green-600">Free</span>
@@ -161,40 +167,30 @@ export function CartContent({ cartItems }: CartContentProps) {
               </span>
             </div>
             {subtotal < 100 && (
-              <div className="flex justify-between text-sm text-neutral-500 bg-neutral-50 p-3 rounded-lg">
-                <span>Add {formatPrice(100 - subtotal)} more for free shipping</span>
+              <div className="text-xs text-neutral-400 bg-cream p-3 rounded-lg">
+                Add {formatPrice(100 - subtotal)} more for free shipping
               </div>
             )}
           </div>
 
-          <div className="flex justify-between items-center">
-            <span className="text-lg font-semibold text-neutral-900">Total</span>
-            <span className="text-2xl font-bold text-secondary">{formatPrice(total)}</span>
+          <div className="flex justify-between items-center py-6">
+            <span className="text-sm font-medium text-neutral-900">Total</span>
+            <span className="text-xl font-bold text-neutral-900">{formatPrice(total)}</span>
           </div>
 
-          <Button variant="primary" size="xl" fullWidth>
+          <Button variant="primary" size="lg" fullWidth>
             Proceed to Checkout
           </Button>
 
-          <div className="space-y-3 pt-4 border-t border-neutral-200">
-            <div className="flex items-center gap-3 text-sm text-neutral-600">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-green-600">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span>Free shipping on orders over $100</span>
-            </div>
-            <div className="flex items-center gap-3 text-sm text-neutral-600">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-green-600">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-              </svg>
-              <span>30-day return policy</span>
-            </div>
-            <div className="flex items-center gap-3 text-sm text-neutral-600">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-green-600">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span>Secure checkout</span>
-            </div>
+          <div className="space-y-3 pt-6 mt-6 border-t border-neutral-100">
+            {['Free shipping over $100', '30-day return policy', 'Secure checkout'].map((text) => (
+              <div key={text} className="flex items-center gap-2.5 text-xs text-neutral-500">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3.5 h-3.5 text-green-500 flex-shrink-0">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+                <span>{text}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>

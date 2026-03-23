@@ -10,7 +10,7 @@ interface ProductPageProps {
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { id } = await params
-  
+
   try {
     const product = await fetchProductById(id)
     return {
@@ -31,20 +31,20 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
 async function ProductDetails({ params }: ProductPageProps) {
   const { id } = await params
-  
+
   try {
     const [product, allProducts] = await Promise.all([
       fetchProductById(id),
       fetchProducts()
     ])
-    
+
     const relatedProducts = allProducts
       .filter(p => p.category === product.category && p.id !== product.id)
       .slice(0, 4)
-    
+
     return (
-      <ProductDetailsContent 
-        product={product} 
+      <ProductDetailsContent
+        product={product}
         relatedProducts={relatedProducts}
       />
     )
@@ -55,26 +55,27 @@ async function ProductDetails({ params }: ProductPageProps) {
 
 function ProductDetailsLoading() {
   return (
-    <div className="min-h-screen bg-white">
-      <div className="container mx-auto px-4 py-8">
-        <div className="animate-pulse">
-          <div className="h-6 w-40 bg-neutral-200 rounded mb-8"></div>
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div className="space-y-4">
-              <div className="aspect-[3/4] rounded-2xl bg-neutral-200"></div>
+    <div className="min-h-screen">
+      <div className="page-header-bg pt-6 pb-8">
+        <div className="container mx-auto px-5 md:px-8">
+          <div className="h-5 w-40 bg-neutral-200 rounded animate-pulse"></div>
+        </div>
+      </div>
+      <div className="container mx-auto px-5 md:px-8">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
+          <div className="animate-pulse">
+            <div className="aspect-[3/4] rounded-2xl bg-neutral-200"></div>
+          </div>
+          <div className="animate-pulse space-y-6 pt-4">
+            <div className="h-3 w-24 bg-neutral-200 rounded"></div>
+            <div className="h-10 w-3/4 bg-neutral-200 rounded"></div>
+            <div className="h-8 w-32 bg-neutral-200 rounded"></div>
+            <div className="space-y-2">
+              <div className="h-4 w-full bg-neutral-200 rounded"></div>
+              <div className="h-4 w-full bg-neutral-200 rounded"></div>
+              <div className="h-4 w-2/3 bg-neutral-200 rounded"></div>
             </div>
-            <div className="space-y-6">
-              <div className="h-4 w-24 bg-neutral-200 rounded"></div>
-              <div className="h-12 w-3/4 bg-neutral-200 rounded"></div>
-              <div className="h-8 w-32 bg-neutral-200 rounded"></div>
-              <div className="space-y-2">
-                <div className="h-4 w-full bg-neutral-200 rounded"></div>
-                <div className="h-4 w-full bg-neutral-200 rounded"></div>
-                <div className="h-4 w-2/3 bg-neutral-200 rounded"></div>
-              </div>
-              <div className="h-14 w-full bg-neutral-200 rounded-xl"></div>
-              <div className="h-14 w-full bg-neutral-200 rounded-xl"></div>
-            </div>
+            <div className="h-14 w-full bg-neutral-200 rounded-xl"></div>
           </div>
         </div>
       </div>
