@@ -8,6 +8,7 @@ import { CartItem } from '@/types'
 import { formatPrice } from '@/utils/formatters'
 import { Button } from '@/components/ui/Button'
 import { useCart } from '@/hooks/useCart'
+import { validateName, validatePhone, validateAddress, sanitizeInput } from '@/utils/security'
 
 interface CheckoutContentProps {
   cartItems: CartItem[]
@@ -19,8 +20,8 @@ interface CustomerInfo {
   address: string
 }
 
-const UPI_ID = 'ladestudio@upi'
-const WHATSAPP_NUMBER = '919999999999'
+const UPI_ID = process.env.NEXT_PUBLIC_UPI_ID || 'default@upi'
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919999999999'
 
 export function CheckoutContent({ cartItems }: CheckoutContentProps) {
   const router = useRouter()
@@ -39,10 +40,19 @@ export function CheckoutContent({ cartItems }: CheckoutContentProps) {
 
   const validateForm = () => {
     const newErrors: Partial<CustomerInfo> = {}
-    if (!customer.name.trim()) newErrors.name = 'Name is required'
-    if (!customer.phone.trim()) newErrors.phone = 'Phone is required'
-    else if (!/^\d{10}$/.test(customer.phone)) newErrors.phone = 'Enter valid 10-digit phone'
-    if (!customer.address.trim()) newErrors.address = 'Address is required'
+    
+    if (!validateName(customer.name)) {
+      newErrors.name = 'Enter valid name (2-100 characters, letters only)'
+    }
+    
+    if (!validatePhone(customer.phone)) {
+      newErrors.phone = 'Enter valid 10-digit phone number'
+    }
+    
+    if (!validateAddress(customer.address)) {
+      newErrors.address = 'Enter valid address (10-500 characters)'
+    }
+    
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -120,9 +130,10 @@ export function CheckoutContent({ cartItems }: CheckoutContentProps) {
                 <input
                   type="text"
                   value={customer.name}
-                  onChange={(e) => setCustomer({ ...customer, name: e.target.value })}
+                  onChange={(e) => setCustomer({ ...customer, name: sanitizeInput(e.target.value, 100) })}
                   className={`w-full px-4 py-3 rounded-xl border-2 ${errors.name ? 'border-red-500' : 'border-neutral-200'} focus:border-secondary focus:outline-none transition-colors`}
                   placeholder="Enter your name"
+                  maxLength={100}
                 />
                 {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
               </div>
@@ -134,6 +145,7 @@ export function CheckoutContent({ cartItems }: CheckoutContentProps) {
                   onChange={(e) => setCustomer({ ...customer, phone: e.target.value.replace(/\D/g, '').slice(0, 10) })}
                   className={`w-full px-4 py-3 rounded-xl border-2 ${errors.phone ? 'border-red-500' : 'border-neutral-200'} focus:border-secondary focus:outline-none transition-colors`}
                   placeholder="10-digit phone number"
+                  maxLength={10}
                 />
                 {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
               </div>
@@ -141,10 +153,11 @@ export function CheckoutContent({ cartItems }: CheckoutContentProps) {
                 <label className="block text-sm font-medium text-neutral-700 mb-2">Delivery Address</label>
                 <textarea
                   value={customer.address}
-                  onChange={(e) => setCustomer({ ...customer, address: e.target.value })}
+                  onChange={(e) => setCustomer({ ...customer, address: sanitizeInput(e.target.value, 500) })}
                   rows={4}
                   className={`w-full px-4 py-3 rounded-xl border-2 ${errors.address ? 'border-red-500' : 'border-neutral-200'} focus:border-secondary focus:outline-none transition-colors resize-none`}
                   placeholder="Full delivery address"
+                  maxLength={500}
                 />
                 {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address}</p>}
               </div>

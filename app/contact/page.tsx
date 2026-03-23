@@ -2,9 +2,10 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/Button'
+import { sanitizeInput } from '@/utils/security'
 
-const PHONE_NUMBER = '+91 99999 99999'
-const WHATSAPP_NUMBER = '919999999999'
+const PHONE_NUMBER = process.env.NEXT_PUBLIC_PHONE_NUMBER || '+91 99999 99999'
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919999999999'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
@@ -24,7 +25,13 @@ export default function ContactPage() {
     e.preventDefault()
     setIsSubmitting(true)
     
-    const message = `Name: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`
+    const sanitizedData = {
+      name: sanitizeInput(formData.name, 100),
+      email: sanitizeInput(formData.email, 100),
+      message: sanitizeInput(formData.message, 500),
+    }
+    
+    const message = `Name: ${sanitizedData.name || 'Not provided'}\nEmail: ${sanitizedData.email || 'Not provided'}\nMessage: ${sanitizedData.message}`
     const waMessage = encodeURIComponent(`*Contact Form Submission*\n\n${message}`)
     
     setTimeout(() => {
@@ -84,27 +91,30 @@ export default function ContactPage() {
                 <input
                   type="text"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  onChange={(e) => setFormData({ ...formData, name: sanitizeInput(e.target.value, 100) })}
                   className="w-full px-4 py-3 rounded-xl border-2 border-neutral-200 focus:border-secondary focus:outline-none transition-colors"
                   placeholder="Your Name (optional)"
+                  maxLength={100}
                 />
               </div>
               <div>
                 <input
                   type="email"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) => setFormData({ ...formData, email: sanitizeInput(e.target.value, 100) })}
                   className="w-full px-4 py-3 rounded-xl border-2 border-neutral-200 focus:border-secondary focus:outline-none transition-colors"
                   placeholder="Email Address (optional)"
+                  maxLength={100}
                 />
               </div>
               <div>
                 <textarea
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  onChange={(e) => setFormData({ ...formData, message: sanitizeInput(e.target.value, 500) })}
                   rows={4}
                   className="w-full px-4 py-3 rounded-xl border-2 border-neutral-200 focus:border-secondary focus:outline-none transition-colors resize-none"
                   placeholder="Your message..."
+                  maxLength={500}
                 />
               </div>
               <Button
