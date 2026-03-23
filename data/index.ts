@@ -1,0 +1,176 @@
+import { Product } from '@/types'
+
+export const products: Product[] = [
+  {
+    id: '1',
+    name: 'Minimalist Leather Watch',
+    description: 'Elegant timepiece with premium Italian leather strap and sapphire crystal face',
+    price: 189,
+    originalPrice: 249,
+    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&h=1000&fit=crop',
+    category: 'Accessories',
+    inStock: true,
+  },
+  {
+    id: '2',
+    name: 'Premium Cotton Oxford Shirt',
+    description: '100% Egyptian cotton button-down shirt with mother-of-pearl buttons',
+    price: 129,
+    originalPrice: 159,
+    image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&h=1000&fit=crop',
+    category: 'Apparel',
+    inStock: true,
+  },
+  {
+    id: '3',
+    name: 'Handcrafted Leather Wallet',
+    description: 'Full-grain leather bifold wallet with RFID protection',
+    price: 89,
+    image: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=800&h=1000&fit=crop',
+    category: 'Accessories',
+    inStock: true,
+  },
+  {
+    id: '4',
+    name: 'Ceramic Pour-Over Coffee Set',
+    description: 'Artisan-crafted ceramic dripper and carafe set for the perfect brew',
+    price: 145,
+    originalPrice: 180,
+    image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&h=1000&fit=crop',
+    category: 'Home',
+    inStock: true,
+  },
+  {
+    id: '5',
+    name: 'Merino Wool Scarf',
+    description: 'Luxuriously soft Australian merino wool scarf in classic neutrals',
+    price: 95,
+    image: 'https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=800&h=1000&fit=crop',
+    category: 'Apparel',
+    inStock: true,
+  },
+  {
+    id: '6',
+    name: 'Wireless Noise-Canceling Earbuds',
+    description: 'Premium audio with 30-hour battery life and adaptive noise cancellation',
+    price: 299,
+    originalPrice: 349,
+    image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&h=1000&fit=crop',
+    category: 'Electronics',
+    inStock: true,
+  },
+  {
+    id: '7',
+    name: 'Linen Blend Throw Blanket',
+    description: 'Stonewashed Belgian linen and cotton blend throw for year-round comfort',
+    price: 165,
+    image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&h=1000&fit=crop',
+    category: 'Home',
+    inStock: true,
+  },
+  {
+    id: '8',
+    name: 'Titanium Optical Frames',
+    description: 'Ultra-lightweight Japanese titanium frames with spring hinges',
+    price: 275,
+    image: 'https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=800&h=1000&fit=crop',
+    category: 'Accessories',
+    inStock: false,
+  },
+  {
+    id: '9',
+    name: 'Hand-Poured Soy Candle Set',
+    description: 'Set of 3 signature candles in ceramic vessels - Santal, Bergamot, Cedar',
+    price: 78,
+    image: 'https://images.unsplash.com/photo-1602607434844-2c116d1d1c2e?w=800&h=1000&fit=crop',
+    category: 'Home',
+    inStock: true,
+  },
+  {
+    id: '10',
+    name: 'Suede Chelsea Boots',
+    description: 'Premium Italian suede boots with leather sole and cushioned insole',
+    price: 325,
+    originalPrice: 395,
+    image: 'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=800&h=1000&fit=crop',
+    category: 'Footwear',
+    inStock: true,
+  },
+  {
+    id: '11',
+    name: 'Wireless Charging Pad',
+    description: 'Sleek aluminum charging pad compatible with all Qi-enabled devices',
+    price: 59,
+    image: 'https://images.unsplash.com/photo-1591290619762-c588e3b59910?w=800&h=1000&fit=crop',
+    category: 'Electronics',
+    inStock: true,
+  },
+  {
+    id: '12',
+    name: 'Cashmere Beanie',
+    description: '100% Mongolian cashmere beanie in timeless charcoal',
+    price: 85,
+    image: 'https://images.unsplash.com/photo-1576871337622-98d48d1cf531?w=800&h=1000&fit=crop',
+    category: 'Apparel',
+    inStock: true,
+  },
+]
+
+export const featuredProducts = products.slice(0, 4)
+export const trendingProducts = products.slice(4, 8)
+export const newArrivals = products.slice(8, 12)
+
+export const categories = [
+  {
+    id: 'apparel',
+    name: 'Apparel',
+    description: 'Premium clothing essentials',
+    image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&h=600&fit=crop',
+    productCount: 24,
+  },
+  {
+    id: 'accessories',
+    name: 'Accessories',
+    description: 'Refined finishing touches',
+    image: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=800&h=600&fit=crop',
+    productCount: 18,
+  },
+  {
+    id: 'home',
+    name: 'Home',
+    description: 'Elevate your living space',
+    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop',
+    productCount: 32,
+  },
+  {
+    id: 'electronics',
+    name: 'Electronics',
+    description: 'Modern tech essentials',
+    image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=800&h=600&fit=crop',
+    productCount: 15,
+  },
+  {
+    id: 'footwear',
+    name: 'Footwear',
+    description: 'Crafted for comfort',
+    image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&h=600&fit=crop',
+    productCount: 12,
+  },
+]
+
+export const heroBanner = {
+  title: 'Timeless Elegance',
+  subtitle: 'Discover our curated collection of premium essentials',
+  description: 'Quality craftsmanship meets contemporary design. Shop the latest arrivals and elevate your everyday.',
+  ctaText: 'Explore Collection',
+  ctaLink: '/products',
+  image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600&h=900&fit=crop',
+}
+
+export const ctaBanner = {
+  title: 'Join the Lade Studio Community',
+  subtitle: 'Subscribe for early access to new arrivals and exclusive offers',
+  description: 'Be the first to know about new collections, exclusive sales, and curated style inspiration delivered to your inbox.',
+  ctaText: 'Subscribe Now',
+  image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=1600&h=600&fit=crop',
+}
