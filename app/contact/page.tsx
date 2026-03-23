@@ -45,7 +45,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen">
-      <section className="relative overflow-hidden px-4 pb-16 pt-28 sm:px-6 lg:px-8 xl:px-10 md:pb-22 md:pt-36">
+      <section className="relative overflow-hidden px-4 pb-16 pt-16 sm:px-6 lg:px-8 xl:px-10 md:pb-22 md:pt-20">
         <div className="absolute inset-0 jewel-dark" />
         <div className="absolute inset-0 rich-grid opacity-45" />
         <div className="absolute -left-20 top-10 h-72 w-72 rounded-full bg-secondary/14 blur-3xl" />

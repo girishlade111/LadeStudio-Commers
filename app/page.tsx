@@ -17,7 +17,7 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen">
-      <section className="relative isolate overflow-hidden px-4 pb-16 pt-28 sm:px-6 lg:px-8 xl:px-10 md:pb-24 md:pt-36">
+      <section className="relative isolate overflow-hidden px-4 pb-16 pt-16 sm:px-6 lg:px-8 xl:px-10 md:pb-24 md:pt-20">
         <div className="absolute inset-0 -z-20 jewel-dark" />
         <div className="absolute inset-0 -z-10 opacity-30">
           <Image src={heroBanner.image} alt="Hero background" fill className="object-cover mix-blend-soft-light" priority />

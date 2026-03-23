@@ -146,7 +146,7 @@ const faqCategories = [
 export default function FAQPage() {
   return (
     <div className="min-h-screen">
-      <section className="relative overflow-hidden px-4 pb-20 pt-28 sm:px-6 lg:px-8 xl:px-10 md:pb-24 md:pt-36">
+      <section className="relative overflow-hidden px-4 pb-20 pt-16 sm:px-6 lg:px-8 xl:px-10 md:pb-24 md:pt-20">
         <div className="absolute inset-0 jewel-dark" />
         <div className="absolute inset-0 rich-grid opacity-40" />
         <div className="absolute -left-12 top-12 h-72 w-72 rounded-full bg-secondary/14 blur-3xl" />
