@@ -3,6 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
+  productionBrowserSourceMaps: false,
   images: {
     remotePatterns: [
       {
@@ -35,9 +36,22 @@ const nextConfig = {
           key: 'Cache-Control',
           value: 'public, s-maxage=60, stale-while-revalidate=300',
         },
+        {
+          key: 'X-Content-Type-Options',
+          value: 'nosniff',
+        },
       ],
     },
   ],
+  async redirects() {
+    return [
+      {
+        source: '/shop',
+        destination: '/products',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig
