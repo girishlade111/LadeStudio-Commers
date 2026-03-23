@@ -8,8 +8,8 @@ import {
   searchProducts,
 } from '@/services/googleSheets'
 import { getCachedProducts, setCachedProducts } from '@/utils/cache'
+import { getGoogleSheetId } from '@/utils/env'
 
-const SHEET_ID = process.env.GOOGLE_SHEET_ID
 const PRODUCTS_CACHE_KEY = 'catalog_products_all'
 
 export async function getAllProducts(): Promise<Product[]> {
@@ -18,12 +18,14 @@ export async function getAllProducts(): Promise<Product[]> {
     return cachedProducts
   }
 
-  if (!SHEET_ID) {
+  const sheetId = getGoogleSheetId()
+
+  if (!sheetId) {
     return []
   }
 
   try {
-    const rows = await fetchSheetData({ sheetId: SHEET_ID, sheetName: 'Products' })
+    const rows = await fetchSheetData({ sheetId, sheetName: 'Products' })
     const products = convertToProducts(rows)
     setCachedProducts(PRODUCTS_CACHE_KEY, products, 10 * 60 * 1000)
     return products

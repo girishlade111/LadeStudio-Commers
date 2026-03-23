@@ -7,6 +7,17 @@ function getStorageItem(key: string, fallback: string): string {
   return localStorage.getItem(key) || fallback
 }
 
+function getPendingCheckoutStorageItem(): string {
+  if (typeof window === 'undefined') return 'null'
+
+  const sessionValue = window.sessionStorage.getItem(PENDING_CHECKOUT_KEY)
+  if (sessionValue) {
+    return sessionValue
+  }
+
+  return window.localStorage.getItem(PENDING_CHECKOUT_KEY) || 'null'
+}
+
 export function getCart(): string {
   return getStorageItem(CART_KEY, '[]')
 }
@@ -36,15 +47,17 @@ export function clearWishlist(): void {
 }
 
 export function getPendingCheckout(): string {
-  return getStorageItem(PENDING_CHECKOUT_KEY, 'null')
+  return getPendingCheckoutStorageItem()
 }
 
 export function setPendingCheckout(pendingCheckout: string): void {
   if (typeof window === 'undefined') return
-  localStorage.setItem(PENDING_CHECKOUT_KEY, pendingCheckout)
+  window.sessionStorage.setItem(PENDING_CHECKOUT_KEY, pendingCheckout)
+  window.localStorage.setItem(PENDING_CHECKOUT_KEY, pendingCheckout)
 }
 
 export function clearPendingCheckout(): void {
   if (typeof window === 'undefined') return
-  localStorage.removeItem(PENDING_CHECKOUT_KEY)
+  window.sessionStorage.removeItem(PENDING_CHECKOUT_KEY)
+  window.localStorage.removeItem(PENDING_CHECKOUT_KEY)
 }

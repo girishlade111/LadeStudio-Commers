@@ -1,5 +1,6 @@
 import { Product } from '@/types'
 import { getSheetValues } from '@/services/googleWorkspace'
+import { hasGoogleServiceAccountCredentials } from '@/utils/env'
 
 export interface SheetConfig {
   sheetId: string
@@ -22,9 +23,7 @@ export type ProductFromSheet = Product
 
 export async function fetchSheetData(config: SheetConfig): Promise<string[][]> {
   const { sheetId, sheetName = 'Products' } = config
-  const canUsePrivateApi = Boolean(
-    process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL && process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY
-  )
+  const canUsePrivateApi = hasGoogleServiceAccountCredentials()
 
   if (canUsePrivateApi) {
     return getSheetValues(sheetId, `${sheetName}!A:Z`)

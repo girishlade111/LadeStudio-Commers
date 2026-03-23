@@ -1,11 +1,11 @@
 import { CartItem, OrderLineItem, OrderRecord } from '@/types'
 import { appendSheetValues, ensureSheetExists, getSheetValues, updateSheetValues, uploadFileToDrive } from '@/services/googleWorkspace'
 import { getAllProducts } from '@/services/catalog'
+import { getGoogleDriveFolderId, getGoogleSheetId } from '@/utils/env'
 import { buildOrderLineItems, calculateOrderTotals, summarizeOrderItems } from '@/utils/orders'
+import { validateProductId } from '@/utils/security'
 
-const SHEET_ID = process.env.GOOGLE_SHEET_ID
 const ORDERS_SHEET_NAME = 'Orders'
-const DRIVE_FOLDER_ID = process.env.GOOGLE_DRIVE_FOLDER_ID
 
 const ORDER_HEADERS = [
   'order_id',
@@ -28,15 +28,17 @@ const ORDER_HEADERS = [
 ]
 
 export async function ensureOrdersSheetHeaders(): Promise<void> {
-  if (!SHEET_ID) {
-    throw new Error('GOOGLE_SHEET_ID is not configured')
+  const sheetId = getGoogleSheetId()
+
+  if (!sheetId) {
+    throw new Error('GOOGLE_SHEET_ID or GOOGLE_SHEETS_ID is not configured')
   }
 
-  await ensureSheetExists(SHEET_ID, ORDERS_SHEET_NAME)
-  const headerValues = await getSheetValues(SHEET_ID, `${ORDERS_SHEET_NAME}!1:1`)
+  await ensureSheetExists(sheetId, ORDERS_SHEET_NAME)
+  const headerValues = await getSheetValues(sheetId, `${ORDERS_SHEET_NAME}!1:1`)
 
   if (headerValues.length === 0 || headerValues[0].length === 0) {
-    await updateSheetValues(SHEET_ID, `${ORDERS_SHEET_NAME}!A1:Q1`, [ORDER_HEADERS])
+    await updateSheetValues(sheetId, `${ORDERS_SHEET_NAME}!A1:Q1`, [ORDER_HEADERS])
   }
 }
 
@@ -74,12 +76,14 @@ function mapOrderRow(row: string[]): OrderRecord | null {
 }
 
 export async function getOrdersByClerkUserId(clerkUserId: string): Promise<OrderRecord[]> {
-  if (!SHEET_ID) {
+  const sheetId = getGoogleSheetId()
+
+  if (!sheetId) {
     return []
   }
 
   await ensureOrdersSheetHeaders()
-  const rows = await getSheetValues(SHEET_ID, `${ORDERS_SHEET_NAME}!A:Q`)
+  const rows = await getSheetValues(sheetId, `${ORDERS_SHEET_NAME}!A:Q`)
 
   return rows
     .slice(1)
@@ -101,11 +105,14 @@ export async function createOrder(options: {
   screenshotMimeType: string
   screenshotBuffer: Buffer
 }): Promise<OrderRecord> {
-  if (!SHEET_ID) {
-    throw new Error('GOOGLE_SHEET_ID is not configured')
+  const sheetId = getGoogleSheetId()
+  const driveFolderId = getGoogleDriveFolderId()
+
+  if (!sheetId) {
+    throw new Error('GOOGLE_SHEET_ID or GOOGLE_SHEETS_ID is not configured')
   }
 
-  if (!DRIVE_FOLDER_ID) {
+  if (!driveFolderId) {
     throw new Error('GOOGLE_DRIVE_FOLDER_ID is not configured')
   }
 
@@ -113,16 +120,36 @@ export async function createOrder(options: {
 
   const products = await getAllProducts()
   const itemsByProductId = new Map(products.map((product) => [product.id, product]))
-  const cartItems: CartItem[] = options.items.flatMap((item) => {
-    const product = itemsByProductId.get(item.productId)
-    if (!product) {
-      return []
+  const mergedItems = new Map<string, number>()
+
+  for (const item of options.items) {
+    if (!validateProductId(item.productId)) {
+      throw new Error(`Invalid product id: ${item.productId}`)
     }
 
-    return [{
+    if (!Number.isInteger(item.quantity) || item.quantity <= 0) {
+      throw new Error(`Invalid quantity for product: ${item.productId}`)
+    }
+
+    mergedItems.set(item.productId, (mergedItems.get(item.productId) || 0) + item.quantity)
+  }
+
+  const missingProductIds = Array.from(mergedItems.keys()).filter((productId) => !itemsByProductId.has(productId))
+  if (missingProductIds.length > 0) {
+    throw new Error(`Some products are no longer available: ${missingProductIds.join(', ')}`)
+  }
+
+  const cartItems: CartItem[] = Array.from(mergedItems.entries()).map(([productId, quantity]) => {
+    const product = itemsByProductId.get(productId)
+
+    if (!product) {
+      throw new Error(`Product not found: ${productId}`)
+    }
+
+    return {
       ...product,
-      quantity: item.quantity,
-    }]
+      quantity,
+    }
   })
 
   if (cartItems.length === 0) {
@@ -137,7 +164,7 @@ export async function createOrder(options: {
     fileName: `${orderId}-${options.screenshotFileName}`,
     mimeType: options.screenshotMimeType,
     fileBuffer: options.screenshotBuffer,
-    folderId: DRIVE_FOLDER_ID,
+    folderId: driveFolderId,
   })
 
   const orderRecord: OrderRecord = {
@@ -160,7 +187,7 @@ export async function createOrder(options: {
     createdAt: timestamp,
   }
 
-  await appendSheetValues(SHEET_ID, `${ORDERS_SHEET_NAME}!A:Q`, [[
+  await appendSheetValues(sheetId, `${ORDERS_SHEET_NAME}!A:Q`, [[
     orderRecord.orderId,
     orderRecord.clerkUserId,
     orderRecord.clerkEmail,

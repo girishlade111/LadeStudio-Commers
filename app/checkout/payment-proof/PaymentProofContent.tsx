@@ -15,6 +15,10 @@ interface PaymentProofContentProps {
   initialPendingCheckout: PendingCheckout | null
 }
 
+const MAX_SCREENSHOT_SIZE = 5 * 1024 * 1024
+const ALLOWED_SCREENSHOT_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp'])
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919999999999'
+
 export function PaymentProofContent({ initialPendingCheckout }: PaymentProofContentProps) {
   const router = useRouter()
   const { clearCart } = useCart()
@@ -53,6 +57,16 @@ export function PaymentProofContent({ initialPendingCheckout }: PaymentProofCont
     [pendingCheckout]
   )
 
+  const handleWhatsAppSupport = () => {
+    if (!submittedOrder) return
+
+    const message = encodeURIComponent(
+      `Hi Ladi Studio, I submitted payment proof for order ${submittedOrder.orderId}. Please help me with the next update.`
+    )
+
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank', 'noopener,noreferrer')
+  }
+
   const handleScreenshotChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null
     if (previewUrl) {
@@ -60,7 +74,26 @@ export function PaymentProofContent({ initialPendingCheckout }: PaymentProofCont
       setPreviewUrl(null)
     }
 
+    if (!file) {
+      setScreenshot(null)
+      setErrors((current) => ({ ...current, screenshot: 'Upload your payment screenshot.' }))
+      return
+    }
+
+    if (!ALLOWED_SCREENSHOT_TYPES.has(file.type)) {
+      setScreenshot(null)
+      setErrors((current) => ({ ...current, screenshot: 'Only JPG, PNG, or WEBP screenshots are allowed.' }))
+      return
+    }
+
+    if (file.size > MAX_SCREENSHOT_SIZE) {
+      setScreenshot(null)
+      setErrors((current) => ({ ...current, screenshot: 'Screenshot must be 5 MB or smaller.' }))
+      return
+    }
+
     setScreenshot(file)
+    setErrors((current) => ({ ...current, screenshot: undefined, submit: undefined }))
     if (file) {
       setPreviewUrl(URL.createObjectURL(file))
     }
@@ -92,6 +125,7 @@ export function PaymentProofContent({ initialPendingCheckout }: PaymentProofCont
       formData.append('shippingAddress', pendingCheckout.customer.address)
       formData.append('payerName', sanitizeInput(payerName, 100))
       formData.append('payerPhone', payerPhone.replace(/\D/g, '').slice(0, 10))
+      formData.append('pendingCheckout', JSON.stringify(pendingCheckout))
       formData.append(
         'items',
         JSON.stringify(
@@ -153,6 +187,9 @@ export function PaymentProofContent({ initialPendingCheckout }: PaymentProofCont
           <Link href="/orders" className="flex-1">
             <Button variant="secondary" size="lg" fullWidth>View My Orders</Button>
           </Link>
+          <Button variant="outline" size="lg" onClick={handleWhatsAppSupport}>
+            Contact on WhatsApp
+          </Button>
           <Button variant="ghost" size="lg" className="border border-white/15 bg-white/6 text-white hover:bg-white/10" onClick={() => router.push('/shop')}>
             Continue Shopping
           </Button>
@@ -229,6 +266,7 @@ export function PaymentProofContent({ initialPendingCheckout }: PaymentProofCont
         {errors.submit && (
           <div className="mt-6 rounded-[1.3rem] bg-red-50 px-4 py-3 text-sm text-red-600">
             {errors.submit}
+            <p className="mt-1 text-xs text-red-500/90">Your cart and checkout snapshot are still saved, so you can retry safely.</p>
           </div>
         )}
 

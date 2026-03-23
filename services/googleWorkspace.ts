@@ -1,4 +1,5 @@
 import { createSign, randomUUID } from 'crypto'
+import { getGoogleServiceAccountCredentials } from '@/utils/env'
 
 const GOOGLE_TOKEN_URL = 'https://oauth2.googleapis.com/token'
 const GOOGLE_SHEETS_BASE_URL = 'https://sheets.googleapis.com/v4/spreadsheets'
@@ -21,17 +22,7 @@ function base64UrlEncode(value: string | Buffer): string {
 }
 
 function getGoogleCredentials() {
-  const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL
-  const privateKey = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY?.replace(/\\n/g, '\n')
-
-  if (!email || !privateKey) {
-    throw new Error('Google service account credentials are not configured')
-  }
-
-  return {
-    email,
-    privateKey,
-  }
+  return getGoogleServiceAccountCredentials()
 }
 
 async function fetchGoogleAccessToken(scopes: string[]): Promise<string> {
