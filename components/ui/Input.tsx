@@ -1,41 +1,94 @@
-import { InputHTMLAttributes, TextareaHTMLAttributes } from 'react'
+'use client'
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+import { InputHTMLAttributes, TextareaHTMLAttributes, forwardRef } from 'react'
+
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string
   error?: string
+  helperText?: string
+  leftIcon?: React.ReactNode
+  rightIcon?: React.ReactNode
 }
 
-interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ label, error, helperText, leftIcon, rightIcon, className = '', ...props }, ref) => {
+    return (
+      <div className="w-full">
+        {label && (
+          <label className="block text-sm font-medium text-neutral-700 mb-2">
+            {label}
+          </label>
+        )}
+        <div className="relative">
+          {leftIcon && (
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400">
+              {leftIcon}
+            </div>
+          )}
+          <input
+            ref={ref}
+            className={`
+              w-full px-4 py-3 bg-white border rounded-xl
+              text-neutral-900 placeholder:text-neutral-400
+              focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary
+              transition-all duration-200
+              disabled:bg-neutral-100 disabled:text-neutral-400 disabled:cursor-not-allowed
+              ${error ? 'border-error' : 'border-neutral-200'}
+              ${leftIcon ? 'pl-12' : ''}
+              ${rightIcon ? 'pr-12' : ''}
+              ${className}
+            `}
+            {...props}
+          />
+          {rightIcon && (
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400">
+              {rightIcon}
+            </div>
+          )}
+        </div>
+        {error && <p className="mt-2 text-sm text-error">{error}</p>}
+        {helperText && !error && <p className="mt-2 text-sm text-neutral-500">{helperText}</p>}
+      </div>
+    )
+  }
+)
+
+Input.displayName = 'Input'
+
+export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string
   error?: string
+  helperText?: string
 }
 
-const inputStyles = 'w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent'
-const errorStyles = 'border-red-500'
-const labelStyles = 'block text-sm font-medium text-gray-700 mb-1'
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+  ({ label, error, helperText, className = '', ...props }, ref) => {
+    return (
+      <div className="w-full">
+        {label && (
+          <label className="block text-sm font-medium text-neutral-700 mb-2">
+            {label}
+          </label>
+        )}
+        <textarea
+          ref={ref}
+          className={`
+            w-full px-4 py-3 bg-white border rounded-xl
+            text-neutral-900 placeholder:text-neutral-400
+            focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary
+            transition-all duration-200
+            disabled:bg-neutral-100 disabled:text-neutral-400 disabled:cursor-not-allowed
+            resize-none
+            ${error ? 'border-error' : 'border-neutral-200'}
+            ${className}
+          `}
+          {...props}
+        />
+        {error && <p className="mt-2 text-sm text-error">{error}</p>}
+        {helperText && !error && <p className="mt-2 text-sm text-neutral-500">{helperText}</p>}
+      </div>
+    )
+  }
+)
 
-export function Input({ label, error, className = '', ...props }: InputProps) {
-  return (
-    <div>
-      {label && <label className={labelStyles}>{label}</label>}
-      <input
-        className={`${inputStyles} ${error ? errorStyles : 'border-gray-300'} ${className}`}
-        {...props}
-      />
-      {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
-    </div>
-  )
-}
-
-export function Textarea({ label, error, className = '', ...props }: TextareaProps) {
-  return (
-    <div>
-      {label && <label className={labelStyles}>{label}</label>}
-      <textarea
-        className={`${inputStyles} ${error ? errorStyles : 'border-gray-300'} ${className}`}
-        {...props}
-      />
-      {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
-    </div>
-  )
-}
+Textarea.displayName = 'Textarea'

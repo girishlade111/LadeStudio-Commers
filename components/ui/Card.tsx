@@ -1,15 +1,48 @@
+'use client'
+
 import { ReactNode } from 'react'
 
-interface CardProps {
+export interface CardProps {
   children: ReactNode
   className?: string
+  variant?: 'default' | 'bordered' | 'elevated' | 'ghost'
+  padding?: 'none' | 'sm' | 'md' | 'lg'
+  hover?: boolean
   onClick?: () => void
 }
 
-export function Card({ children, className = '', onClick }: CardProps) {
+export function Card({
+  children,
+  className = '',
+  variant = 'default',
+  padding = 'md',
+  hover = false,
+  onClick,
+}: CardProps) {
+  const variants = {
+    default: 'bg-white shadow-soft',
+    bordered: 'bg-white border border-neutral-200',
+    elevated: 'bg-white shadow-medium',
+    ghost: 'bg-transparent',
+  }
+
+  const paddings = {
+    none: '',
+    sm: 'p-4',
+    md: 'p-6',
+    lg: 'p-8',
+  }
+
   return (
     <div
-      className={`bg-white rounded-lg shadow-md overflow-hidden ${onClick ? 'cursor-pointer hover:shadow-lg transition-shadow' : ''} ${className}`}
+      className={`
+        rounded-2xl
+        ${variants[variant]}
+        ${paddings[padding]}
+        ${hover ? 'transition-all duration-300 hover:shadow-medium hover:-translate-y-1 cursor-pointer' : ''}
+        ${onClick ? 'cursor-pointer' : ''}
+        ${className}
+      `}
       onClick={onClick}
     >
       {children}

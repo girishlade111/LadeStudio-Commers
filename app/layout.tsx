@@ -1,15 +1,15 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { Header } from '@/components/layout/Header'
+import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 
 export const metadata: Metadata = {
-  title: 'Lade Studio - Modern E-commerce',
-  description: 'Discover premium products at Lade Studio - Your one-stop shop for quality goods',
-  keywords: 'e-commerce, shopping, products, online store',
+  title: 'Lade Studio - Premium E-commerce',
+  description: 'Discover premium products at Lade Studio - Your destination for quality goods',
+  keywords: 'e-commerce, shopping, products, online store, premium',
   openGraph: {
     title: 'Lade Studio',
-    description: 'Modern E-commerce Platform',
+    description: 'Premium E-commerce Platform',
     type: 'website',
   },
 }
@@ -22,8 +22,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-1">
+        <Navbar cartCount={0} wishlistCount={0} />
+        <main className="flex-1 pt-20">
           {children}
         </main>
         <Footer />
