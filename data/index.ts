@@ -10,6 +10,7 @@ export const products: Product[] = [
     image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&h=1000&fit=crop',
     category: 'Accessories',
     inStock: true,
+    features: ['Premium Italian leather strap', 'Sapphire crystal face', 'Japanese quartz movement', 'Water resistant to 50m', '2-year warranty'],
   },
   {
     id: '2',
@@ -20,6 +21,7 @@ export const products: Product[] = [
     image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&h=1000&fit=crop',
     category: 'Apparel',
     inStock: true,
+    features: ['100% Egyptian cotton', 'Mother-of-pearl buttons', 'Single-needle stitching', 'Slim fit design', 'Machine washable'],
   },
   {
     id: '3',
@@ -29,6 +31,7 @@ export const products: Product[] = [
     image: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=800&h=1000&fit=crop',
     category: 'Accessories',
     inStock: true,
+    features: ['Full-grain leather', 'RFID blocking technology', '6 card slots', 'Bill compartment', 'Dust bag included'],
   },
   {
     id: '4',
@@ -39,6 +42,7 @@ export const products: Product[] = [
     image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&h=1000&fit=crop',
     category: 'Home',
     inStock: true,
+    features: ['Handcrafted ceramic design', 'Heat-resistant dripper', '1L glass carafe', 'Bamboo server stand', 'Dishwasher safe'],
   },
   {
     id: '5',
@@ -48,6 +52,7 @@ export const products: Product[] = [
     image: 'https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=800&h=1000&fit=crop',
     category: 'Apparel',
     inStock: true,
+    features: ['100% Australian merino wool', 'Reversible design', 'Temperature regulating', 'Hand wash only', 'Sustainable sourcing'],
   },
   {
     id: '6',
@@ -58,6 +63,7 @@ export const products: Product[] = [
     image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&h=1000&fit=crop',
     category: 'Electronics',
     inStock: true,
+    features: ['30-hour battery life', 'Adaptive noise cancellation', 'IPX4 water resistant', 'Touch controls', 'USB-C fast charging'],
   },
   {
     id: '7',
@@ -67,6 +73,7 @@ export const products: Product[] = [
     image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&h=1000&fit=crop',
     category: 'Home',
     inStock: true,
+    features: ['Belgian linen & cotton blend', 'Stonewashed for softness', 'Breathable & lightweight', 'Machine washable', '150x200cm size'],
   },
   {
     id: '8',
@@ -76,6 +83,7 @@ export const products: Product[] = [
     image: 'https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=800&h=1000&fit=crop',
     category: 'Accessories',
     inStock: false,
+    features: ['Japanese titanium frame', 'Spring hinges', 'Hypoallergenic', 'Ultralight 18g weight', 'Anti-slip nose pads'],
   },
   {
     id: '9',
@@ -85,6 +93,7 @@ export const products: Product[] = [
     image: 'https://images.unsplash.com/photo-1602607434844-2c116d1d1c2e?w=800&h=1000&fit=crop',
     category: 'Home',
     inStock: true,
+    features: ['100% natural soy wax', 'Ceramic vessels', '40-hour burn time each', 'Lead-free cotton wicks', 'Hand-poured in USA'],
   },
   {
     id: '10',
@@ -95,6 +104,7 @@ export const products: Product[] = [
     image: 'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=800&h=1000&fit=crop',
     category: 'Footwear',
     inStock: true,
+    features: ['Italian suede upper', 'Genuine leather sole', 'Cushioned memory insole', 'Elastic side panels', 'Water-resistant treatment'],
   },
   {
     id: '11',
@@ -104,6 +114,7 @@ export const products: Product[] = [
     image: 'https://images.unsplash.com/photo-1591290619762-c588e3b59910?w=800&h=1000&fit=crop',
     category: 'Electronics',
     inStock: true,
+    features: ['Qi-certified fast charging', '15W max output', 'Slim aluminum design', 'LED indicator light', 'Foreign object detection'],
   },
   {
     id: '12',
@@ -113,6 +124,7 @@ export const products: Product[] = [
     image: 'https://images.unsplash.com/photo-1576871337622-98d48d1cf531?w=800&h=1000&fit=crop',
     category: 'Apparel',
     inStock: true,
+    features: ['100% Mongolian cashmere', 'Lightweight & warm', 'One size fits all', 'Ribbed knit design', 'Hand wash recommended'],
   },
 ]
 

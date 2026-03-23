@@ -26,6 +26,7 @@ export function ProductDetailsContent({ product, relatedProducts }: ProductDetai
   const [selectedImage, setSelectedImage] = useState(0)
   const [isAddingToCart, setIsAddingToCart] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
+  const [isImageLoaded, setIsImageLoaded] = useState(false)
   
   const images = [product.image]
   const inWishlist = isInWishlist(product.id)
@@ -66,7 +67,7 @@ export function ProductDetailsContent({ product, relatedProducts }: ProductDetai
             viewBox="0 0 24 24" 
             strokeWidth={2} 
             stroke="currentColor" 
-            className="w-5 h-5 group-hover:-translate-x-1 transition-transform"
+            className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300"
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
           </svg>
@@ -76,14 +77,16 @@ export function ProductDetailsContent({ product, relatedProducts }: ProductDetai
         <div className="grid lg:grid-cols-2 gap-12">
           <div className="space-y-4">
             <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-neutral-100">
+              <div className={`absolute inset-0 bg-neutral-200 transition-opacity duration-500 ${isImageLoaded ? 'opacity-0' : 'opacity-100'}`} />
               {images[selectedImage] ? (
                 <Image
                   src={images[selectedImage]}
                   alt={product.name}
                   fill
-                  className="object-cover"
+                  className={`object-cover transition-all duration-500 ${isImageLoaded ? 'scale-100 opacity-100' : 'scale-105 opacity-0'}`}
                   priority
                   sizes="(max-width: 1024px) 100vw, 50vw"
+                  onLoad={() => setIsImageLoaded(true)}
                 />
               ) : (
                 <div className="flex items-center justify-center h-full text-neutral-400">
@@ -105,9 +108,12 @@ export function ProductDetailsContent({ product, relatedProducts }: ProductDetai
                 {images.map((_, index) => (
                   <button
                     key={index}
-                    onClick={() => setSelectedImage(index)}
-                    className={`relative w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
-                      selectedImage === index ? 'border-secondary' : 'border-transparent hover:border-neutral-300'
+                    onClick={() => {
+                      setIsImageLoaded(false)
+                      setSelectedImage(index)
+                    }}
+                    className={`relative w-20 h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 ${
+                      selectedImage === index ? 'border-secondary scale-105' : 'border-transparent hover:border-neutral-300 hover:scale-102'
                     }`}
                   >
                     <Image
@@ -149,6 +155,28 @@ export function ProductDetailsContent({ product, relatedProducts }: ProductDetai
 
             <p className="text-lg text-neutral-600 mb-8 leading-relaxed">{product.description}</p>
 
+            {product.features && product.features.length > 0 && (
+              <div className="mb-8">
+                <h3 className="text-lg font-semibold text-neutral-900 mb-4">Features</h3>
+                <ul className="space-y-3">
+                  {product.features.map((feature, index) => (
+                    <li 
+                      key={index} 
+                      className="flex items-center gap-3 text-neutral-600"
+                      style={{ animationDelay: `${index * 100}ms` }}
+                    >
+                      <span className="flex-shrink-0 w-5 h-5 rounded-full bg-secondary/10 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3 text-secondary">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                        </svg>
+                      </span>
+                      <span className="transition-all duration-300 hover:text-neutral-900">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             {product.inStock && (
               <div className="mb-8">
                 <label className="block text-sm font-medium text-neutral-700 mb-3">Quantity</label>
@@ -157,7 +185,7 @@ export function ProductDetailsContent({ product, relatedProducts }: ProductDetai
                     <button
                       onClick={decreaseQuantity}
                       disabled={quantity <= 1}
-                      className="px-4 py-3 text-neutral-600 hover:text-secondary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="px-4 py-3 text-neutral-600 hover:text-secondary transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-neutral-50"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15" />
@@ -169,7 +197,7 @@ export function ProductDetailsContent({ product, relatedProducts }: ProductDetai
                     <button
                       onClick={increaseQuantity}
                       disabled={quantity >= 10}
-                      className="px-4 py-3 text-neutral-600 hover:text-secondary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="px-4 py-3 text-neutral-600 hover:text-secondary transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-neutral-50"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -248,18 +276,23 @@ export function ProductDetailsContent({ product, relatedProducts }: ProductDetai
           <section className="mt-20">
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-2xl font-bold text-neutral-900">You May Also Like</h2>
-              <Link href="/products" className="text-secondary hover:text-secondary-700 font-medium transition-colors">
+              <Link href="/products" className="text-secondary hover:text-secondary-700 font-medium transition-colors duration-300">
                 View All
               </Link>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {relatedProducts.map((relatedProduct) => (
-                <ProductCard
-                  key={relatedProduct.id}
-                  product={relatedProduct}
-                  isInWishlist={isInWishlist(relatedProduct.id)}
-                  onWishlistToggle={toggleWishlist}
-                />
+              {relatedProducts.map((relatedProduct, index) => (
+                <div 
+                  key={relatedProduct.id} 
+                  className="opacity-0 animate-fade-in"
+                  style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'forwards' }}
+                >
+                  <ProductCard
+                    product={relatedProduct}
+                    isInWishlist={isInWishlist(relatedProduct.id)}
+                    onWishlistToggle={toggleWishlist}
+                  />
+                </div>
               ))}
             </div>
           </section>
