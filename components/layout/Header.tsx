@@ -5,7 +5,7 @@ export function Header() {
     <header className="bg-white shadow-sm">
       <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="text-2xl font-bold">
-          Ladi Studio
+          Lade Studio
         </Link>
         <div className="flex items-center gap-6">
           <Link href="/products" className="hover:text-primary-600">

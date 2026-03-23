@@ -4,11 +4,11 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 
 export const metadata: Metadata = {
-  title: 'Ladi Studio - Modern E-commerce',
-  description: 'Discover premium products at Ladi Studio - Your one-stop shop for quality goods',
+  title: 'Lade Studio - Modern E-commerce',
+  description: 'Discover premium products at Lade Studio - Your one-stop shop for quality goods',
   keywords: 'e-commerce, shopping, products, online store',
   openGraph: {
-    title: 'Ladi Studio',
+    title: 'Lade Studio',
     description: 'Modern E-commerce Platform',
     type: 'website',
   },

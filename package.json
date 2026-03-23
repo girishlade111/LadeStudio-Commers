@@ -1,7 +1,7 @@
 {
-  "name": "ladi-studio",
+  "name": "lade-studio",
   "version": "1.0.0",
-  "description": "Ladi Studio - Modern E-commerce Platform",
+  "description": "Lade Studio - Modern E-commerce Platform",
   "private": true,
   "scripts": {
     "dev": "next dev",
