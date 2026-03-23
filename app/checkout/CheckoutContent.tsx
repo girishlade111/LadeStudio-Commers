@@ -86,7 +86,7 @@ export function CheckoutContent({ cartItems }: CheckoutContentProps) {
 
   return (
     <div className="mx-auto max-w-5xl animate-fade-up">
-      <div className="mb-10 rounded-[2rem] jewel-dark px-6 py-6 shadow-elevated md:px-8">
+      <div className="mb-10 rounded-[2rem] jewel-dark px-5 py-5 shadow-elevated sm:px-6 sm:py-6 lg:px-7">
         <div className="flex items-center gap-4">
           {[
             { id: '1', label: 'Details', active: step === 'form', done: step === 'payment' },
@@ -111,7 +111,7 @@ export function CheckoutContent({ cartItems }: CheckoutContentProps) {
 
       {step === 'form' && (
         <div className="grid gap-6 md:grid-cols-[1fr,0.88fr]">
-          <div className="jewel-card rounded-[2.2rem] p-7 md:p-8">
+          <div className="jewel-card rounded-[2.2rem] p-6 sm:p-7 lg:p-8">
             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-secondary">Customer Information</p>
             <h2 className="mt-3 font-display text-4xl font-bold text-neutral-900">Delivery details</h2>
             <div className="mt-8 space-y-5">
@@ -154,7 +154,7 @@ export function CheckoutContent({ cartItems }: CheckoutContentProps) {
             </div>
           </div>
 
-          <div className="jewel-dark rounded-[2.2rem] p-7 shadow-elevated md:p-8">
+          <div className="jewel-dark rounded-[2.2rem] p-6 shadow-elevated sm:p-7 lg:p-8">
             <h2 className="font-display text-4xl font-bold text-white">Order Summary</h2>
             <div className="mt-6 space-y-4 max-h-72 overflow-y-auto pr-1">
               {cartItems.map((item) => (
@@ -195,7 +195,7 @@ export function CheckoutContent({ cartItems }: CheckoutContentProps) {
 
       {step === 'payment' && (
         <div className="grid gap-6 md:grid-cols-[0.9fr,1.1fr]">
-          <div className="jewel-dark rounded-[2.2rem] p-7 shadow-elevated md:p-8">
+          <div className="jewel-dark rounded-[2.2rem] p-6 shadow-elevated sm:p-7 lg:p-8">
             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-secondary">UPI Payment</p>
             <h2 className="mt-3 font-display text-4xl font-bold text-white">Scan to pay</h2>
             <p className="mt-3 text-sm leading-7 text-white/65">Pay with any UPI app and continue to upload your payment screenshot.</p>
@@ -231,14 +231,14 @@ export function CheckoutContent({ cartItems }: CheckoutContentProps) {
           </div>
 
           <div className="space-y-5">
-            <div className="jewel-card rounded-[2.2rem] p-6 shadow-soft">
+            <div className="jewel-card rounded-[2.2rem] p-5 shadow-soft sm:p-6 lg:p-7">
               <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-neutral-500">Delivery Address</h3>
               <p className="mt-4 text-lg font-semibold text-neutral-900">{customer.name}</p>
               <p className="mt-1 text-neutral-600">{customer.phone}</p>
               <p className="mt-3 whitespace-pre-line text-neutral-600">{customer.address}</p>
             </div>
 
-            <div className="jewel-card rounded-[2.2rem] p-6 shadow-soft">
+            <div className="jewel-card rounded-[2.2rem] p-5 shadow-soft sm:p-6 lg:p-7">
               <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-neutral-500">Order Details</h3>
               <div className="mt-5 space-y-3">
                 <div className="flex justify-between text-sm text-neutral-500">

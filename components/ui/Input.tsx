@@ -28,15 +28,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <input
             ref={ref}
             className={`
-              w-full px-4 py-3 bg-white border rounded-xl
-              text-neutral-900 placeholder:text-neutral-400
+              w-full rounded-[1.1rem] border bg-white px-4 py-3.5 text-neutral-900 placeholder:text-neutral-400
               focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary
               transition-all duration-200
               disabled:bg-neutral-100 disabled:text-neutral-400 disabled:cursor-not-allowed
               shadow-soft backdrop-blur-sm
               ${error ? 'border-error' : 'border-neutral-200/80'}
-              ${leftIcon ? 'pl-12' : ''}
-              ${rightIcon ? 'pr-12' : ''}
+              ${leftIcon ? 'pl-12 sm:pl-14' : 'sm:px-5'}
+              ${rightIcon ? 'pr-12 sm:pr-14' : ''}
               ${className}
             `}
             {...props}
@@ -74,8 +73,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         <textarea
           ref={ref}
           className={`
-            w-full px-4 py-3 bg-white border rounded-xl
-            text-neutral-900 placeholder:text-neutral-400
+            w-full rounded-[1.1rem] border bg-white px-4 py-3.5 text-neutral-900 placeholder:text-neutral-400 sm:px-5
             focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary
             transition-all duration-200
             disabled:bg-neutral-100 disabled:text-neutral-400 disabled:cursor-not-allowed

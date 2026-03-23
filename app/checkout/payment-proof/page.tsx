@@ -17,7 +17,7 @@ export default function PaymentProofPage() {
   return (
     <div className="min-h-screen">
       <div className="page-header-bg pt-8 pb-16 md:pb-20">
-        <div className="container mx-auto px-5 md:px-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
           <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-secondary mb-4 animate-fade-up">
             Secure Checkout
           </p>
@@ -27,7 +27,7 @@ export default function PaymentProofPage() {
         </div>
       </div>
 
-      <div className="container mx-auto px-5 md:px-8 -mt-8 pb-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 -mt-8 pb-16">
         <PaymentProofContent initialPendingCheckout={initialPendingCheckout} />
       </div>
     </div>

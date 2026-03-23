@@ -37,7 +37,7 @@ export function Footer() {
       <div className="absolute -left-24 top-10 h-56 w-56 rounded-full bg-secondary/15 blur-3xl" />
       <div className="absolute bottom-0 right-0 h-64 w-64 rounded-full bg-accent/15 blur-3xl" />
 
-      <div className="container relative z-10 mx-auto px-5 md:px-8 py-20 md:py-24">
+      <div className="container relative z-10 mx-auto px-4 py-16 sm:px-6 sm:py-20 lg:px-8 xl:px-10 md:py-24">
         <div className="grid gap-14 lg:grid-cols-[1.2fr,0.8fr,0.8fr,1fr]">
           <div className="max-w-sm">
             <div className="mb-7 flex items-center gap-3">
@@ -95,7 +95,7 @@ export function Footer() {
 
           <div>
             <h4 className="mb-5 text-[11px] font-semibold uppercase tracking-[0.24em] text-secondary">Insider List</h4>
-            <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.05] p-5 backdrop-blur-sm">
+            <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.05] p-5 sm:p-6 backdrop-blur-sm">
               <p className="mb-4 text-sm leading-relaxed text-white/65">
                 Early access drops, limited edits, and studio notes delivered first.
               </p>
@@ -107,7 +107,7 @@ export function Footer() {
                 />
                 <button
                   type="submit"
-                  className="w-full rounded-full bg-gradient-to-r from-secondary to-accent px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-primary-900 transition-transform hover:-translate-y-0.5"
+                  className="w-full rounded-full bg-gradient-to-r from-secondary to-accent px-5 py-3.5 text-sm font-bold uppercase tracking-[0.16em] text-primary-900 transition-transform hover:-translate-y-0.5"
                 >
                   Join Now
                 </button>

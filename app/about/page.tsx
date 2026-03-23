@@ -54,7 +54,7 @@ const stats = [
 export default function AboutPage() {
   return (
     <div className="min-h-screen">
-      <section className="relative overflow-hidden px-5 pb-16 pt-28 md:px-8 md:pb-24 md:pt-36">
+      <section className="relative overflow-hidden px-4 pb-16 pt-28 sm:px-6 lg:px-8 xl:px-10 md:pb-24 md:pt-36">
         <div className="absolute inset-0 jewel-dark" />
         <div className="absolute inset-0 rich-grid opacity-45" />
         <div className="absolute -left-20 top-10 h-72 w-72 rounded-full bg-secondary/15 blur-3xl" />
@@ -102,11 +102,11 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="px-5 md:px-8">
+      <section className="px-4 sm:px-6 lg:px-8 xl:px-10">
         <div className="container mx-auto -mt-10">
-          <div className="grid gap-4 rounded-[2.2rem] jewel-card p-6 md:grid-cols-4 md:p-8">
+          <div className="grid gap-4 rounded-[2.2rem] jewel-card p-5 sm:p-6 md:grid-cols-4 lg:p-7">
             {stats.map((stat) => (
-              <div key={stat.label} className="rounded-[1.5rem] bg-white/70 p-5 text-center shadow-soft">
+              <div key={stat.label} className="rounded-[1.5rem] bg-white/70 p-5 text-center shadow-soft sm:p-6">
                 <div className="font-display text-4xl font-bold text-primary-800">{stat.value}</div>
                 <div className="mt-2 text-[11px] uppercase tracking-[0.22em] text-neutral-500">{stat.label}</div>
               </div>
@@ -115,7 +115,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="px-5 py-20 md:px-8 md:py-28">
+      <section className="px-4 py-20 sm:px-6 lg:px-8 xl:px-10 md:py-28">
         <div className="container mx-auto grid gap-10 lg:grid-cols-[0.92fr,1.08fr]">
           <div className="relative overflow-hidden rounded-[2.4rem] jewel-card p-4">
             <div className="relative aspect-[4/3] overflow-hidden rounded-[1.8rem]">
@@ -127,7 +127,7 @@ export default function AboutPage() {
               />
             </div>
           </div>
-          <div className="jewel-card rounded-[2.4rem] p-8 md:p-10">
+          <div className="jewel-card rounded-[2.4rem] p-6 sm:p-7 lg:p-8 xl:p-9">
             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-secondary">Our Mission</p>
             <h2 className="mt-4 font-display text-5xl font-bold text-neutral-900">Redefining everyday luxury</h2>
             <p className="mt-6 text-lg leading-8 text-neutral-600">
@@ -140,7 +140,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-neutral-50/70 px-5 py-20 md:px-8 md:py-28">
+      <section className="bg-neutral-50/70 px-4 py-20 sm:px-6 lg:px-8 xl:px-10 md:py-28">
         <div className="container mx-auto">
           <div className="text-center mb-14">
             <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-secondary">What We Believe</span>
@@ -149,7 +149,7 @@ export default function AboutPage() {
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((value) => (
-              <div key={value.title} className="jewel-card rounded-[2rem] p-7">
+              <div key={value.title} className="jewel-card rounded-[2rem] p-5 sm:p-6 lg:p-7">
                 <div className="h-12 w-12 rounded-2xl bg-secondary/12 mb-5" />
                 <h3 className="font-display text-3xl font-bold text-neutral-900">{value.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-neutral-600">{value.description}</p>
@@ -159,7 +159,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="px-5 py-20 md:px-8 md:py-28">
+      <section className="px-4 py-20 sm:px-6 lg:px-8 xl:px-10 md:py-28">
         <div className="container mx-auto">
           <div className="text-center mb-14">
             <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-secondary">The People</span>
@@ -168,7 +168,7 @@ export default function AboutPage() {
 
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {team.map((member) => (
-              <div key={member.name} className="jewel-card rounded-[2rem] p-6 text-center">
+              <div key={member.name} className="jewel-card rounded-[2rem] p-5 text-center sm:p-6 lg:p-7">
                 <div className="relative mx-auto h-40 w-40 overflow-hidden rounded-full">
                   <Image src={member.image} alt={member.name} fill className="object-cover" />
                 </div>

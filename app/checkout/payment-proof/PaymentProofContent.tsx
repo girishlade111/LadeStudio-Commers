@@ -128,7 +128,7 @@ export function PaymentProofContent({ initialPendingCheckout }: PaymentProofCont
 
   if (submittedOrder) {
     return (
-      <div className="mx-auto max-w-3xl jewel-dark rounded-[2.4rem] p-8 shadow-elevated md:p-10">
+      <div className="mx-auto max-w-3xl jewel-dark rounded-[2.4rem] p-6 shadow-elevated sm:p-7 lg:p-8 xl:p-9">
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-accent/20 text-white mb-6">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-8 w-8">
             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
@@ -163,7 +163,7 @@ export function PaymentProofContent({ initialPendingCheckout }: PaymentProofCont
 
   if (!pendingCheckout) {
     return (
-      <div className="mx-auto max-w-2xl jewel-card rounded-[2.2rem] p-8 text-center shadow-soft">
+      <div className="mx-auto max-w-2xl jewel-card rounded-[2.2rem] p-6 text-center shadow-soft sm:p-7 lg:p-8">
         <h2 className="font-display text-4xl font-bold text-neutral-900">No payment to submit</h2>
         <p className="mt-3 text-neutral-500">Complete checkout first, then come back here to upload your payment screenshot.</p>
         <Link href="/checkout" className="mt-8 inline-block">
@@ -175,7 +175,7 @@ export function PaymentProofContent({ initialPendingCheckout }: PaymentProofCont
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1.15fr,0.85fr]">
-      <form onSubmit={handleSubmit} className="jewel-card rounded-[2.2rem] p-6 shadow-soft md:p-8">
+      <form onSubmit={handleSubmit} className="jewel-card rounded-[2.2rem] p-5 shadow-soft sm:p-6 lg:p-7">
         <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-secondary">Step 3</p>
         <h2 className="mt-3 font-display text-4xl font-bold text-neutral-900">Upload payment proof</h2>
         <p className="mt-3 text-sm leading-7 text-neutral-500">
@@ -211,7 +211,7 @@ export function PaymentProofContent({ initialPendingCheckout }: PaymentProofCont
 
         <div className="mt-6">
           <label className="mb-2 block text-xs font-medium uppercase tracking-[0.16em] text-neutral-500">Payment Screenshot</label>
-          <label className={`flex cursor-pointer flex-col items-center justify-center rounded-[1.6rem] border border-dashed px-5 py-10 text-center transition-colors ${
+          <label className={`flex cursor-pointer flex-col items-center justify-center rounded-[1.6rem] border border-dashed px-5 py-8 text-center transition-colors sm:px-6 sm:py-10 ${
             errors.screenshot ? 'border-red-400 bg-red-50/40' : 'border-neutral-300 bg-white/55 hover:border-secondary'
           }`}>
             <input type="file" accept="image/png,image/jpeg,image/webp" className="hidden" onChange={handleScreenshotChange} />
@@ -245,7 +245,7 @@ export function PaymentProofContent({ initialPendingCheckout }: PaymentProofCont
       </form>
 
       <div className="space-y-5">
-        <div className="jewel-dark rounded-[2.2rem] p-6 shadow-elevated">
+        <div className="jewel-dark rounded-[2.2rem] p-5 shadow-elevated sm:p-6 lg:p-7">
           <h3 className="font-display text-3xl font-bold text-white">Submitted products</h3>
           <div className="mt-5 max-h-80 space-y-4 overflow-y-auto pr-1">
             {pendingCheckout.items.map((item) => (
@@ -263,7 +263,7 @@ export function PaymentProofContent({ initialPendingCheckout }: PaymentProofCont
           </div>
         </div>
 
-        <div className="jewel-card rounded-[2.2rem] p-6 shadow-soft">
+        <div className="jewel-card rounded-[2.2rem] p-5 shadow-soft sm:p-6 lg:p-7">
           <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-neutral-500">Order summary</h3>
           <div className="mt-4 space-y-3">
             <div className="flex justify-between text-sm text-neutral-500">
@@ -281,7 +281,7 @@ export function PaymentProofContent({ initialPendingCheckout }: PaymentProofCont
           </div>
         </div>
 
-        <div className="jewel-card rounded-[2.2rem] p-6 shadow-soft">
+        <div className="jewel-card rounded-[2.2rem] p-5 shadow-soft sm:p-6 lg:p-7">
           <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-neutral-500">Shipping details</h3>
           <p className="mt-4 text-lg font-semibold text-neutral-900">{pendingCheckout.customer.name}</p>
           <p className="mt-1 text-neutral-600">{pendingCheckout.customer.phone}</p>

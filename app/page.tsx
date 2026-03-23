@@ -17,7 +17,7 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen">
-      <section className="relative isolate overflow-hidden px-5 pb-16 pt-28 md:px-8 md:pb-24 md:pt-36">
+      <section className="relative isolate overflow-hidden px-4 pb-16 pt-28 sm:px-6 lg:px-8 xl:px-10 md:pb-24 md:pt-36">
         <div className="absolute inset-0 -z-20 jewel-dark" />
         <div className="absolute inset-0 -z-10 opacity-30">
           <Image src={heroBanner.image} alt="Hero background" fill className="object-cover mix-blend-soft-light" priority />
@@ -69,7 +69,7 @@ export default async function HomePage() {
                   { value: '24/7', label: 'Store Access' },
                   { value: 'INR', label: 'UPI Ready' },
                 ].map((stat) => (
-                  <div key={stat.label} className="rounded-[1.6rem] border border-white/10 bg-white/8 px-5 py-5 backdrop-blur-xl">
+                  <div key={stat.label} className="rounded-[1.6rem] border border-white/10 bg-white/8 px-5 py-5 backdrop-blur-xl sm:px-6">
                     <p className="font-display text-3xl font-bold text-white">{stat.value}</p>
                     <p className="mt-1 text-[11px] uppercase tracking-[0.22em] text-white/50">{stat.label}</p>
                   </div>
@@ -222,14 +222,14 @@ export default async function HomePage() {
         )}
       </Section>
 
-      <section className="relative overflow-hidden px-5 py-20 md:px-8 md:py-28">
+      <section className="relative overflow-hidden px-4 py-20 sm:px-6 lg:px-8 xl:px-10 md:py-28">
         <div className="container mx-auto">
           <div className="grid overflow-hidden rounded-[2.6rem] border border-white/10 jewel-dark md:grid-cols-2">
             <div className="relative min-h-[380px]">
               <Image src={ctaBanner.image} alt="Newsletter banner" fill className="object-cover mix-blend-luminosity opacity-75" sizes="(max-width: 768px) 100vw, 50vw" />
               <div className="absolute inset-0 bg-gradient-to-r from-primary-900/60 to-transparent" />
             </div>
-            <div className="relative flex items-center px-8 py-12 md:px-14 lg:px-16">
+            <div className="relative flex items-center px-6 py-10 sm:px-8 md:px-12 lg:px-14 xl:px-16">
               <div>
                 <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-secondary">Stay Connected</span>
                 <h2 className="mt-5 font-display text-display-sm font-bold text-white md:text-display-md">
@@ -242,7 +242,7 @@ export default async function HomePage() {
                   <input
                     type="email"
                     placeholder="Your email address"
-                    className="flex-1 rounded-full border border-white/10 bg-white/10 px-5 py-4 text-sm text-white placeholder:text-white/38 focus:border-secondary/40"
+                    className="flex-1 rounded-full border border-white/10 bg-white/10 px-5 py-4 text-sm text-white placeholder:text-white/38 focus:border-secondary/40 sm:px-6"
                   />
                   <Button variant="secondary" size="lg" className="whitespace-nowrap">
                     {ctaBanner.ctaText}

@@ -45,7 +45,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen">
-      <section className="relative overflow-hidden px-5 pb-16 pt-28 md:px-8 md:pb-22 md:pt-36">
+      <section className="relative overflow-hidden px-4 pb-16 pt-28 sm:px-6 lg:px-8 xl:px-10 md:pb-22 md:pt-36">
         <div className="absolute inset-0 jewel-dark" />
         <div className="absolute inset-0 rich-grid opacity-45" />
         <div className="absolute -left-20 top-10 h-72 w-72 rounded-full bg-secondary/14 blur-3xl" />
@@ -63,12 +63,12 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <div className="container mx-auto -mt-10 px-5 pb-16 md:px-8">
+      <div className="container mx-auto -mt-10 px-4 pb-16 sm:px-6 lg:px-8 xl:px-10">
         <div className="grid gap-6 lg:grid-cols-[0.9fr,1.1fr]">
           <div className="space-y-5">
             <button
               onClick={handleWhatsAppClick}
-              className="jewel-card w-full rounded-[2rem] p-6 text-left transition-all hover:-translate-y-1 hover:shadow-card-hover"
+              className="jewel-card w-full rounded-[2rem] p-5 text-left transition-all hover:-translate-y-1 hover:shadow-card-hover sm:p-6 lg:p-7"
             >
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-secondary">WhatsApp</p>
               <h2 className="mt-3 font-display text-4xl font-bold text-neutral-900">Chat instantly</h2>
@@ -77,21 +77,21 @@ export default function ContactPage() {
 
             <button
               onClick={handlePhoneClick}
-              className="jewel-card w-full rounded-[2rem] p-6 text-left transition-all hover:-translate-y-1 hover:shadow-card-hover"
+              className="jewel-card w-full rounded-[2rem] p-5 text-left transition-all hover:-translate-y-1 hover:shadow-card-hover sm:p-6 lg:p-7"
             >
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-secondary">Call Us</p>
               <h2 className="mt-3 font-display text-4xl font-bold text-neutral-900">Speak to the team</h2>
               <p className="mt-3 text-neutral-600 leading-7">{PHONE_NUMBER}</p>
             </button>
 
-            <div className="jewel-dark rounded-[2rem] p-6">
+            <div className="jewel-dark rounded-[2rem] p-5 sm:p-6 lg:p-7">
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-secondary">Business Hours</p>
               <p className="mt-4 text-lg text-white">Monday - Saturday</p>
               <p className="text-white/65">9:00 AM - 7:00 PM</p>
             </div>
           </div>
 
-          <div className="jewel-card rounded-[2.4rem] p-8 shadow-soft md:p-10">
+          <div className="jewel-card rounded-[2.4rem] p-6 shadow-soft sm:p-7 lg:p-8 xl:p-9">
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-secondary">Send a Message</p>
             <h2 className="mt-3 font-display text-5xl font-bold text-neutral-900">Start with a note</h2>
             <p className="mt-3 text-neutral-500">Fill in the details below and we&apos;ll route your message to WhatsApp.</p>

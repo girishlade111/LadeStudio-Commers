@@ -85,7 +85,7 @@ const deliveryTimeline = [
 export default function ShippingPage() {
   return (
     <div className="min-h-screen">
-      <section className="relative overflow-hidden px-5 pb-20 pt-28 md:px-8 md:pb-24 md:pt-36">
+      <section className="relative overflow-hidden px-4 pb-20 pt-28 sm:px-6 lg:px-8 xl:px-10 md:pb-24 md:pt-36">
         <div className="absolute inset-0 jewel-dark" />
         <div className="absolute inset-0 rich-grid opacity-35" />
         <div className="absolute -left-16 top-10 h-72 w-72 rounded-full bg-secondary/14 blur-3xl" />
@@ -105,12 +105,12 @@ export default function ShippingPage() {
         </div>
       </section>
 
-      <section className="container mx-auto px-5 pb-20 md:px-8 md:pb-24">
+      <section className="container mx-auto px-4 pb-20 sm:px-6 lg:px-8 xl:px-10 md:pb-24">
         <div className="grid gap-6 md:grid-cols-3">
           {shippingOptions.map((option) => (
             <div
               key={option.name}
-              className={option.highlighted ? 'jewel-dark rounded-[2.2rem] p-6 shadow-elevated' : 'jewel-card rounded-[2.2rem] p-6 shadow-soft'}
+              className={option.highlighted ? 'jewel-dark rounded-[2.2rem] p-5 shadow-elevated sm:p-6 lg:p-7' : 'jewel-card rounded-[2.2rem] p-5 shadow-soft sm:p-6 lg:p-7'}
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -156,7 +156,7 @@ export default function ShippingPage() {
         </div>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.1fr,0.9fr]">
-          <div className="jewel-card rounded-[2.3rem] p-6 shadow-soft md:p-8">
+          <div className="jewel-card rounded-[2.3rem] p-5 shadow-soft sm:p-6 lg:p-7">
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-secondary">Delivery Process</p>
             <h2 className="mt-3 font-display text-4xl font-bold text-neutral-900">From order to arrival</h2>
             <div className="mt-8 space-y-6">
@@ -183,7 +183,7 @@ export default function ShippingPage() {
           </div>
 
           <div className="space-y-6">
-            <div className="jewel-dark rounded-[2.3rem] p-6 shadow-elevated md:p-8">
+            <div className="jewel-dark rounded-[2.3rem] p-5 shadow-elevated sm:p-6 lg:p-7">
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-secondary">Coverage</p>
               <h2 className="mt-3 font-display text-4xl font-bold text-white">Pan-India delivery</h2>
               <p className="mt-4 leading-8 text-white/68">
@@ -195,7 +195,7 @@ export default function ShippingPage() {
               </div>
             </div>
 
-            <div className="jewel-card rounded-[2.3rem] p-6 shadow-soft md:p-8">
+            <div className="jewel-card rounded-[2.3rem] p-5 shadow-soft sm:p-6 lg:p-7">
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-neutral-500">Need Help?</p>
               <h2 className="mt-3 font-display text-3xl font-bold text-neutral-900">Questions about your delivery area?</h2>
               <p className="mt-3 leading-8 text-neutral-600">

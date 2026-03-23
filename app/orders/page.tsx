@@ -20,7 +20,7 @@ export default async function OrdersPage() {
   return (
     <div className="min-h-screen">
       <div className="page-header-bg pt-8 pb-16 md:pb-20">
-        <div className="container mx-auto px-5 md:px-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
           <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-secondary mb-4 animate-fade-up">
             Account
           </p>
@@ -30,9 +30,9 @@ export default async function OrdersPage() {
         </div>
       </div>
 
-      <div className="container mx-auto px-5 md:px-8 -mt-8 pb-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 -mt-8 pb-16">
         {orders.length === 0 ? (
-          <div className="max-w-3xl mx-auto jewel-card rounded-[2.2rem] p-8 md:p-10 shadow-soft text-center">
+          <div className="max-w-3xl mx-auto jewel-card rounded-[2.2rem] p-6 shadow-soft text-center sm:p-7 lg:p-8">
             <h2 className="text-4xl font-display font-bold text-neutral-900 mb-3">No orders yet</h2>
             <p className="text-neutral-500 mb-6">Once you submit a payment proof, your purchased products will appear here.</p>
             <Link href="/shop">
@@ -42,7 +42,7 @@ export default async function OrdersPage() {
         ) : (
           <div className="max-w-5xl mx-auto space-y-6">
             {orders.map((order) => (
-              <article key={order.orderId} className="jewel-card rounded-[2.4rem] p-6 shadow-soft md:p-8">
+              <article key={order.orderId} className="jewel-card rounded-[2.4rem] p-5 shadow-soft sm:p-6 lg:p-7">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
                   <div>
                     <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-secondary mb-2">Order</p>

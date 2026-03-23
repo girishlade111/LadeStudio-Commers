@@ -71,7 +71,7 @@ const sections = [
 export default function PrivacyPage() {
   return (
     <div className="min-h-screen">
-      <section className="relative overflow-hidden px-5 pb-20 pt-28 md:px-8 md:pb-24 md:pt-36">
+      <section className="relative overflow-hidden px-4 pb-20 pt-28 sm:px-6 lg:px-8 xl:px-10 md:pb-24 md:pt-36">
         <div className="absolute inset-0 jewel-dark" />
         <div className="absolute inset-0 rich-grid opacity-35" />
         <div className="absolute -left-20 top-16 h-72 w-72 rounded-full bg-secondary/14 blur-3xl" />
@@ -91,15 +91,15 @@ export default function PrivacyPage() {
         </div>
       </section>
 
-      <section className="container mx-auto px-5 pb-20 md:px-8 md:pb-24">
-        <div className="mx-auto max-w-4xl jewel-card rounded-[2.6rem] p-6 shadow-soft md:p-10">
+      <section className="container mx-auto px-4 pb-20 sm:px-6 lg:px-8 xl:px-10 md:pb-24">
+        <div className="mx-auto max-w-4xl jewel-card rounded-[2.6rem] p-5 shadow-soft sm:p-6 lg:p-8 xl:p-9">
           <p className="text-lg leading-8 text-neutral-600">
             At Lade Studio, we are committed to protecting your privacy and handling your information responsibly. This Privacy Policy explains what information we collect, why we collect it, and how we use it when you browse the website, place an order, or contact us.
           </p>
 
           <div className="mt-10 space-y-8">
             {sections.map((section) => (
-              <div key={section.title} className="rounded-[1.8rem] border border-neutral-200/80 bg-white/70 p-6 shadow-soft">
+              <div key={section.title} className="rounded-[1.8rem] border border-neutral-200/80 bg-white/70 p-5 shadow-soft sm:p-6 lg:p-7">
                 <h2 className="font-display text-3xl font-bold text-neutral-900">{section.title}</h2>
                 <div className="mt-4 space-y-4">
                   {section.body.map((paragraph) => (

@@ -28,7 +28,7 @@ export function ProductCard({ product, onWishlistToggle, isInWishlist, priority 
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="jewel-card card-shine h-full rounded-[1.75rem] p-3 transition-all duration-500 hover:-translate-y-2 hover:shadow-card-hover">
+      <div className="jewel-card card-shine h-full rounded-[1.75rem] p-3.5 sm:p-4 transition-all duration-500 hover:-translate-y-2 hover:shadow-card-hover">
         <Link href={`/products/${product.id}`} className="block">
           <div className="relative aspect-[3/4] overflow-hidden rounded-[1.3rem] bg-gradient-to-br from-cream to-neutral-100">
             {!imageError && product.image ? (
@@ -85,14 +85,14 @@ export function ProductCard({ product, onWishlistToggle, isInWishlist, priority 
               )}
             </div>
 
-            <div className={`absolute bottom-0 left-0 right-0 p-4 transition-all duration-500 ${isHovered ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-              <div className="rounded-[1.2rem] border border-white/15 bg-white/14 px-4 py-3 backdrop-blur-xl">
+            <div className={`absolute bottom-0 left-0 right-0 p-4 sm:p-5 transition-all duration-500 ${isHovered ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+              <div className="rounded-[1.2rem] border border-white/15 bg-white/14 px-4 py-3.5 backdrop-blur-xl">
                 <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/80">Discover Piece</span>
               </div>
             </div>
           </div>
 
-          <div className="space-y-2 px-1 pb-2 pt-5">
+          <div className="space-y-2.5 px-1.5 pb-2.5 pt-5 sm:px-2 sm:pt-6">
             <div className="flex items-center gap-2">
               <span className="rounded-full bg-secondary/14 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-secondary-800">
                 {product.category}

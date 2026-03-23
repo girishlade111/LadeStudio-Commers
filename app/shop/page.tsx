@@ -124,7 +124,7 @@ function ShopContent() {
 
   return (
     <div className="min-h-screen">
-      <section className="relative overflow-hidden px-5 pb-14 pt-28 md:px-8 md:pb-20 md:pt-36">
+      <section className="relative overflow-hidden px-4 pb-14 pt-28 sm:px-6 lg:px-8 xl:px-10 md:pb-20 md:pt-36">
         <div className="absolute inset-0 jewel-dark" />
         <div className="absolute inset-0 rich-grid opacity-45" />
         <div className="absolute -left-20 top-10 h-64 w-64 rounded-full bg-secondary/14 blur-3xl" />
@@ -145,7 +145,7 @@ function ShopContent() {
         </div>
       </section>
 
-      <section className="sticky top-24 z-30 mx-5 -mt-8 rounded-[1.8rem] border border-white/40 bg-white/68 px-5 py-5 shadow-elevated backdrop-blur-2xl md:mx-8">
+      <section className="sticky top-24 z-30 mx-4 -mt-8 rounded-[1.8rem] border border-white/40 bg-white/68 px-4 py-4 shadow-elevated backdrop-blur-2xl sm:mx-6 sm:px-5 sm:py-5 lg:mx-8 xl:mx-10">
         <div className="container mx-auto flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="relative flex-1 lg:max-w-xl">
             <input
@@ -181,10 +181,10 @@ function ShopContent() {
         </div>
       </section>
 
-      <div className="container mx-auto px-5 py-10 md:px-8 md:py-14">
+      <div className="container mx-auto px-4 py-10 sm:px-6 lg:px-8 xl:px-10 md:py-14">
         <div className="flex gap-8">
           <aside className="hidden md:block w-72 flex-shrink-0">
-            <div className="jewel-card sticky top-44 rounded-[2rem] p-6">
+            <div className="jewel-card sticky top-44 rounded-[2rem] p-5 sm:p-6 lg:p-7">
               <h3 className="text-[11px] font-semibold uppercase tracking-[0.22em] text-secondary">Categories</h3>
               <div className="mt-5 space-y-2">
                 {categories.map((category) => (
@@ -210,7 +210,7 @@ function ShopContent() {
           {showFilters && (
             <div className="fixed inset-0 z-50 bg-primary-900/50 md:hidden" onClick={() => setShowFilters(false)}>
               <div
-                className="absolute bottom-0 left-0 right-0 rounded-t-[2rem] bg-white p-6 shadow-elevated"
+                className="absolute bottom-0 left-0 right-0 rounded-t-[2rem] bg-white p-5 shadow-elevated sm:p-6"
                 onClick={(event) => event.stopPropagation()}
               >
                 <div className="mb-5 flex items-center justify-between">
@@ -260,7 +260,7 @@ function ShopContent() {
                 ))}
               </div>
             ) : (
-              <div className="jewel-card rounded-[2.2rem] px-6 py-16 text-center">
+              <div className="jewel-card rounded-[2.2rem] px-5 py-14 text-center sm:px-6 sm:py-16">
                 <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-neutral-100">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-8 w-8 text-neutral-400">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -283,14 +283,14 @@ function ShopContent() {
 function ShopLoading() {
   return (
     <div className="min-h-screen">
-      <div className="jewel-dark px-5 pb-16 pt-32 md:px-8">
+      <div className="jewel-dark px-4 pb-16 pt-32 sm:px-6 lg:px-8 xl:px-10">
         <div className="container mx-auto">
           <div className="h-5 w-32 rounded-full bg-white/10" />
           <div className="mt-8 h-20 max-w-2xl rounded-[2rem] bg-white/10" />
           <div className="mt-6 h-8 max-w-xl rounded-full bg-white/10" />
         </div>
       </div>
-      <div className="container mx-auto px-5 py-12 md:px-8">
+      <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8 xl:px-10">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[...Array(8)].map((_, index) => (
             <div key={index} className="jewel-card animate-pulse rounded-[2rem] p-3">

@@ -50,7 +50,7 @@ export function ProductDetailsContent({ product, relatedProducts }: ProductDetai
   return (
     <div className="min-h-screen">
       <div className="page-header-bg pt-8 pb-10">
-        <div className="container mx-auto px-5 md:px-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
           <nav className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-neutral-500">
             <Link href="/" className="hover:text-plum-700 transition-colors">Home</Link>
             <span>/</span>
@@ -61,7 +61,7 @@ export function ProductDetailsContent({ product, relatedProducts }: ProductDetai
         </div>
       </div>
 
-      <div className="container mx-auto px-5 pb-16 md:px-8">
+      <div className="container mx-auto px-4 pb-16 sm:px-6 lg:px-8 xl:px-10">
         <div className="grid gap-10 lg:grid-cols-[1fr,0.95fr] lg:gap-16">
           <div className="space-y-5 animate-fade-up">
             <div className="jewel-card overflow-hidden rounded-[2.4rem] p-4">
@@ -96,7 +96,7 @@ export function ProductDetailsContent({ product, relatedProducts }: ProductDetai
           </div>
 
           <div className="animate-fade-up" style={{ animationDelay: '100ms' }}>
-            <div className="jewel-card rounded-[2.4rem] p-7 md:p-9">
+            <div className="jewel-card rounded-[2.4rem] p-6 sm:p-7 lg:p-8 xl:p-9">
               <div className="flex flex-wrap items-center gap-3">
                 <span className="rounded-full bg-secondary/14 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-secondary-800">
                   {product.category}

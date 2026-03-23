@@ -67,7 +67,7 @@ export function CartContent({ cartItems }: CartContentProps) {
         {cartItems.map((item) => (
           <div
             key={item.id}
-            className={`jewel-card flex gap-5 rounded-[2rem] p-5 transition-all duration-300 ${
+            className={`jewel-card flex gap-5 rounded-[2rem] p-5 transition-all duration-300 sm:p-6 ${
               removingId === item.id ? 'translate-x-4 opacity-0' : 'opacity-100'
             }`}
           >
@@ -140,7 +140,7 @@ export function CartContent({ cartItems }: CartContentProps) {
       </div>
 
       <div>
-        <div className="jewel-dark sticky top-32 rounded-[2.2rem] p-7 shadow-elevated">
+        <div className="jewel-dark sticky top-32 rounded-[2.2rem] p-6 shadow-elevated sm:p-7 lg:p-8">
           <h3 className="font-display text-3xl font-bold text-white">Order Summary</h3>
 
           <div className="mt-7 space-y-4 border-b border-white/10 pb-6">

@@ -51,8 +51,8 @@ export function Navbar() {
 
   return (
     <>
-      <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${isScrolled ? 'pt-3' : 'pt-5'}`}>
-        <div className="container mx-auto px-5 md:px-8">
+      <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${isScrolled ? 'pt-3' : 'pt-4 sm:pt-5'}`}>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
           <div className={`relative overflow-hidden rounded-[1.75rem] border transition-all duration-500 ${
             isScrolled
               ? 'border-white/35 bg-white/68 shadow-elevated backdrop-blur-2xl'
@@ -63,7 +63,7 @@ export function Navbar() {
               <div className="absolute right-0 top-0 h-24 w-28 rounded-full bg-accent/20 blur-3xl" />
             </div>
 
-            <nav className="relative z-10 flex items-center justify-between gap-4 px-4 py-3 md:px-6">
+            <nav className="relative z-10 flex items-center justify-between gap-4 px-4 py-3 sm:px-5 lg:px-7">
               <Link href="/" className="group flex items-center gap-3">
                 <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-secondary via-secondary-300 to-accent text-primary-900 shadow-glow">
                   <span className="font-display text-xl font-bold">L</span>
@@ -78,12 +78,12 @@ export function Navbar() {
                 </span>
               </Link>
 
-              <div className="hidden md:flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-2 py-2 backdrop-blur-xl">
+              <div className="hidden md:flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-2.5 py-2 backdrop-blur-xl">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`rounded-full px-5 py-2.5 text-sm font-semibold tracking-[0.08em] uppercase transition-all duration-300 ${
+                    className={`rounded-full px-4 py-2.5 lg:px-5 lg:py-3 text-sm font-semibold tracking-[0.08em] uppercase transition-all duration-300 ${
                       isActive(link.href)
                         ? 'bg-gradient-to-r from-primary-800 via-plum-700 to-primary-800 text-white shadow-card'
                         : `${isScrolled ? 'text-neutral-600 hover:bg-neutral-100/90 hover:text-primary-800' : 'text-white/80 hover:bg-white/10 hover:text-white'}`
@@ -95,7 +95,7 @@ export function Navbar() {
                 {isSignedIn && (
                   <Link
                     href="/orders"
-                    className={`rounded-full px-5 py-2.5 text-sm font-semibold tracking-[0.08em] uppercase transition-all duration-300 ${
+                    className={`rounded-full px-4 py-2.5 lg:px-5 lg:py-3 text-sm font-semibold tracking-[0.08em] uppercase transition-all duration-300 ${
                       isActive('/orders')
                         ? 'bg-gradient-to-r from-primary-800 via-plum-700 to-primary-800 text-white shadow-card'
                         : `${isScrolled ? 'text-neutral-600 hover:bg-neutral-100/90 hover:text-primary-800' : 'text-white/80 hover:bg-white/10 hover:text-white'}`
@@ -108,7 +108,7 @@ export function Navbar() {
 
               <div className="flex items-center gap-2">
                 <button
-                  className={`hidden sm:inline-flex h-11 w-11 items-center justify-center rounded-full border transition-all ${
+                  className={`hidden sm:inline-flex h-10 w-10 items-center justify-center rounded-full border transition-all lg:h-11 lg:w-11 ${
                     isScrolled ? 'border-neutral-200 bg-white/60 text-neutral-600 hover:text-primary-800' : 'border-white/15 bg-white/10 text-white/75 hover:text-white'
                   }`}
                   aria-label="Search"
@@ -120,7 +120,7 @@ export function Navbar() {
 
                 <Link
                   href="/wishlist"
-                  className={`relative inline-flex h-11 w-11 items-center justify-center rounded-full border transition-all ${
+                  className={`relative inline-flex h-10 w-10 items-center justify-center rounded-full border transition-all lg:h-11 lg:w-11 ${
                     isScrolled ? 'border-neutral-200 bg-white/60 text-neutral-600 hover:text-primary-800' : 'border-white/15 bg-white/10 text-white/80 hover:text-white'
                   }`}
                   aria-label="Wishlist"
@@ -137,7 +137,7 @@ export function Navbar() {
 
                 <Link
                   href="/cart"
-                  className={`relative inline-flex h-11 w-11 items-center justify-center rounded-full border transition-all ${
+                  className={`relative inline-flex h-10 w-10 items-center justify-center rounded-full border transition-all lg:h-11 lg:w-11 ${
                     isScrolled ? 'border-neutral-200 bg-white/60 text-neutral-600 hover:text-primary-800' : 'border-white/15 bg-white/10 text-white/80 hover:text-white'
                   }`}
                   aria-label="Cart"
@@ -155,7 +155,7 @@ export function Navbar() {
                 {!isSignedIn && (
                   <Link
                     href="/sign-in"
-                    className={`hidden md:inline-flex rounded-full px-5 py-2.5 text-sm font-semibold tracking-[0.08em] uppercase transition-all ${
+                    className={`hidden md:inline-flex rounded-full px-4 py-2.5 lg:px-5 lg:py-3 text-sm font-semibold tracking-[0.08em] uppercase transition-all ${
                       isScrolled
                         ? 'bg-primary-800 text-white shadow-card hover:shadow-medium'
                         : 'border border-white/20 bg-white/10 text-white hover:bg-white/16'
@@ -166,13 +166,13 @@ export function Navbar() {
                 )}
 
                 {isSignedIn && (
-                  <div className="hidden md:flex items-center rounded-full border border-white/15 bg-white/10 px-2 py-1.5">
+                  <div className="hidden md:flex items-center rounded-full border border-white/15 bg-white/10 px-2.5 py-1.5">
                     <UserButton />
                   </div>
                 )}
 
                 <button
-                  className={`md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border transition-all ${
+                  className={`md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border transition-all ${
                     isScrolled ? 'border-neutral-200 bg-white/60 text-neutral-700' : 'border-white/15 bg-white/10 text-white'
                   }`}
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -199,7 +199,7 @@ export function Navbar() {
         <div className={`absolute right-0 top-0 h-full w-[88%] max-w-sm transform border-l border-white/10 jewel-dark rich-grid transition-transform duration-500 ease-out-expo ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}>
-          <div className="flex h-full flex-col px-8 pb-8 pt-24">
+          <div className="flex h-full flex-col px-6 pb-6 pt-20 sm:px-7 sm:pb-8 sm:pt-24">
             <nav className="space-y-2">
               {navLinks.map((link, index) => (
                 <Link

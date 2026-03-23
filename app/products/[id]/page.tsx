@@ -64,11 +64,11 @@ function ProductDetailsLoading() {
   return (
     <div className="min-h-screen">
       <div className="page-header-bg pt-6 pb-8">
-        <div className="container mx-auto px-5 md:px-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
           <div className="h-5 w-40 bg-neutral-200 rounded animate-pulse"></div>
         </div>
       </div>
-      <div className="container mx-auto px-5 md:px-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
           <div className="animate-pulse">
             <div className="aspect-[3/4] rounded-2xl bg-neutral-200"></div>

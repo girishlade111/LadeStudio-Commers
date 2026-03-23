@@ -55,7 +55,7 @@ const sections = [
 export default function TermsPage() {
   return (
     <div className="min-h-screen">
-      <section className="relative overflow-hidden px-5 pb-20 pt-28 md:px-8 md:pb-24 md:pt-36">
+      <section className="relative overflow-hidden px-4 pb-20 pt-28 sm:px-6 lg:px-8 xl:px-10 md:pb-24 md:pt-36">
         <div className="absolute inset-0 jewel-dark" />
         <div className="absolute inset-0 rich-grid opacity-35" />
         <div className="absolute -left-20 top-16 h-72 w-72 rounded-full bg-secondary/14 blur-3xl" />
@@ -75,15 +75,15 @@ export default function TermsPage() {
         </div>
       </section>
 
-      <section className="container mx-auto px-5 pb-20 md:px-8 md:pb-24">
-        <div className="mx-auto max-w-4xl jewel-card rounded-[2.6rem] p-6 shadow-soft md:p-10">
+      <section className="container mx-auto px-4 pb-20 sm:px-6 lg:px-8 xl:px-10 md:pb-24">
+        <div className="mx-auto max-w-4xl jewel-card rounded-[2.6rem] p-5 shadow-soft sm:p-6 lg:p-8 xl:p-9">
           <p className="text-lg leading-8 text-neutral-600">
             Welcome to Lade Studio. By browsing, purchasing, or using our services, you agree to the terms below. These terms are intended to keep the shopping experience transparent, reliable, and safe for everyone using the platform.
           </p>
 
           <div className="mt-10 space-y-8">
             {sections.map((section) => (
-              <div key={section.title} className="rounded-[1.8rem] border border-neutral-200/80 bg-white/70 p-6 shadow-soft">
+              <div key={section.title} className="rounded-[1.8rem] border border-neutral-200/80 bg-white/70 p-5 shadow-soft sm:p-6 lg:p-7">
                 <h2 className="font-display text-3xl font-bold text-neutral-900">{section.title}</h2>
                 <p className="mt-4 leading-8 text-neutral-600">{section.text}</p>
               </div>
@@ -91,7 +91,7 @@ export default function TermsPage() {
           </div>
 
           <div className="mt-10 grid gap-6 md:grid-cols-2">
-            <div className="rounded-[1.8rem] border border-neutral-200/80 bg-white/70 p-6 shadow-soft">
+            <div className="rounded-[1.8rem] border border-neutral-200/80 bg-white/70 p-5 shadow-soft sm:p-6 lg:p-7">
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-secondary">Helpful Links</p>
               <div className="mt-4 space-y-3">
                 <Link href="/shipping" className="block text-sm font-semibold text-plum-700 transition-colors hover:text-plum-900">

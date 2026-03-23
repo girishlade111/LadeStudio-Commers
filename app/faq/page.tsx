@@ -146,7 +146,7 @@ const faqCategories = [
 export default function FAQPage() {
   return (
     <div className="min-h-screen">
-      <section className="relative overflow-hidden px-5 pb-20 pt-28 md:px-8 md:pb-24 md:pt-36">
+      <section className="relative overflow-hidden px-4 pb-20 pt-28 sm:px-6 lg:px-8 xl:px-10 md:pb-24 md:pt-36">
         <div className="absolute inset-0 jewel-dark" />
         <div className="absolute inset-0 rich-grid opacity-40" />
         <div className="absolute -left-12 top-12 h-72 w-72 rounded-full bg-secondary/14 blur-3xl" />
@@ -164,7 +164,7 @@ export default function FAQPage() {
             </p>
           </div>
 
-          <div className="mx-auto mt-12 max-w-5xl jewel-card rounded-[2.2rem] p-6 shadow-soft md:p-8">
+          <div className="mx-auto mt-12 max-w-5xl jewel-card rounded-[2.2rem] p-5 shadow-soft sm:p-6 lg:p-7">
             <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
               <div>
                 <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-secondary">Need personal help?</p>
@@ -184,10 +184,10 @@ export default function FAQPage() {
         </div>
       </section>
 
-      <section className="container mx-auto px-5 pb-20 md:px-8 md:pb-24">
+      <section className="container mx-auto px-4 pb-20 sm:px-6 lg:px-8 xl:px-10 md:pb-24">
         <div className="space-y-12">
           {faqCategories.map((category) => (
-            <div key={category.title} className="jewel-card rounded-[2.4rem] p-6 shadow-soft md:p-8">
+            <div key={category.title} className="jewel-card rounded-[2.4rem] p-5 shadow-soft sm:p-6 lg:p-7">
               <div className="flex items-center gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary/14 text-secondary">
                   {category.icon}
@@ -201,7 +201,7 @@ export default function FAQPage() {
               <div className="mt-8 space-y-4">
                 {category.faqs.map((faq, index) => (
                   <details key={index} className="group overflow-hidden rounded-[1.7rem] border border-neutral-200/80 bg-white/70 shadow-soft">
-                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 md:px-6">
+                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 sm:px-6">
                       <span className="pr-4 text-lg font-semibold text-neutral-900">{faq.question}</span>
                       <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-secondary/14 text-secondary transition-transform duration-300 group-open:rotate-180">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-4 w-4">
@@ -209,7 +209,7 @@ export default function FAQPage() {
                         </svg>
                       </span>
                     </summary>
-                    <div className="border-t border-neutral-100 px-5 pb-5 pt-4 md:px-6">
+                    <div className="border-t border-neutral-100 px-5 pb-5 pt-4 sm:px-6">
                       <p className="leading-8 text-neutral-600">{faq.answer}</p>
                     </div>
                   </details>

@@ -10,14 +10,14 @@ export default function WishlistPage() {
     return (
       <div className="min-h-screen">
         <div className="page-header-bg pt-8 pb-16">
-          <div className="container mx-auto px-5 md:px-8">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
             <div className="animate-pulse">
               <div className="h-4 w-20 bg-neutral-200 rounded mb-4"></div>
               <div className="h-10 w-48 bg-neutral-200 rounded"></div>
             </div>
           </div>
         </div>
-        <div className="container mx-auto px-5 md:px-8 -mt-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 -mt-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {[...Array(4)].map((_, i) => (
               <div key={i} className="animate-pulse">
@@ -39,7 +39,7 @@ export default function WishlistPage() {
     <div className="min-h-screen">
       {/* Page Header */}
       <div className="page-header-bg pt-8 pb-16 md:pb-20">
-        <div className="container mx-auto px-5 md:px-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
           <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-secondary mb-4 animate-fade-up">
             Saved Items
           </p>
@@ -49,7 +49,7 @@ export default function WishlistPage() {
         </div>
       </div>
 
-      <div className="container mx-auto px-5 md:px-8 -mt-8 pb-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 -mt-8 pb-16">
         <WishlistContent wishlistItems={wishlist} />
       </div>
     </div>

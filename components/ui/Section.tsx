@@ -30,7 +30,7 @@ export function Section({
     sm: 'py-10 md:py-14',
     md: 'py-14 md:py-20',
     lg: 'py-20 md:py-28',
-    xl: 'py-28 md:py-36',
+    xl: 'py-24 md:py-32',
   }
 
   return (

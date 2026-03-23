@@ -48,7 +48,7 @@ const eligibility = {
 export default function RefundsPage() {
   return (
     <div className="min-h-screen">
-      <section className="relative overflow-hidden px-5 pb-20 pt-28 md:px-8 md:pb-24 md:pt-36">
+      <section className="relative overflow-hidden px-4 pb-20 pt-28 sm:px-6 lg:px-8 xl:px-10 md:pb-24 md:pt-36">
         <div className="absolute inset-0 jewel-dark" />
         <div className="absolute inset-0 rich-grid opacity-35" />
         <div className="absolute -left-16 top-16 h-72 w-72 rounded-full bg-secondary/14 blur-3xl" />
@@ -68,9 +68,9 @@ export default function RefundsPage() {
         </div>
       </section>
 
-      <section className="container mx-auto px-5 pb-20 md:px-8 md:pb-24">
+      <section className="container mx-auto px-4 pb-20 sm:px-6 lg:px-8 xl:px-10 md:pb-24">
         <div className="grid gap-6 lg:grid-cols-[0.95fr,1.05fr]">
-          <div className="jewel-dark rounded-[2.3rem] p-6 shadow-elevated md:p-8">
+          <div className="jewel-dark rounded-[2.3rem] p-5 shadow-elevated sm:p-6 lg:p-7">
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-secondary">Return Promise</p>
             <h2 className="mt-3 font-display text-4xl font-bold text-white">30 days to request a return</h2>
             <p className="mt-4 leading-8 text-white/70">
@@ -95,7 +95,7 @@ export default function RefundsPage() {
           </div>
 
           <div className="grid gap-6">
-            <div className="jewel-card rounded-[2.3rem] p-6 shadow-soft md:p-8">
+            <div className="jewel-card rounded-[2.3rem] p-5 shadow-soft sm:p-6 lg:p-7">
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-secondary">Eligibility</p>
               <div className="mt-6 grid gap-5 md:grid-cols-2">
                 <div className="rounded-[1.8rem] border border-emerald-200/70 bg-emerald-50/70 p-5">
@@ -132,7 +132,7 @@ export default function RefundsPage() {
               </div>
             </div>
 
-            <div className="jewel-card rounded-[2.3rem] p-6 shadow-soft md:p-8">
+            <div className="jewel-card rounded-[2.3rem] p-5 shadow-soft sm:p-6 lg:p-7">
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-neutral-500">Return Process</p>
               <div className="mt-6 grid gap-4 md:grid-cols-2">
                 {returnProcess.map((step) => (
@@ -149,7 +149,7 @@ export default function RefundsPage() {
           </div>
         </div>
 
-        <div className="mt-10 jewel-card rounded-[2.3rem] p-6 shadow-soft md:p-8">
+        <div className="mt-10 jewel-card rounded-[2.3rem] p-5 shadow-soft sm:p-6 lg:p-7">
           <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-secondary">Support</p>
