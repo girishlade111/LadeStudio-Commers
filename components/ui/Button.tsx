@@ -44,10 +44,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     const sizes = {
-      sm: 'px-4 py-2.5 text-sm rounded-full gap-2',
-      md: 'px-5 py-3 text-sm rounded-full gap-2',
-      lg: 'px-6 py-3.5 text-base rounded-full gap-2.5',
-      xl: 'px-7 py-4 text-base rounded-full gap-3',
+      sm: 'px-4 py-3 sm:py-2.5 text-sm rounded-full gap-2 min-h-[44px] sm:min-h-[auto]',
+      md: 'px-5 py-3.5 sm:py-3 text-sm rounded-full gap-2 min-h-[48px] sm:min-h-[auto]',
+      lg: 'px-6 py-4 sm:py-3.5 text-base rounded-full gap-2.5 min-h-[52px] sm:min-h-[auto]',
+      xl: 'px-7 py-4 text-base rounded-full gap-3 min-h-[52px] sm:min-h-[auto]',
     }
 
     return (

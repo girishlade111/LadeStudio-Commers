@@ -77,6 +77,14 @@ export const metadata: Metadata = {
   },
 }
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: '#1b1c2b',
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -84,7 +92,7 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider signInUrl="/sign-in" signUpUrl="/sign-up">
-      <html lang="en">
+      <html lang="en" className="scroll-smooth">
         <head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -93,9 +101,9 @@ export default function RootLayout({
             rel="stylesheet"
           />
         </head>
-        <body className="min-h-screen flex flex-col font-body antialiased text-neutral-900">
+        <body className="min-h-screen flex flex-col font-body antialiased text-neutral-900 overflow-x-hidden">
           <Navbar />
-          <main className="flex-1 pt-28 md:pt-32">
+          <main className="flex-1 pt-20 sm:pt-24 md:pt-28 lg:pt-32">
             {children}
           </main>
           <Footer />

@@ -52,8 +52,8 @@ export function Footer() {
       <div className="absolute -left-32 top-0 h-80 w-80 rounded-full bg-secondary/10 blur-[100px]" />
       <div className="absolute -right-32 bottom-0 h-64 w-64 rounded-full bg-plum-500/10 blur-[80px]" />
 
-      <div className="container relative z-10 mx-auto px-4 py-16 sm:px-6 sm:py-20 lg:px-8 xl:px-10 md:py-24">
-        <div className="grid gap-12 lg:grid-cols-[1.3fr,0.9fr,0.9fr,1.1fr]">
+      <div className="container relative z-10 mx-auto px-4 py-12 sm:px-6 sm:py-16 lg:px-8 xl:px-10 md:py-20 lg:py-24">
+        <div className="grid gap-10 lg:grid-cols-[1.3fr,0.9fr,0.9fr,1.1fr]">
           <div className="max-w-sm">
             <div className="mb-7 flex items-center gap-3">
               <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-secondary via-secondary-300 to-amber-200 text-primary-900 shadow-lg shadow-secondary/25">
@@ -157,12 +157,12 @@ export function Footer() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
                     required
-                    className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/35 focus:border-secondary/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-secondary/10 transition-all"
+                    className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 sm:py-3 text-sm text-white placeholder:text-white/35 focus:border-secondary/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-secondary/10 transition-all"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="group relative w-full rounded-xl bg-gradient-to-r from-secondary via-amber-300 to-secondary bg-size-200 bg-pos-0 px-5 py-3.5 text-[12px] font-bold uppercase tracking-[0.14em] text-primary-900 shadow-lg shadow-secondary/20 transition-all duration-300 hover:bg-pos-100 hover:shadow-xl"
+                  className="group relative w-full rounded-xl bg-gradient-to-r from-secondary via-amber-300 to-secondary bg-size-200 bg-pos-0 px-5 py-4 sm:py-3.5 text-[12px] font-bold uppercase tracking-[0.14em] text-primary-900 shadow-lg shadow-secondary/20 transition-all duration-300 hover:bg-pos-100 hover:shadow-xl min-h-[48px] sm:min-h-auto"
                 >
                   {isSubscribed ? 'Thank You!' : 'Subscribe'}
                 </button>
@@ -191,21 +191,21 @@ export function Footer() {
 
         <div className="mt-16 border-t border-white/10" />
 
-        <div className="flex flex-col gap-5 pt-8 md:flex-row md:items-center md:justify-between">
-          <p className="text-[12px] uppercase tracking-[0.18em] text-white/35">
+        <div className="flex flex-col gap-4 pt-8 md:flex-row md:items-center md:justify-between">
+          <p className="text-[11px] uppercase tracking-[0.18em] text-white/35 text-center md:text-left">
             &copy; {currentYear} Lade Studio. All rights reserved.
           </p>
-          <div className="flex flex-wrap items-center gap-6">
+          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6">
             {footerLinks.legal.map((link, index) => (
-              <div key={link.href} className="flex items-center gap-6">
+              <div key={link.href} className="flex items-center gap-4">
                 <Link
                   href={link.href}
-                  className="text-[12px] uppercase tracking-[0.14em] text-white/40 transition-colors duration-300 hover:text-white/70"
+                  className="text-[11px] uppercase tracking-[0.14em] text-white/40 transition-colors duration-300 hover:text-white/70"
                 >
                   {link.label}
                 </Link>
                 {index < footerLinks.legal.length - 1 && (
-                  <span className="h-1 w-1 rounded-full bg-white/20" />
+                  <span className="hidden md:block h-1 w-1 rounded-full bg-white/20" />
                 )}
               </div>
             ))}

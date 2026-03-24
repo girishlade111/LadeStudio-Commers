@@ -85,8 +85,8 @@ export function ProductCard({ product, onWishlistToggle, isInWishlist, priority 
               )}
             </div>
 
-            <div className={`absolute bottom-0 left-0 right-0 p-4 sm:p-5 transition-all duration-500 ${isHovered ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-              <div className="rounded-[1.2rem] border border-white/15 bg-white/14 px-4 py-3.5 backdrop-blur-xl">
+            <div className={`absolute bottom-0 left-0 right-0 p-3 sm:p-5 transition-all duration-500 ${isHovered ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+              <div className="rounded-[1.2rem] border border-white/15 bg-white/14 px-3 py-3 sm:px-4 sm:py-3.5 backdrop-blur-xl">
                 <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/80">Discover Piece</span>
               </div>
             </div>

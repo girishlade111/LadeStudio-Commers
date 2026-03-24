@@ -71,13 +71,13 @@ export default async function HomePage() {
               </p>
 
               <div className="mt-9 flex flex-col gap-3 sm:flex-row animate-fade-up" style={{ animationDelay: '200ms' }}>
-                <Link href="/shop">
-                  <Button size="lg" variant="secondary" className="min-w-[220px] shadow-[0_0_30px_rgba(212,170,103,0.3)] hover:shadow-[0_0_50px_rgba(212,170,103,0.45)] hover:shadow-glow-lg hover:-translate-y-0.5 transition-all duration-300 text-[13px]">
+                <Link href="/shop" className="w-full sm:w-auto">
+                  <Button size="lg" variant="secondary" className="w-full sm:min-w-[220px] shadow-[0_0_30px_rgba(212,170,103,0.3)] hover:shadow-[0_0_50px_rgba(212,170,103,0.45)] hover:shadow-glow-lg hover:-translate-y-0.5 transition-all duration-300 text-[13px]">
                     Shop The Collection
                   </Button>
                 </Link>
-                <Link href="/about">
-                  <Button size="lg" variant="ghost" className="border border-white/15 bg-white/[0.06] text-white backdrop-blur-sm hover:bg-white/[0.12] hover:border-white/25 text-[13px]">
+                <Link href="/about" className="w-full sm:w-auto">
+                  <Button size="lg" variant="ghost" className="w-full sm:w-auto border border-white/15 bg-white/[0.06] text-white backdrop-blur-sm hover:bg-white/[0.12] hover:border-white/25 text-[13px]">
                     Our Story
                   </Button>
                 </Link>
@@ -105,7 +105,7 @@ export default async function HomePage() {
                 </div>
               </div>
 
-              <div className="mt-10 grid gap-3 sm:grid-cols-3 animate-fade-up" style={{ animationDelay: '320ms' }}>
+              <div className="mt-10 grid gap-3 xs:grid-cols-2 sm:grid-cols-3 animate-fade-up" style={{ animationDelay: '320ms' }}>
                 {[
                   { value: `${allProducts.length || 0}+`, label: 'Curated Picks' },
                   { value: 'Premium', label: 'Quality Assured' },
