@@ -9,6 +9,7 @@ import {
 } from '@/services/googleSheets'
 import { getCachedProducts, setCachedProducts } from '@/utils/cache'
 import { getGoogleSheetId } from '@/utils/env'
+import { products as localProducts } from '@/data'
 
 const PRODUCTS_CACHE_KEY = 'catalog_products_all'
 
@@ -21,7 +22,7 @@ export async function getAllProducts(): Promise<Product[]> {
   const sheetId = getGoogleSheetId()
 
   if (!sheetId) {
-    return []
+    return localProducts
   }
 
   try {
@@ -30,8 +31,8 @@ export async function getAllProducts(): Promise<Product[]> {
     setCachedProducts(PRODUCTS_CACHE_KEY, products, 10 * 60 * 1000)
     return products
   } catch (error) {
-    console.error('Failed to load catalog products', error)
-    return []
+    console.error('Failed to load catalog products from Google Sheets, using local data:', error)
+    return localProducts
   }
 }
 
