@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { ClerkProvider } from '@clerk/nextjs'
 import './globals.css'
-import { Navbar } from '@/components/layout/Navbar'
-import { Footer } from '@/components/layout/Footer'
+import { Navbar, Footer, BottomNav } from '@/components/layout'
 
 const BASE_URL = 'https://ladestudio.com'
 
@@ -103,10 +102,11 @@ export default function RootLayout({
         </head>
         <body className="min-h-screen flex flex-col font-body antialiased text-neutral-900 overflow-x-hidden">
           <Navbar />
-          <main className="flex-1 pt-20 sm:pt-24 md:pt-28 lg:pt-32">
+          <main className="flex-1 pt-20 sm:pt-24 md:pt-28 lg:pt-32 pb-20 lg:pb-0">
             {children}
           </main>
           <Footer />
+          <BottomNav />
         </body>
       </html>
     </ClerkProvider>
