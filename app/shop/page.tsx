@@ -194,54 +194,67 @@ function ShopContent() {
 
   return (
     <div className="min-h-screen pb-16">
-      <section className="relative overflow-hidden px-4 pb-8 pt-10 sm:px-6 lg:px-8 xl:px-10 md:pb-10 md:pt-12">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(245,193,72,0.18),transparent_24%),radial-gradient(circle_at_top_right,rgba(87,46,168,0.22),transparent_28%),linear-gradient(135deg,#0f1123,#18152f_55%,#25163d)]" />
-        <div className="absolute inset-0 rich-grid opacity-30" />
+      <section className="relative overflow-hidden px-4 pb-10 pt-12 sm:px-6 lg:px-8 xl:px-10 md:pb-14 md:pt-16">
+        <div className="absolute inset-0 bg-primary-900" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(212,170,103,0.12),transparent_50%),radial-gradient(ellipse_at_top_right,rgba(95,52,84,0.2),transparent_50%),radial-gradient(ellipse_at_bottom,rgba(32,116,104,0.1),transparent_40%)]" />
+        <div className="absolute inset-0 rich-grid opacity-25" />
+        
+        <div className="absolute -left-32 top-0 h-[400px] w-[400px] rounded-full bg-secondary/8 blur-[100px]" />
+        <div className="absolute -right-24 top-1/3 h-[300px] w-[300px] rounded-full bg-plum-500/10 blur-[80px]" />
+        
         <div className="container relative mx-auto">
-          <div className="grid gap-6 xl:grid-cols-[1.2fr,0.8fr] xl:items-end">
-            <div className="max-w-3xl">
-              <span className="inline-flex rounded-full border border-white/10 bg-white/8 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-secondary">
-                Marketplace Edit
-              </span>
-              <h1 className="mt-5 font-display text-[clamp(2.6rem,5vw,4.5rem)] font-bold leading-[0.95] text-white">
-                Shop the catalog through a
-                <span className="block text-gradient">sharper studio lens</span>
+          <div className="grid gap-8 xl:grid-cols-[1.15fr,0.85fr] xl:items-end xl:gap-10">
+            <div className="max-w-2xl">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-secondary/25 bg-secondary/8 px-3 py-1.5 text-[9px] font-medium uppercase tracking-[0.3em] text-secondary backdrop-blur-sm">
+                <span className="h-1 w-1 rounded-full bg-secondary" />
+                Curated Catalog
+              </div>
+              <h1 className="font-display text-[clamp(2.2rem,4.5vw,3.8rem)] font-semibold tracking-tight text-white">
+                Discover curated
+                <span className="mt-1 block font-light italic text-white/80">premium selections</span>
+                <span className="mt-1 block text-gradient bg-gradient-to-r from-secondary via-amber-100 to-secondary bg-clip-text text-transparent">for refined tastes</span>
               </h1>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-white/68 sm:text-lg sm:leading-8">
-                A cleaner browse experience inspired by modern marketplaces, rebuilt in Ladi Studio&apos;s richer jewel palette.
+              
+              <div className="mt-5 flex items-center gap-3">
+                <span className="h-px w-12 bg-gradient-to-r from-transparent to-secondary" />
+                <span className="text-[10px] uppercase tracking-[0.25em] text-white/50">Premium Marketplace</span>
+              </div>
+
+              <p className="mt-4 max-w-xl text-[15px] leading-6 text-white/55">
+                Explore our meticulously curated collection of premium products, each selected for exceptional quality and timeless elegance.
               </p>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-3 xl:justify-self-end xl:min-w-[32rem]">
-              <HeroMetric label="Products Live" value={String(products.length).padStart(2, '0')} />
-              <HeroMetric label="Collections" value={String(collectionInsights.categoryCount).padStart(2, '0')} />
-              <HeroMetric label="Average Ticket" value={formatPrice(collectionInsights.averagePrice)} />
+            <div className="grid gap-3 sm:grid-cols-3 xl:justify-self-end xl:min-w-[28rem]">
+              <HeroMetric label="Products" value={String(products.length)} />
+              <HeroMetric label="Collections" value={String(collectionInsights.categoryCount)} />
+              <HeroMetric label="Avg. Price" value={formatPrice(collectionInsights.averagePrice)} />
             </div>
           </div>
         </div>
       </section>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
-        <section className="sticky top-24 z-30 -mt-2 rounded-[2rem] border border-white/45 bg-white/72 px-4 py-4 shadow-elevated backdrop-blur-2xl sm:px-5 sm:py-5 lg:px-6">
-          <div className="flex flex-col gap-4">
+        <section className="sticky top-20 z-30 -mt-3 rounded-[1.5rem] border border-white/40 bg-white/75 px-4 py-3.5 shadow-lg backdrop-blur-xl sm:px-5 sm:py-4 lg:px-5">
+          <div className="flex flex-col gap-3">
             <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
               <div className="relative flex-1">
                 <input
                   type="text"
-                  placeholder="Search products, categories, or design notes"
+                  placeholder="Search products..."
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
-                  className="w-full rounded-full border border-white/70 bg-white/88 py-3.5 pl-12 pr-4 text-sm text-neutral-900 placeholder:text-neutral-400 shadow-soft outline-none transition-all focus:border-secondary/60"
+                  className="w-full rounded-[1rem] border border-neutral-200/80 bg-white/90 py-3 pl-11 pr-4 text-sm text-neutral-900 placeholder:text-neutral-400 shadow-sm outline-none transition-all focus:border-secondary/50 focus:ring-2 focus:ring-secondary/10"
                 />
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                 </svg>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2.5">
                 <button
                   onClick={() => setShowFilters(true)}
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-neutral-200 bg-white/88 px-4 py-3 text-sm font-semibold text-neutral-700 shadow-soft md:hidden"
+                  className="inline-flex items-center justify-center gap-2 rounded-[1rem] border border-neutral-200 bg-white/90 px-4 py-2.5 text-sm font-medium text-neutral-600 shadow-sm md:hidden"
                 >
                   <FilterIcon />
                   Filters
@@ -250,7 +263,7 @@ function ShopContent() {
                 <select
                   value={sortBy}
                   onChange={(event) => setSortBy(event.target.value)}
-                  className="rounded-full border border-neutral-200 bg-white/88 px-4 py-3 text-sm font-semibold text-neutral-700 shadow-soft outline-none"
+                  className="rounded-[1rem] border border-neutral-200/80 bg-white/90 px-4 py-2.5 text-sm font-medium text-neutral-700 shadow-sm outline-none transition-all focus:border-secondary/50"
                 >
                   {sortOptions.map((option) => (
                     <option key={option.value} value={option.value}>{option.label}</option>
@@ -259,22 +272,22 @@ function ShopContent() {
               </div>
             </div>
 
-            <div className="flex items-center gap-3 overflow-x-auto pb-1">
+            <div className="flex items-center gap-2 overflow-x-auto pb-1.5 -mx-1 px-1">
               {categories.map((category) => {
                 const isActive = selectedCategory === category
                 return (
                   <button
                     key={category}
                     onClick={() => setSelectedCategory(category)}
-                    className={`shrink-0 rounded-full border px-4 py-2.5 text-sm font-semibold transition-all ${
+                    className={`shrink-0 rounded-full border px-3.5 py-2 text-[12px] font-medium transition-all ${
                       isActive
-                        ? 'border-transparent bg-gradient-to-r from-primary-800 via-plum-700 to-primary-800 text-white shadow-card'
-                        : 'border-white/70 bg-white/78 text-neutral-600 shadow-soft hover:border-secondary/40 hover:text-primary-800'
+                        ? 'border-transparent bg-primary-800 text-white shadow-sm'
+                        : 'border-neutral-200/70 bg-white/80 text-neutral-500 hover:border-secondary/40 hover:text-primary-800'
                     }`}
                   >
                     {category}
-                    <span className={`ml-2 text-xs ${isActive ? 'text-white/72' : 'text-neutral-400'}`}>
-                      {categoryCounts[category] || 0}
+                    <span className={`ml-1.5 ${isActive ? 'text-white/70' : 'text-neutral-400'}`}>
+                      ({categoryCounts[category] || 0})
                     </span>
                   </button>
                 )
@@ -311,23 +324,23 @@ function ShopContent() {
           </aside>
 
           <main className="min-w-0">
-            <div className="mb-6 flex flex-col gap-4 rounded-[2rem] border border-white/55 bg-white/78 px-5 py-5 shadow-soft backdrop-blur-xl sm:px-6">
-              <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
+            <div className="mb-5 flex flex-col gap-3 rounded-[1.5rem] border border-neutral-100 bg-white px-4 py-4 shadow-sm sm:px-5">
+              <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
                 <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-secondary">Browse Status</p>
-                  <h2 className="mt-2 font-display text-3xl font-bold text-neutral-900 sm:text-4xl">
-                    {searchLabel}
+                  <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-secondary">Showing</p>
+                  <h2 className="mt-1 font-display text-2xl font-semibold text-neutral-900">
+                    {filteredProducts.length} products
                   </h2>
-                  <p className="mt-2 text-sm leading-7 text-neutral-500">
-                    Showing <span className="font-semibold text-neutral-900">{filteredProducts.length}</span> products in{' '}
-                    <span className="font-semibold text-plum-700">{activeCategoryLabel}</span>.
+                  <p className="mt-1 text-sm text-neutral-500">
+                    in <span className="font-medium text-neutral-700">{activeCategoryLabel}</span>
                   </p>
                 </div>
 
-                <div className="flex flex-wrap gap-2">
-                  <StatPill label="Visible" value={String(filteredProducts.length)} />
-                  <StatPill label="Range" value={`${formatPrice(collectionInsights.minPrice)} - ${formatPrice(collectionInsights.maxPrice)}`} />
-                  <StatPill label="Sort" value={sortOptions.find((option) => option.value === sortBy)?.label || 'Featured'} />
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-neutral-400">Sort:</span>
+                  <span className="text-sm font-medium text-neutral-700">
+                    {sortOptions.find((option) => option.value === sortBy)?.label || 'Featured'}
+                  </span>
                 </div>
               </div>
             </div>
@@ -425,21 +438,14 @@ function ShopContent() {
 
 function HeroMetric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-[1.4rem] border border-white/10 bg-white/8 px-4 py-4 shadow-soft backdrop-blur-xl">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/46">{label}</p>
-      <p className="mt-2 text-lg font-bold text-white sm:text-xl">{value}</p>
+    <div className="rounded-[1.2rem] border border-white/10 bg-white/5 px-4 py-3.5 backdrop-blur-xl transition-all hover:bg-white/10 hover:border-white/15">
+      <p className="text-[9px] font-medium uppercase tracking-[0.22em] text-white/40">{label}</p>
+      <p className="mt-1.5 text-base font-semibold tracking-tight text-white">{value}</p>
     </div>
   )
 }
 
-function StatPill({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-full border border-white/55 bg-white/88 px-4 py-2 shadow-soft">
-      <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-neutral-400">{label}</span>
-      <span className="ml-2 text-sm font-semibold text-neutral-900">{value}</span>
-    </div>
-  )
-}
+
 
 function PriceInsightCard({
   minPrice,
@@ -453,34 +459,33 @@ function PriceInsightCard({
   const bars = [32, 46, 28, 68, 52, 75, 41, 58, 35, 62]
 
   return (
-    <div className="jewel-card rounded-[2rem] p-5 shadow-soft sm:p-6 lg:p-7">
-      <div className="flex items-start justify-between">
-        <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-secondary">Price Lens</p>
-          <h3 className="mt-2 text-2xl font-bold text-neutral-900">Collection range</h3>
-        </div>
-        <span className="rounded-full bg-primary-900/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-primary-800">
+    <div className="rounded-[1.5rem] border border-neutral-100 bg-white p-4 shadow-sm">
+      <div className="flex items-center justify-between">
+        <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-secondary">Price Range</p>
+        <span className="rounded-full bg-primary-50 px-2 py-1 text-[9px] font-medium uppercase tracking-[0.1em] text-primary-700">
           Live
         </span>
       </div>
 
-      <p className="mt-3 text-sm leading-6 text-neutral-500">
-        Average ticket currently sits at <span className="font-semibold text-neutral-900">{formatPrice(averagePrice)}</span>.
+      <div className="mt-3 flex items-baseline gap-2">
+        <span className="text-xl font-bold text-neutral-900">{formatPrice(minPrice)}</span>
+        <span className="text-xs text-neutral-400">-</span>
+        <span className="text-xl font-bold text-neutral-900">{formatPrice(maxPrice)}</span>
+      </div>
+      
+      <p className="mt-2 text-xs text-neutral-500">
+        Avg: <span className="font-medium text-neutral-700">{formatPrice(averagePrice)}</span>
       </p>
 
-      <div className="mt-6 rounded-[1.6rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(245,238,255,0.9))] p-4 shadow-inner">
-        <div className="flex h-24 items-end gap-2">
+      <div className="mt-4 rounded-[1rem] bg-neutral-50 p-3">
+        <div className="flex h-16 items-end gap-1.5">
           {bars.map((height, index) => (
             <div
               key={index}
-              className="flex-1 rounded-full bg-[linear-gradient(180deg,rgba(138,104,255,0.25),rgba(138,104,255,0.78))]"
+              className="flex-1 rounded-full bg-gradient-to-t from-primary-200 to-primary-400"
               style={{ height: `${height}%` }}
             />
           ))}
-        </div>
-        <div className="mt-4 flex items-center justify-between text-xs font-semibold text-neutral-500">
-          <span className="rounded-full bg-neutral-950 px-3 py-1.5 text-white">{formatPrice(minPrice)}</span>
-          <span className="rounded-full bg-primary-800 px-3 py-1.5 text-white">{formatPrice(maxPrice)}</span>
         </div>
       </div>
     </div>
@@ -499,30 +504,27 @@ function CategoryRail({
   onSelect: (category: string) => void
 }) {
   return (
-    <div className="jewel-card rounded-[2rem] p-5 shadow-soft sm:p-6 lg:p-7">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-secondary">Collections</p>
-          <h3 className="mt-2 text-2xl font-bold text-neutral-900">Browse by category</h3>
-        </div>
+    <div className="rounded-[1.5rem] border border-neutral-100 bg-white p-4 shadow-sm">
+      <div className="flex items-center justify-between">
+        <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-secondary">Categories</p>
         <FilterIcon />
       </div>
 
-      <div className="mt-5 space-y-2">
+      <div className="mt-3 space-y-1">
         {categories.map((category) => {
           const isActive = selectedCategory === category
           return (
             <button
               key={category}
               onClick={() => onSelect(category)}
-              className={`flex w-full items-center justify-between rounded-[1.25rem] px-4 py-3 text-left text-sm font-semibold transition-all ${
+              className={`flex w-full items-center justify-between rounded-[0.8rem] px-3.5 py-2.5 text-left text-[13px] font-medium transition-all ${
                 isActive
-                  ? 'bg-gradient-to-r from-primary-800 via-plum-700 to-primary-800 text-white shadow-card'
-                  : 'bg-white/60 text-neutral-600 hover:bg-white hover:text-primary-800'
+                  ? 'bg-primary-800 text-white'
+                  : 'text-neutral-600 hover:bg-neutral-50 hover:text-primary-800'
               }`}
             >
               <span>{category}</span>
-              <span className={`text-xs ${isActive ? 'text-white/72' : 'text-neutral-400'}`}>
+              <span className={`text-xs ${isActive ? 'text-white/70' : 'text-neutral-400'}`}>
                 {categoryCounts[category] || 0}
               </span>
             </button>
@@ -545,21 +547,18 @@ function CatalogPulseCard({
   searchLabel: string
 }) {
   return (
-    <div className="jewel-dark rounded-[2rem] p-5 shadow-elevated sm:p-6 lg:p-7">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-secondary">Catalog Pulse</p>
-      <h3 className="mt-2 font-display text-3xl font-bold text-white">Focused discovery</h3>
-      <p className="mt-3 text-sm leading-7 text-white/65">
-        {searchLabel} across <span className="font-semibold text-white">{activeCategory}</span>.
-      </p>
+    <div className="rounded-[1.5rem] border border-neutral-100 bg-white p-4 shadow-sm">
+      <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-secondary">Browse Status</p>
+      <p className="mt-1 text-sm text-neutral-600">{searchLabel}</p>
 
-      <div className="mt-6 grid grid-cols-2 gap-3">
-        <div className="rounded-[1.4rem] border border-white/10 bg-white/8 p-4">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/42">Visible</p>
-          <p className="mt-2 text-2xl font-bold text-white">{visibleProducts}</p>
+      <div className="mt-4 grid grid-cols-2 gap-2.5">
+        <div className="rounded-[1rem] border border-neutral-100 bg-neutral-50 p-3">
+          <p className="text-[9px] font-medium uppercase tracking-[0.15em] text-neutral-400">Showing</p>
+          <p className="mt-1 text-lg font-bold text-neutral-900">{visibleProducts}</p>
         </div>
-        <div className="rounded-[1.4rem] border border-white/10 bg-white/8 p-4">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/42">Catalog</p>
-          <p className="mt-2 text-2xl font-bold text-white">{totalProducts}</p>
+        <div className="rounded-[1rem] border border-neutral-100 bg-neutral-50 p-3">
+          <p className="text-[9px] font-medium uppercase tracking-[0.15em] text-neutral-400">Total</p>
+          <p className="mt-1 text-lg font-bold text-neutral-900">{totalProducts}</p>
         </div>
       </div>
     </div>
@@ -568,21 +567,20 @@ function CatalogPulseCard({
 
 function TrendingTagsCard({ tags }: { tags: string[] }) {
   return (
-    <div className="jewel-card rounded-[2rem] p-5 shadow-soft sm:p-6 lg:p-7">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-secondary">Studio Notes</p>
-      <h3 className="mt-2 text-2xl font-bold text-neutral-900">Trending descriptors</h3>
-      <div className="mt-5 flex flex-wrap gap-2">
+    <div className="rounded-[1.5rem] border border-neutral-100 bg-white p-4 shadow-sm">
+      <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-secondary">Tags</p>
+      <div className="mt-3 flex flex-wrap gap-1.5">
         {tags.length > 0 ? (
           tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-secondary/20 bg-secondary/10 px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-secondary-800"
+              className="rounded-full border border-neutral-100 bg-neutral-50 px-2.5 py-1.5 text-[10px] font-medium text-neutral-600"
             >
               {tag}
             </span>
           ))
         ) : (
-          <p className="text-sm text-neutral-500">Tags will surface here as your catalog metadata grows.</p>
+          <p className="text-xs text-neutral-400">No tags available</p>
         )}
       </div>
     </div>
@@ -614,14 +612,14 @@ function MarketplaceProductCard({
         event.preventDefault()
         onWishlistToggle(product)
       }}
-      className={`inline-flex h-11 w-11 items-center justify-center rounded-full border transition-all ${
+      className={`inline-flex h-9 w-9 items-center justify-center rounded-full border transition-all ${
         isInWishlist
-          ? 'border-secondary/35 bg-secondary text-primary-900 shadow-glow'
-          : 'border-white/70 bg-white/82 text-primary-800 backdrop-blur-xl hover:border-secondary/40 hover:text-primary-900'
+          ? 'border-secondary/40 bg-secondary text-primary-900 shadow-glow'
+          : 'border-white/60 bg-white/80 text-neutral-500 backdrop-blur-sm hover:border-secondary/40 hover:text-secondary'
       }`}
       aria-label={isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
     >
-      <svg xmlns="http://www.w3.org/2000/svg" fill={isInWishlist ? 'currentColor' : 'none'} viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-4 w-4">
+      <svg xmlns="http://www.w3.org/2000/svg" fill={isInWishlist ? 'currentColor' : 'none'} viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-3.5 w-3.5">
         <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
       </svg>
     </button>
@@ -635,55 +633,56 @@ function MarketplaceProductCard({
         onMouseLeave={() => setIsHovered(false)}
       >
         <Link href={`/products/${product.id}`} className="block h-full">
-          <article className="relative h-full min-h-[28rem] overflow-hidden rounded-[2.15rem] border border-white/55 bg-[linear-gradient(135deg,#1c1534,#271646_55%,#3f1d6e)] p-5 shadow-elevated sm:p-6">
-            <div className="absolute inset-0 opacity-70">
+          <article className="relative h-full min-h-[24rem] overflow-hidden rounded-[1.8rem] border border-white/15 bg-primary-900 p-4 shadow-elevated sm:p-5">
+            <div className="absolute inset-0 opacity-60">
               {!imageError && product.image ? (
                 <Image
                   src={product.image}
                   alt={product.name}
                   fill
-                  className={`object-cover object-center transition-transform duration-700 ${isHovered ? 'scale-105' : 'scale-100'}`}
+                  className={`object-cover transition-transform duration-700 ${isHovered ? 'scale-105' : 'scale-100'}`}
                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 66vw, 50vw"
                   priority={priority}
                   quality={priority ? 85 : 75}
                   onError={() => setImageError(true)}
                 />
               ) : (
-                <div className="h-full w-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.22),transparent_48%)]" />
+                <div className="h-full w-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.15),transparent_50%)]" />
               )}
             </div>
 
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,18,0.06),rgba(12,12,22,0.5)_55%,rgba(10,10,20,0.92))]" />
-            <div className="absolute right-5 top-5 z-10">{wishlistButton}</div>
+            <div className="absolute inset-0 bg-gradient-to-t from-primary-900 via-primary-900/40 to-transparent" />
+            <div className="absolute right-4 top-4 z-10">{wishlistButton}</div>
 
-            <div className="relative z-10 flex h-full flex-col justify-between">
-              <div className="flex flex-wrap items-center gap-2">
-                <Badge variant="secondary" size="md">Featured Pick</Badge>
-                <Badge variant="default" size="md" className="bg-white/12 text-white border-white/10">
+            <div className="relative z-10 flex h-full flex-col justify-end">
+              <div className="flex flex-wrap items-center gap-2 mb-3">
+                <span className="rounded-full bg-secondary/20 px-2.5 py-1 text-[9px] font-medium uppercase tracking-[0.15em] text-secondary">Featured</span>
+                <span className="rounded-full bg-white/10 px-2.5 py-1 text-[9px] font-medium uppercase tracking-[0.15em] text-white/70">
                   {product.category}
-                </Badge>
+                </span>
               </div>
 
-              <div className="max-w-xl">
-                <p className="text-sm uppercase tracking-[0.18em] text-white/50">Curated spotlight</p>
-                <h3 className="mt-3 max-w-lg font-display text-4xl font-bold leading-[1.02] text-white sm:text-5xl">
-                  {product.name}
-                </h3>
-                <p className="mt-4 max-w-lg line-clamp-3 text-sm leading-7 text-white/72 sm:text-base">
-                  {product.description || 'A studio-picked piece highlighted for its standout shape, tone, and premium finish.'}
-                </p>
+              <h3 className="font-display text-2xl font-semibold leading-tight text-white sm:text-3xl">
+                {product.name}
+              </h3>
+              <p className="mt-2 line-clamp-2 text-sm leading-6 text-white/60">
+                {product.description || 'Premium quality piece with exceptional craftsmanship.'}
+              </p>
 
-                <div className="mt-6 flex flex-wrap items-center gap-3">
-                  <span className="rounded-full bg-white px-4 py-2 text-sm font-bold text-primary-900 shadow-soft">
-                    {formatPrice(product.price)}
+              <div className="mt-4 flex flex-wrap items-center gap-3">
+                <span className="rounded-full bg-white px-4 py-2 text-sm font-bold text-primary-900 shadow-lg">
+                  {formatPrice(product.price)}
+                </span>
+                {product.originalPrice && (
+                  <span className="text-sm font-medium text-white/40 line-through">
+                    {formatPrice(product.originalPrice)}
                   </span>
-                  {product.originalPrice && (
-                    <span className="text-sm font-semibold text-white/52 line-through">
-                      {formatPrice(product.originalPrice)}
-                    </span>
-                  )}
-                  {discount > 0 && <Badge variant="secondary">Save {discount}%</Badge>}
-                </div>
+                )}
+                {discount > 0 && (
+                  <span className="rounded-full bg-secondary px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-primary-900">
+                    -{discount}%
+                  </span>
+                )}
               </div>
             </div>
           </article>
@@ -699,16 +698,16 @@ function MarketplaceProductCard({
       onMouseLeave={() => setIsHovered(false)}
     >
       <Link href={`/products/${product.id}`} className="block h-full">
-        <article className="flex h-full flex-col rounded-[2rem] border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,0.94),rgba(252,249,255,0.98))] p-4 shadow-soft transition-all duration-500 hover:-translate-y-1.5 hover:shadow-card-hover sm:p-5">
-          <div className="relative overflow-hidden rounded-[1.6rem] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.96),rgba(241,236,250,0.92))]">
-            <div className="absolute right-4 top-4 z-10">{wishlistButton}</div>
+        <article className="flex h-full flex-col rounded-[1.5rem] border border-neutral-100 bg-white p-3.5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md sm:p-4">
+          <div className="relative overflow-hidden rounded-[1.2rem] bg-neutral-50">
+            <div className="absolute right-3 top-3 z-10">{wishlistButton}</div>
             <div className="aspect-[1/1]">
               {!imageError && product.image ? (
                 <Image
                   src={product.image}
                   alt={product.name}
                   fill
-                  className={`object-cover transition-transform duration-700 ${isHovered ? 'scale-105' : 'scale-100'}`}
+                  className={`object-cover transition-transform duration-500 ${isHovered ? 'scale-105' : 'scale-100'}`}
                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                   priority={priority}
                   quality={priority ? 80 : 70}
@@ -716,48 +715,41 @@ function MarketplaceProductCard({
                 />
               ) : (
                 <div className="flex h-full items-center justify-center text-neutral-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.2} stroke="currentColor" className="h-16 w-16">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.2} stroke="currentColor" className="h-12 w-12">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                   </svg>
                 </div>
               )}
             </div>
-
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-primary-900/10 to-transparent" />
+            
+            {discount > 0 && (
+              <div className="absolute left-3 top-3 rounded-full bg-primary-900 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-white">
+                -{discount}%
+              </div>
+            )}
           </div>
 
-          <div className="flex flex-1 flex-col pt-5">
-            <div className="flex items-start justify-between gap-3">
-              <div className="flex flex-wrap items-center gap-2">
-                <Badge variant="default" className="bg-neutral-900/4 text-neutral-700 border-neutral-200/90">
-                  {product.category}
-                </Badge>
-                {discount > 0 && <Badge variant="secondary">-{discount}%</Badge>}
-              </div>
-              {!product.inStock && <Badge variant="error">Sold Out</Badge>}
+          <div className="flex flex-1 flex-col pt-4">
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-neutral-400">{product.category}</span>
+              {!product.inStock && <span className="text-[10px] font-medium uppercase tracking-[0.1em] text-red-500">Sold Out</span>}
             </div>
 
-            <h3 className="mt-4 line-clamp-2 font-display text-[1.55rem] font-bold leading-tight text-neutral-900 transition-colors group-hover:text-plum-700">
+            <h3 className="mt-2 line-clamp-2 font-display text-base font-semibold leading-snug text-neutral-900 transition-colors group-hover:text-primary-800">
               {product.name}
             </h3>
-            <p className="mt-3 line-clamp-2 text-sm leading-7 text-neutral-500">
-              {product.description || 'A refined studio piece with premium detailing and a more elevated presence.'}
-            </p>
 
-            <div className="mt-5 flex items-end justify-between gap-4">
-              <div>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-neutral-400">Price</p>
-                <div className="mt-2 flex items-center gap-2">
-                  <span className="text-2xl font-extrabold text-primary-800">{formatPrice(product.price)}</span>
-                  {product.originalPrice && (
-                    <span className="text-sm text-neutral-400 line-through">{formatPrice(product.originalPrice)}</span>
-                  )}
-                </div>
+            <div className="mt-auto flex items-center justify-between gap-3 pt-3">
+              <div className="flex items-baseline gap-2">
+                <span className="text-lg font-bold text-primary-800">{formatPrice(product.price)}</span>
+                {product.originalPrice && (
+                  <span className="text-xs text-neutral-400 line-through">{formatPrice(product.originalPrice)}</span>
+                )}
               </div>
 
-              <div className="rounded-full border border-primary-800/15 bg-primary-800/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary-800">
-                View Piece
-              </div>
+              <span className="rounded-full bg-neutral-100 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.1em] text-neutral-600 transition-colors group-hover:bg-primary-800 group-hover:text-white">
+                View
+              </span>
             </div>
           </div>
         </article>
