@@ -38,27 +38,32 @@ export default async function HomePage() {
         <div className="container mx-auto">
           <div className="grid items-center gap-16 lg:grid-cols-[1.1fr,0.9fr] xl:gap-20">
             <div className="max-w-3xl">
-              <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-secondary/30 bg-secondary/10 px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.35em] text-secondary backdrop-blur-md animate-fade-up">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-secondary" />
+              <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-secondary/40 bg-secondary/5 px-4 py-1.5 text-[10px] font-medium uppercase tracking-[0.4em] text-secondary backdrop-blur-md animate-fade-up">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-60" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-secondary" />
                 </span>
                 New Collection 2026
               </div>
 
               <h1
-                className="font-display text-[clamp(3rem,8vw,7.2rem)] font-bold leading-[0.92] text-white tracking-tight animate-fade-up"
-                style={{ animationDelay: '80ms' }}
+                className="font-display text-[clamp(2.8rem,9vw,8rem)] font-semibold tracking-[-0.02em] text-white animate-fade-up"
+                style={{ animationDelay: '60ms', lineHeight: '1.05' }}
               >
-                Where elegance
-                <span className="mt-3 block text-gradient from-secondary via-amber-200 to-secondary">{heroBanner.subtitle}</span>
+                Refined
+                <span className="mt-1 block font-light italic text-white/90">{heroBanner.subtitle}</span>
+                <span className="mt-2 block font-normal not-italic text-gradient bg-gradient-to-r from-secondary via-amber-100 to-secondary bg-clip-text text-transparent">{heroBanner.title}</span>
               </h1>
 
-              <div className="mt-8 h-1 w-24 animate-fade-up rounded-full bg-gradient-to-r from-secondary to-accent" style={{ animationDelay: '160ms' }} />
+              <div className="mt-6 flex items-center gap-3 animate-fade-up" style={{ animationDelay: '140ms' }}>
+                <span className="h-px w-10 bg-gradient-to-r from-transparent to-secondary" />
+                <span className="text-[10px] font-light uppercase tracking-[0.3em] text-secondary/70">Curated Essentials</span>
+                <span className="h-px w-16 bg-gradient-to-l from-transparent to-white/20" />
+              </div>
 
               <p
-                className="mt-8 max-w-2xl text-lg leading-8 text-white/65 animate-fade-up md:text-xl md:leading-9"
-                style={{ animationDelay: '200ms' }}
+                className="mt-6 max-w-xl font-light leading-7 text-white/55 animate-fade-up md:text-[17px] md:leading-8"
+                style={{ animationDelay: '180ms' }}
               >
                 Discover meticulously crafted pieces that blend timeless sophistication with contemporary flair. Each item tells a story of exceptional quality.
               </p>
@@ -76,18 +81,18 @@ export default async function HomePage() {
                 </Link>
               </div>
 
-              <div className="mt-16 grid gap-4 sm:grid-cols-3 animate-fade-up" style={{ animationDelay: '380ms' }}>
+              <div className="mt-14 grid gap-3 sm:grid-cols-3 animate-fade-up" style={{ animationDelay: '340ms' }}>
                 {[
                   { value: `${allProducts.length || 0}+`, label: 'Curated Picks', icon: '✦' },
                   { value: 'Premium', label: 'Quality Assured', icon: '◈' },
                   { value: 'Secure', label: 'UPI Payments', icon: '◇' },
                 ].map((stat, idx) => (
-                  <div key={stat.label} className="group relative rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl transition-all duration-300 hover:border-secondary/30 hover:bg-white/10">
+                  <div key={stat.label} className="group relative rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl transition-all duration-300 hover:border-secondary/30 hover:bg-white/10">
                     <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-secondary/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                     <div className="relative">
-                      <p className="font-display text-3xl font-bold text-white">{stat.value}</p>
-                      <p className="mt-2 flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-white/50">
-                        <span className="text-secondary/70">{stat.icon}</span>
+                      <p className="font-display text-2xl font-medium tracking-tight text-white">{stat.value}</p>
+                      <p className="mt-1.5 flex items-center gap-1.5 text-[9px] uppercase tracking-[0.28em] text-white/45">
+                        <span className="text-secondary/60">{stat.icon}</span>
                         {stat.label}
                       </p>
                     </div>
@@ -98,24 +103,24 @@ export default async function HomePage() {
 
             <div className="relative animate-fade-up" style={{ animationDelay: '150ms' }}>
               <div className="relative mx-auto max-w-[36rem]">
-                <div className="absolute -left-8 top-12 hidden w-40 rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-6 backdrop-blur-xl lg:block animate-float">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary/20 text-secondary mb-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                <div className="absolute -left-8 top-12 hidden w-40 rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-5 backdrop-blur-xl lg:block animate-float">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-secondary/15 text-secondary mb-2.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
                   </div>
-                  <p className="text-[10px] uppercase tracking-[0.25em] text-secondary/80">Premium Quality</p>
-                  <p className="mt-2 text-sm leading-relaxed text-white/70">
-                    Each piece crafted with meticulous attention to detail.
+                  <p className="text-[9px] font-medium uppercase tracking-[0.3em] text-secondary/70">Premium Quality</p>
+                  <p className="mt-1.5 text-[13px] leading-relaxed text-white/60">
+                    Each piece crafted with meticulous attention.
                   </p>
                 </div>
                 
-                <div className="absolute -bottom-8 right-2 z-20 hidden w-44 rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-5 backdrop-blur-xl lg:block animate-float" style={{ animationDelay: '1s' }}>
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/20 text-accent">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                <div className="absolute -bottom-8 right-2 z-20 hidden w-40 rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-4 backdrop-blur-xl lg:block animate-float" style={{ animationDelay: '1s' }}>
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent/15 text-accent">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
                     </div>
                     <div>
-                      <p className="text-[10px] uppercase tracking-[0.25em] text-accent/80">Fast Checkout</p>
-                      <p className="mt-0.5 text-xs leading-5 text-white/60">UPI & Cards</p>
+                      <p className="text-[9px] font-medium uppercase tracking-[0.3em] text-accent/70">Fast Checkout</p>
+                      <p className="mt-0.5 text-[12px] leading-tight text-white/55">UPI & Cards</p>
                     </div>
                   </div>
                 </div>
