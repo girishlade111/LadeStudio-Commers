@@ -280,6 +280,11 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
