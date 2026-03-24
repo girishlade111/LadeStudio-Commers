@@ -17,82 +17,115 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen">
-      <section className="relative isolate overflow-hidden px-4 pb-16 pt-16 sm:px-6 lg:px-8 xl:px-10 md:pb-24 md:pt-20">
-        <div className="absolute inset-0 -z-20 jewel-dark" />
-        <div className="absolute inset-0 -z-10 opacity-30">
-          <Image src={heroBanner.image} alt="Hero background" fill className="object-cover mix-blend-soft-light" priority />
+      <section className="relative isolate overflow-hidden px-4 pb-20 pt-16 sm:px-6 lg:px-8 xl:px-10 md:pb-32 md:pt-24">
+        <div className="absolute inset-0 -z-20 bg-primary-900" />
+        
+        <div className="absolute inset-0 -z-10">
+          <Image src={heroBanner.image} alt="Hero background" fill className="object-cover opacity-25 mix-blend-overlay" priority />
         </div>
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary-900 via-primary-900/85 to-plum-900/70" />
-        <div className="absolute -left-24 top-12 h-72 w-72 rounded-full bg-secondary/15 blur-3xl" />
-        <div className="absolute right-0 top-20 h-80 w-80 rounded-full bg-accent/20 blur-3xl" />
-        <div className="absolute inset-0 rich-grid opacity-40" />
+        
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary-900 via-primary-900/90 to-plum-900/60" />
+        
+        <div className="absolute -left-40 top-0 h-[600px] w-[600px] rounded-full bg-secondary/10 blur-[120px]" />
+        <div className="absolute -right-32 top-20 h-[500px] w-[500px] rounded-full bg-accent/15 blur-[100px]" />
+        <div className="absolute left-1/3 top-1/2 h-64 w-64 rounded-full bg-plum-500/10 blur-[80px]" />
+        
+        <div className="absolute inset-0 rich-grid opacity-30" />
+        
+        <div className="absolute left-0 top-1/4 h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <div className="absolute bottom-1/4 left-0 h-px w-full bg-gradient-to-r from-transparent via-white/5 to-transparent" />
 
         <div className="container mx-auto">
-          <div className="grid items-center gap-14 lg:grid-cols-[1.05fr,0.95fr]">
+          <div className="grid items-center gap-16 lg:grid-cols-[1.1fr,0.9fr] xl:gap-20">
             <div className="max-w-3xl">
-              <div className="mb-7 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/8 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-secondary backdrop-blur-xl animate-fade-up">
-                <span className="h-2 w-2 rounded-full bg-secondary" />
+              <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-secondary/30 bg-secondary/10 px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.35em] text-secondary backdrop-blur-md animate-fade-up">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-secondary" />
+                </span>
                 New Collection 2026
               </div>
 
               <h1
-                className="font-display text-[clamp(3.2rem,7vw,6.8rem)] font-bold leading-[0.94] text-white animate-fade-up"
-                style={{ animationDelay: '100ms' }}
+                className="font-display text-[clamp(3rem,8vw,7.2rem)] font-bold leading-[0.92] text-white tracking-tight animate-fade-up"
+                style={{ animationDelay: '80ms' }}
               >
-                Jewel-toned pieces
-                <span className="mt-2 block text-gradient">{heroBanner.subtitle}</span>
+                Where elegance
+                <span className="mt-3 block text-gradient from-secondary via-amber-200 to-secondary">{heroBanner.subtitle}</span>
               </h1>
 
+              <div className="mt-8 h-1 w-24 animate-fade-up rounded-full bg-gradient-to-r from-secondary to-accent" style={{ animationDelay: '160ms' }} />
+
               <p
-                className="mt-8 max-w-2xl text-lg leading-8 text-white/68 animate-fade-up md:text-xl"
-                style={{ animationDelay: '220ms' }}
+                className="mt-8 max-w-2xl text-lg leading-8 text-white/65 animate-fade-up md:text-xl md:leading-9"
+                style={{ animationDelay: '200ms' }}
               >
-                Curated essentials with richer textures, statement silhouettes, and a premium finish built for everyday rituals.
+                Discover meticulously crafted pieces that blend timeless sophistication with contemporary flair. Each item tells a story of exceptional quality.
               </p>
 
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row animate-fade-up" style={{ animationDelay: '320ms' }}>
+              <div className="mt-12 flex flex-col gap-5 sm:flex-row animate-fade-up" style={{ animationDelay: '280ms' }}>
                 <Link href="/shop">
-                  <Button size="xl" variant="secondary" className="min-w-[220px]">
+                  <Button size="xl" variant="secondary" className="min-w-[240px] shadow-glow hover:shadow-glow-lg hover:-translate-y-0.5 transition-all duration-300">
                     Shop The Collection
                   </Button>
                 </Link>
                 <Link href="/about">
-                  <Button size="xl" variant="ghost" className="border border-white/15 bg-white/6 text-white hover:bg-white/12">
+                  <Button size="xl" variant="ghost" className="border border-white/20 bg-white/5 text-white backdrop-blur-sm hover:bg-white/15 hover:border-white/30">
                     Our Story
                   </Button>
                 </Link>
               </div>
 
-              <div className="mt-12 grid gap-4 sm:grid-cols-3 animate-fade-up" style={{ animationDelay: '420ms' }}>
+              <div className="mt-16 grid gap-4 sm:grid-cols-3 animate-fade-up" style={{ animationDelay: '380ms' }}>
                 {[
-                  { value: `${allProducts.length || 0}+`, label: 'Studio Picks' },
-                  { value: '24/7', label: 'Store Access' },
-                  { value: 'INR', label: 'UPI Ready' },
-                ].map((stat) => (
-                  <div key={stat.label} className="rounded-[1.6rem] border border-white/10 bg-white/8 px-5 py-5 backdrop-blur-xl sm:px-6">
-                    <p className="font-display text-3xl font-bold text-white">{stat.value}</p>
-                    <p className="mt-1 text-[11px] uppercase tracking-[0.22em] text-white/50">{stat.label}</p>
+                  { value: `${allProducts.length || 0}+`, label: 'Curated Picks', icon: '✦' },
+                  { value: 'Premium', label: 'Quality Assured', icon: '◈' },
+                  { value: 'Secure', label: 'UPI Payments', icon: '◇' },
+                ].map((stat, idx) => (
+                  <div key={stat.label} className="group relative rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl transition-all duration-300 hover:border-secondary/30 hover:bg-white/10">
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-secondary/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <div className="relative">
+                      <p className="font-display text-3xl font-bold text-white">{stat.value}</p>
+                      <p className="mt-2 flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-white/50">
+                        <span className="text-secondary/70">{stat.icon}</span>
+                        {stat.label}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="animate-fade-up" style={{ animationDelay: '180ms' }}>
-              <div className="relative mx-auto max-w-[34rem]">
-                <div className="absolute -left-6 top-10 hidden w-36 rounded-[1.8rem] border border-white/10 bg-white/10 p-5 backdrop-blur-xl lg:block">
-                  <p className="text-[11px] uppercase tracking-[0.22em] text-secondary">Curated</p>
-                  <p className="mt-2 text-sm leading-6 text-white/72">
-                    Elevated product storytelling with crafted visuals and rich material cues.
+            <div className="relative animate-fade-up" style={{ animationDelay: '150ms' }}>
+              <div className="relative mx-auto max-w-[36rem]">
+                <div className="absolute -left-8 top-12 hidden w-40 rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-6 backdrop-blur-xl lg:block animate-float">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary/20 text-secondary mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                  </div>
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-secondary/80">Premium Quality</p>
+                  <p className="mt-2 text-sm leading-relaxed text-white/70">
+                    Each piece crafted with meticulous attention to detail.
                   </p>
                 </div>
-                <div className="absolute -bottom-6 right-0 z-20 hidden w-44 rounded-[1.8rem] border border-white/10 bg-white/10 p-5 backdrop-blur-xl lg:block">
-                  <p className="text-[11px] uppercase tracking-[0.22em] text-secondary">Fast Checkout</p>
-                  <p className="mt-2 text-sm leading-6 text-white/72">
-                    Browse, pay with UPI, and upload proof without changing the flow.
-                  </p>
+                
+                <div className="absolute -bottom-8 right-2 z-20 hidden w-44 rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-5 backdrop-blur-xl lg:block animate-float" style={{ animationDelay: '1s' }}>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/20 text-accent">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                    </div>
+                    <div>
+                      <p className="text-[10px] uppercase tracking-[0.25em] text-accent/80">Fast Checkout</p>
+                      <p className="mt-0.5 text-xs leading-5 text-white/60">UPI & Cards</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="relative overflow-hidden rounded-[2.4rem] border border-white/10 bg-white/8 p-4 shadow-elevated backdrop-blur-sm">
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem]">
+
+                <div className="absolute -right-4 top-1/3 hidden h-32 w-32 rounded-full bg-secondary/5 blur-2xl lg:block" />
+                <div className="absolute -left-4 bottom-1/3 hidden h-24 w-24 rounded-full bg-accent/5 blur-xl lg:block" />
+                
+                <div className="relative overflow-hidden rounded-[2.6rem] border border-white/15 bg-white/5 p-1.5 shadow-elevated backdrop-blur-sm">
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-secondary/5" />
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-[2.2rem]">
                     <Image
                       src={heroBanner.image}
                       alt="Featured collection"
@@ -101,9 +134,19 @@ export default async function HomePage() {
                       priority
                       sizes="(max-width: 1024px) 100vw, 42vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary-900/55 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary-900/60 via-primary-900/15 to-transparent" />
+                    
+                    <div className="absolute bottom-6 left-6 right-6">
+                      <div className="rounded-xl border border-white/10 bg-black/30 backdrop-blur-md px-4 py-3">
+                        <p className="text-xs uppercase tracking-[0.2em] text-white/60">Featured</p>
+                        <p className="mt-1 font-display text-lg font-semibold text-white">Timeless Essentials</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
+
+                <div className="absolute -z-10 -top-10 -right-10 h-40 w-40 rounded-full border border-secondary/20" />
+                <div className="absolute -z-10 -bottom-6 -left-6 h-24 w-24 rounded-full border border-white/10" />
               </div>
             </div>
           </div>
