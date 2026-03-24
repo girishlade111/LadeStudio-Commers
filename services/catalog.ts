@@ -27,11 +27,14 @@ export async function getAllProducts(): Promise<Product[]> {
 
   try {
     const rows = await fetchSheetData({ sheetId, sheetName: 'Products' })
-    const products = convertToProducts(rows)
-    setCachedProducts(PRODUCTS_CACHE_KEY, products, 10 * 60 * 1000)
-    return products
+    if (rows.length > 0) {
+      const products = convertToProducts(rows)
+      setCachedProducts(PRODUCTS_CACHE_KEY, products, 10 * 60 * 1000)
+      return products
+    }
+    return localProducts
   } catch (error) {
-    console.error('Failed to load catalog products from Google Sheets, using local data:', error)
+    console.warn('Failed to load catalog products from Google Sheets, using local data')
     return localProducts
   }
 }
